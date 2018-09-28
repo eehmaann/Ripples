@@ -1,0 +1,200 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use App\Food;
+
+class FoodsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        //
+    	$foods=[
+    	 	['Beef', 1, 1],
+    	 	['Liver', 1, 1],
+    	 	['Veal', 1, 1],
+    	 	['Chicken', 1, 1],
+    	 	['Duck', 1 , 1],
+    	 	['Eggs',  1, 2],
+    	 	['Fish', 1, 2],
+    	 	['Shellfish', 1, 2],
+    	 	['Goose', 1, 2],
+    	 	['Lamb', 1, 2],
+    	 	['Nuts', 1 , 3],
+    	 	['Seeds', 1, 3],
+    	 	['Tofu', 1, 3],
+    	 	['Turkey', 1, 3],
+    	 	['Cheese', 1, 3],
+    	 	['Cottage Cheese', 1, 4],
+    	 	['Cream', 1, 4],
+    	 	['Cream Cheese', 1, 4],
+    	 	['Kefir', 1, 4],
+    	 	['Milk', 1, 4],
+    	 	['Yogurt', 1, 5],
+    	 	['Corn', 1, 5],
+    	 	['Rice Bread', 1, 5],
+    	 	['Rice Cakes', 1, 5],
+    	 	['Rye', 1, 5],
+    	 	['Sour Dough', 1, 6],
+    	 	['Wheat', 1, 6],
+    	 	['Other Breads', 1, 6],
+    	 	['Pasta', 1, 6],
+    	 	['Alfalfa Sprouts', 1, 7],
+    	 	['Other Sprouts', 1, 7],
+    	 	['Artichoke', 1, 7],
+    	 	['Asparagus', 1, 7],
+    	 	['Avocado', 1, 7],
+    	 	['Bambo Shoots', 1, 8],
+    	 	['Beef Greens', 1, 8],
+    	 	['Bell Peppers', 1, 8],
+    	 	['Bok Choi', 1, 8],
+    	 	['Broccoli', 1, 8],
+    	 	['Brussel Sprouts', 1, 9],
+    	 	['Cabbage', 1, 9],
+    	 	['Napa Cabbage', 1, 9],
+    	 	['Red Cabbage', 1, 9],
+    	 	['Savoy Cabbage', 1, 9],
+
+    	 	['Cauliflower', 2, 1],
+    	 	['Celery', 2, 1],
+    	 	['Cilantro', 2, 1],
+    	 	['Collards', 2 , 1],
+    	 	['Cucumber', 2, 1],
+    	 	['Dandelion Greens',  2, 2],
+    	 	['Endive', 2, 2],
+    	 	['Eggplant', 2, 2],
+    	 	['Garlic', 2, 2],
+    	 	['Green Beans', 2, 2],
+    	 	['Jerusalem Artichoke', 2 , 3],
+    	 	['Kale', 2, 3],
+    	 	['Leek', 2, 3],
+    	 	['Bibb Lettuce', 2, 3],
+    	 	['Butter Lettuce', 2, 4],
+    	 	['Iceberg Lettuce', 2, 4],
+    	 	['Red Leaf Lettuce', 2, 4],
+    	 	['Romain Lettuce', 2, 4],
+    	 	['Mung Bean Sprout', 2, 5],
+    	 	['Mushrooms', 2, 5],
+    	 	['Mustard Greens', 2, 5],
+    	 	['Mustard Spinach', 2, 5],
+    	 	['Radish', 2, 5],
+    	 	['Okra', 2, 6],
+    	 	['Onions', 2, 6],
+    	 	['Parsley', 2, 6],
+    	 	['Scallions', 2, 6],
+    	 	['Snow Peas', 2, 7],
+    	 	['Spinach', 2, 7],
+    	 	['Squash', 2, 7],
+    	 	['Summer Squash', 2, 7],
+    	 	['Yellow Squash', 2, 7],
+    	 	['Zucchini', 2, 8],
+    	 	['Swiss Chard', 2, 8],
+    	 	['Tomato', 2, 8],
+    	 	['Turnip Greens', 2, 8],
+    	 	['Watercress', 2, 8],
+    	 	['Vegetable Starch', 2, 9],
+    	 	['Beets', 2, 9],
+    	 	['Carrots', 2, 9],
+    	 	['Corn', 2, 9],
+    	 	['Garbanzo Beans', 2, 9],
+
+    	 	['Jicama', 3, 1],
+    	 	['Lentils', 3, 1],
+    	 	['Lima Beans', 3, 1],
+    	 	['Other Beans', 3, 1],
+    	 	['Parsnips', 3 , 1],
+    	 	['Peas',  3, 2],
+    	 	['Potato', 3, 2],
+    	 	['Sweet Potato', 3, 2],
+    	 	['Turnip', 3, 2],
+    	 	['Winter Squash', 3, 2],
+    	 	['Acorn Squash', 3 , 3],
+    	 	['Butternut Squash', 3, 3],
+    	 	['Hubbard Squash', 3, 3],
+    	 	['Spaghetti Squash', 3, 3],
+    	 	['Other Squash', 3, 3],
+    	 	['Yam', 3, 4],
+    	 	['Apple', 3, 4],
+    	 	['Apricot', 3, 4],
+    	 	['Banano', 3, 4],
+    	 	['Blackberry', 3, 4],
+    	 	['Blueberry', 3, 5],
+    	 	['Boysenberry', 3, 5],
+    	 	['Cactus Fruit', 3, 5],
+    	 	['Cantaloupe Melon', 3, 5],
+    	 	['Casaba Melon', 3, 5],
+    	 	['Cherimoys', 3, 6],
+    	 	['Cherry', 3, 6],
+    	 	['Cranberry', 3, 6],
+    	 	['Crenshaw Melon', 3, 6],
+    	 	['Dried Fruit', 3, 7],
+    	 	['Elderberry', 3, 7],
+    	 	['Fig (fresh)', 3, 7],
+    	 	['Gooseberry', 3, 7],
+    	 	['Grapefruit', 3, 7],
+    	 	['Grapes', 3, 8],
+    	 	['Guaya', 3, 8],
+    	 	['Honeydew', 3, 8],
+    	 	['Kiwi', 3, 8],
+    	 	['Kumquat', 3, 8],
+    	 	['Lemon', 3, 9],
+    	 	['Lime', 3, 9],
+    	 	['Loganberry', 3, 9],
+    	 	['Mango', 3, 9],
+    	 	['Nectarine', 3, 9],
+
+    	 	['Orange', 4, 1],
+    	 	['Papaya', 4, 1],
+    	 	['Peach', 4, 1],
+    	 	['Pear', 4, 1],
+    	 	['Persian Melon', 4 , 1],
+    	 	['Persimmon',  4, 2],
+    	 	['Pineapple', 4, 2],
+    	 	['Plum', 4, 2],
+    	 	['Pomegramate', 4, 2],
+    	 	['Raspberry', 4, 2],
+    	 	['Strawberry', 4 , 3],
+    	 	['Tangerine', 4, 3],
+    	 	['Watermelon', 4, 3],
+    	 	['Amaranth', 4, 3],
+    	 	['Barley', 4 ,3],
+    	 	['Bran Flakes', 4, 4],
+    	 	['Buckwheat', 4, 4],
+    	 	['Corn', 4, 4],
+    	 	['Millet', 4, 4],
+    	 	['Oat-bran', 4, 4],
+    	 	['Oatmeal', 4, 5],
+    	 	['Quinoa', 4, 5],
+    	 	['Rice', 4, 5],
+    	 	['Rye', 4, 5],
+    	 	['Soy', 4, 5],
+    	 	['Wheat', 4, 6],
+    	 	['Other', 4, 6],
+    	 	['Butter', 4, 6],
+    	 	['Mayonnaise', 4, 6],
+    	 	['Nut Butter', 4, 7],
+    	 	['Oil', 4, 7],
+
+    	 ];
+
+    	 $count = count($foods);
+
+	    foreach ($foods as $key => $foodData) {
+	        $food = new food();
+
+	        $food->created_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
+	        $food->updated_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
+	        $food->name = $foodData[0];
+	        $food->columnNumber =$foodData[1];
+            $food->rowNumber=$foodData[2];
+	        $food->frequency= 0;
+
+	        $food->save();
+	        $count--;
+	    }
+    }
+}

@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    This is the ripples page
                 </div>
 
                 <div class="links">
