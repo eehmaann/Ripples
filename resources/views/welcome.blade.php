@@ -79,6 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
+                    <div id="example"></div>
                     This is the ripples page
                 </div>
 
@@ -90,7 +91,10 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+                <div id="definer"></div>
             </div>
         </div>
+
+         <script src="js/app.js"></script>
     </body>
 </html>

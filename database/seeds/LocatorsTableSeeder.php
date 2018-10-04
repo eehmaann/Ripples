@@ -25,7 +25,6 @@ class LocatorsTableSeeder extends Seeder
 	        ['Emotional','', 'Energy'],
 	        ['Mental','', 'Energy',],
 	        ['Offensive', '', 'Energy'],
-	        ['Post-Traumatic','', 'Energy'],
 	        
 	        ['Heavy Metals','', 'Toxins'],
         	['Excesses', '','Toxins'],

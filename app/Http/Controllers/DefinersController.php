@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Emotion;
+use App\Definer;
 use DB;
 
-class EmotionController extends Controller
+class DefinersController extends Controller
 {
     public function index(){
-        return Emotion::all();
+        return Definer::all();
     }
 }

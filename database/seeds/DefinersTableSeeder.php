@@ -14,25 +14,17 @@ class DefinersTableSeeder extends Seeder
     {
         $definers=[
         	['Addictive Heart Energy', 'An energy created out of the heart’s desperation to feel love, joy, etc. Your heart is designed to 
-	        	feel joy, love and other positive emotions, and is the core of your being. If your heart is unable to experience these positive emotions, 
-	        	it can become desperate for something pleasurable— it is then that the addictive heart energy is created. The magnetic quality of this energy 
-	        	draws inappropriate, harmful and/or pleasurable things to the heart as a substitute for joy and love. This energy commonly creates addiction 
-	        	to negative emotions, sugar, food, drugs, alcohol, cigarettes, pornography, chronic illness, work or exercise. Addictive heart energy can also
+	        	feel joy, love and other positive emotions, and is the core of your being. If your heart is unable to experience these positive emotions, it can become desperate for something pleasurable— it is then that the addictive heart energy is created. 
+	        		The magnetic quality of this energy draws inappropriate, harmful and/or pleasurable things to the heart as a substitute for joy and love. This energy commonly creates addiction to negative emotions, sugar, food, drugs, alcohol, cigarettes, pornography, chronic illness, work or exercise. Addictive heart energy can also
 				cause other obsessive, compulsive, addictive or destructive behaviors.','no', '', 'Energy'],
-			['Idea Allergy', 'Allergies are simply trapped energies in the body that create a negative reaction to whatever it is you\'re allergic to. 
-	        	As you can be allergic to a substance or a food, you can be allergic to thoughts or ideas, which will typically cause emotional reactions, and 
-	        	avoidance or sabotage behaviors. Allergies to ideas are often created during a difficult emotional time where you had negative feelings about 
-	        	that particular', 'yes', '', 'Allergy/Intolerance'],
+			['Idea Allergy', 'Allergies are simply trapped energies in the body that create a negative reaction to whatever it is you\'re allergic to. As you can be allergic to a substance or a food, you can be allergic to thoughts or ideas, which will typically cause emotional reactions, and  avoidance or sabotage behaviors. Allergies to ideas are often created during a difficult emotional time where you had negative feelings about that particular', 'yes', '', 'Allergy/Intolerance'],
 	        ['Physical Allergy', 'An energy that develops from changes in the way the energy field reacts to the energy of something 
 	        	(i.e. a particle food, hair, dust)', 'yes', '', 'Allergy/Intolerance'],
 	        ['Intolerance', 'An energy that causes the body to have a negative reaction to food or other elements.', 'no','', 'Allergy/Intolerance',],
 	        ['Trapped Emotion', 'Harmful emotional energies from negative past events that are stored in the body. They can cause depression, 
 	        	anxiety; they can block people from love and happiness and make them feel disconnected from others.', 'yes','', 'Emotional'],
-	        ['Heart-Wall', "Heart Wall is made of layers of trapped emotions that have been designated as a buffer to protect your heart from being broken. 
-	        	Your heart-wall is literally made of trapped energies, but your subconscious has assigned it a physical material and thickness, which are 
-	        	imaginative, but symbolic of the level of protection your heart has needed during the course of your life. \r
-	        	Heart Wall Emotions – are trapped emotions (harmful emotional energies from negative past events that are stored in the body) used by 
-	        	the subconscious build a barrier of protection around the heart.", 'yes','', 'Emotional'],
+	        ['Heart-Wall', "Heart Wall is made of layers of trapped emotions that have been designated as a buffer to protect your heart from being broken. Your heart-wall is literally made of trapped energies, but your subconscious has assigned it a physical material and thickness, which are imaginative, but symbolic of the level of protection your heart has needed during the course of your life. \r
+	        	Heart Wall Emotions – are trapped emotions (harmful emotional energies from negative past events that are stored in the body) used by the subconscious build a barrier of protection around the heart.", 'yes','', 'Emotional'],
 	        ['Emotional Resonance', 'A resonance develops during an intense emotional experience that leaves the body &quot;ringing&quot; with the 
 	        	frequency of that emotional vibration. Resonances often affect the whole body, as opposed to a trapped emotion which is smaller
 				and more acute, but resonances do cause similar emotional difficulties.', 'yes','', 'Emotional'],

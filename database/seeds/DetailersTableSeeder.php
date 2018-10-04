@@ -13,12 +13,12 @@ class DetailersTableSeeder extends Seeder
     public function run()
     {
     	$detailers=[
-    		['Homeopathy', 'adjunctive therapy'],
-    		['Nature Therapy', 'adjunctive therapy'],
-    		['Light Therapy', 'adjunctive therapy'],
-    		['Zero Point Energy Devices', 'adjunctive therapy'],
-    		['Laser Therapy', 'adjunctive therapy'],
-    		['Color Therapy', 'adjunctive therapy'],
+    		['Homeopathy', 'Adjunctive Therapy'],
+    		['Nature Therapy', 'Adjunctive Therapy'],
+    		['Light Therapy', 'Adjunctive Therapy'],
+    		['Zero Point Energy Devices', 'Adjunctive Therapy'],
+    		['Laser Therapy', 'Adjunctive Therapy'],
+    		['Color Therapy', 'Adjunctive therapy'],
     		['Aromatherapy', 'adjunctive therapy'],
     		['Bach Flower Remedies', 'adjunctive therapy'],
     		['Essential Oils', 'adjunctive therapy'],
