@@ -1,24 +1,32 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-/* Main Component */
-class Definer extends Component {
+
+class Locator extends Component {
 
   constructor() {
   
     super();
     //Initialize the state in the constructor
     this.state = {
-        definers: [],
-        currentCategory: 'Energy'
+        locators: [],
+        definers:[],
+        currentCategory: 'Base'
     }
   }
-  /*componentDidMount() is a lifecycle method
-   * that gets called after the component is rendered
-   */
+  
   componentDidMount() {
     /* fetch API in action */
-    fetch('/api/definers')
+    fetch('/api/locators')
+        .then(response => {
+            return response.json();
+        })
+        .then(locators => {
+            //Fetched product is stored in the state
+            this.setState({ locators });
+        });
+        // definer fetch
+      fetch('/api/definers')
         .then(response => {
             return response.json();
         })
@@ -28,7 +36,25 @@ class Definer extends Component {
         });
   }
 
- renderDefiners() {
+ renderLocators() {
+        const listStyle = {
+            listStyle: 'none',
+            fontSize: '18px',
+            lineHeight: '1.8em',
+        }
+    return this.state.locators.map(locator => {
+      if (locator.category_type == this.state.currentCategory ){
+        return (
+            <li style={listStyle} onClick={
+                () =>this.handleClick(locator.name)}key={locator.id} value={locator.category_type}>
+                { locator.name } 
+            </li>      
+        );
+      }
+    })
+  }
+
+  renderDefiners() {
         const listStyle = {
             listStyle: 'none',
             fontSize: '18px',
@@ -37,8 +63,7 @@ class Definer extends Component {
     return this.state.definers.map(definer => {
       if (definer.category_type == this.state.currentCategory ){
         return (
-            <li style={listStyle} onClick={
-                () =>this.handleClick(definer.name)}key={definer.id} value={definer.category_type}>
+            <li style={listStyle} key={definer.id} value={definer.category_type}>
                 {definer.name} 
             </li>      
         );
@@ -50,6 +75,7 @@ class Definer extends Component {
 
     
     handleClick(name) {
+      this.setState({currentCategory:name});
       alert(name);
   }
 
@@ -75,7 +101,12 @@ class Definer extends Component {
         <div>
           <div style= {mainDivStyle}>
             <div style={divStyle}>
-                <h3> Test TEst </h3>
+                <h3> Locators </h3>
+                  <ul>
+                    {this.renderLocators() }
+                  </ul> 
+
+                  <h3> Definers </h3>
                   <ul>
                     {this.renderDefiners() }
                   </ul> 
@@ -90,9 +121,9 @@ class Definer extends Component {
   }
 }
 
-export default Definer;
+export default Locator;
 
 
-if (document.getElementById('definer')) {
-    ReactDOM.render(<Definer />, document.getElementById('definer'));
+if (document.getElementById('silly')) {
+    ReactDOM.render(<Locator />, document.getElementById('locator'));
 }

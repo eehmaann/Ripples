@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-/* Main Component */
+
 class Locator extends Component {
 
   constructor() {
@@ -10,13 +10,10 @@ class Locator extends Component {
     //Initialize the state in the constructor
     this.state = {
         locators: [],
-        definers:[],
         currentCategory: 'Base'
     }
   }
-  /*componentDidMount() is a lifecycle method
-   * that gets called after the component is rendered
-   */
+  
   componentDidMount() {
     /* fetch API in action */
     fetch('/api/locators')
@@ -77,7 +74,7 @@ class Locator extends Component {
         <div>
           <div style= {mainDivStyle}>
             <div style={divStyle}>
-                <h3> All products </h3>
+                <h3> Locators </h3>
                   <ul>
                     {this.renderLocators() }
                   </ul> 

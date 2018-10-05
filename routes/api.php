@@ -23,6 +23,8 @@ Route::get('locators', 'LocatorsController@index');
 
 Route::get('definers', 'DefinersController@index');
 
+Route::get('definers/{definer}', 'DefinersController@show');
+
 Route::get('products', 'ProductsController@index');
  
 Route::get('products/{product}', 'ProductsController@show');

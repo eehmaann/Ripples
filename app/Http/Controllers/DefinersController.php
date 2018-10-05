@@ -11,4 +11,9 @@ class DefinersController extends Controller
     public function index(){
         return Definer::all();
     }
+
+    public function show(Definer $definer)
+    {
+        return $definer;
+    }
 }
