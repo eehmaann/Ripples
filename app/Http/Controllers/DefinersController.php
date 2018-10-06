@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Definer;
 use DB;
+use Carbon\Carbon;
+use Session;
 
 class DefinersController extends Controller
 {
@@ -12,8 +14,14 @@ class DefinersController extends Controller
         return Definer::all();
     }
 
-    public function show(Definer $definer)
-    {
-        return $definer;
+    public function show($id){
+    	$definer = Definer::find($id);
+        if(is_null($definer)) {
+            Session::flash('message','Error prognosis is not found');
+            return redirect('/locators');
+        }
+        return view('definer.show')->with([
+            'definer' => $definer,
+        ]);// //
     }
 }

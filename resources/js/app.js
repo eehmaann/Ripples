@@ -16,4 +16,6 @@ require('./bootstrap');
 require('./components/Example');
 require('./components/Emotion/EmotionGroup');
 require('./components/Locator');
-require('./components/Definers');
+//require('./components/Energies/AHE');
+require('./components/Energies/Allergy/AllergyConstructor');
+

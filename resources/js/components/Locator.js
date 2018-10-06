@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Definer from './Definers'
 
 
 class Locator extends Component {
 
-  constructor() {
+  constructor(props) {
   
-    super();
+    super(props);
     //Initialize the state in the constructor
     this.state = {
         locators: [],
@@ -77,12 +78,12 @@ class Locator extends Component {
                 <h3> Locators </h3>
                   <ul>
                     {this.renderLocators() }
-                  </ul> 
-
+                  </ul>
+                  <ul>
+                    <Definer definerName={this.state.currentCategory}/>
+                  </ul>
             </div> 
-
-          </div>
-              
+          </div>     
         </div>
       
     );
