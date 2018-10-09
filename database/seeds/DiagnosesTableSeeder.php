@@ -1,10 +1,17 @@
 <?php
 
-use Illuminate\Database\Seeder; use App\Definer;
+use Illuminate\Database\Seeder;
+use App\Diagnosis;
 
-class DefinersTableSeeder extends Seeder {          
+class DiagnosesTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */    
 	public function run(){
-		$definers=[             
+		$diagnoses=[             
 			['Addictive Heart Energy', 'An energy created out of the
 				heart’s desperation to feel love, joy, etc. Your heart is designed to
 				feel joy, love and other positive emotions, and is the core of your being. If
@@ -167,7 +174,8 @@ class DefinersTableSeeder extends Seeder {
 
 			['Recreational Drugs', 'generally are very imbalancing to the energy field, and
 				will often lead to weakness in the chakras as well as liver damage, kidney 
-				damage, etc. Drugs can open the body to invasion by entities.', 'no','', 'Chemical'],             
+				damage, etc. Drugs can open the body to invasion by entities.', 'no','', 
+				'Chemical'],             
 
 			['Vaccination','','no', '','Medical'],
 
@@ -764,19 +772,18 @@ class DefinersTableSeeder extends Seeder {
 			['C7-T1','','no','','Cervical Disks'],
 
         ];           
-	    $count = count($definers);         
-	    foreach ($definers as $key => $definerData) {             
-	    	$definer = new Definer();
-	        $definer->created_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
-			$definer->updated_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
-			$definer->name = $definerData[0];             
-			$definer->definition=$definerData[1];             
-			$definer->trapped_emotions= $definerData[2];
-			$definer->picture= $definerData[3];             
-			$definer->category_type=$definerData[4];
-	        $definer->save();             
+	    $count = count($diagnoses);         
+	    foreach ($diagnoses as $key => $diagnosisData) {             
+	    	$diagnosis = new Diagnosis();
+	        $diagnosis->created_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
+			$diagnosis->updated_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
+			$diagnosis->name = $diagnosisData[0];             
+			$diagnosis->definition=$diagnosisData[1];             
+			$diagnosis->trapped_emotions= $diagnosisData[2];
+			$diagnosis->picture= $diagnosisData[3];             
+			$diagnosis->category_type=$diagnosisData[4];
+	        $diagnosis->save();             
 	        $count--;     
 	    } 
 	} 
 }
-

@@ -65,6 +65,7 @@
         </style>
     </head>
     <body>
+
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -81,6 +82,7 @@
                 <div class="title m-b-md">
                    
                     This is the ripples page
+                    <div id="example"></div>
                 </div>
 
                 <div class="links">
@@ -92,7 +94,6 @@
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
                 <div id='locator'></div>
-                 <div id="test"></div>
             </div>
         </div>
 

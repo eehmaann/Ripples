@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-
+import UnderlyingChoiceDisplay from './underlyerChoice/UnderlyingChoiceDisplay';
 /* Main Component */
-class Definer extends Component {
+class Organ extends Component {
 
   constructor() {
   
@@ -10,6 +10,7 @@ class Definer extends Component {
     //Initialize the state in the constructor
     this.state = {
         definers: [],
+        statement:''
     }
   }
   /*componentDidMount() is a lifecycle method
@@ -17,7 +18,7 @@ class Definer extends Component {
    */
   componentDidMount() {
     /* fetch API in action */
-    fetch('/api/definers')
+    fetch('/api/definers/{definer}')
         .then(response => {
             return response.json();
         })
@@ -34,22 +35,11 @@ class Definer extends Component {
             lineHeight: '1.8em',
         }
     return this.state.definers.map(definer => {
-      if (definer.category_type == this.props.definerName){
+      statment={name}+" is unhappy";
         return (
-               <li style={listStyle} 
-               onClick={() =>this.handleClick(definer.name)}key={definer.id}>
-                {definer.name} 
-                </li>    
+            <UnderlyingChoiceDisplay/>
         );
-      }
     })
-  }
-
-
-
-    
-    handleClick(name) {
-      alert(name);
   }
 
   render() {
@@ -74,18 +64,17 @@ class Definer extends Component {
         <div>
           <div style= {mainDivStyle}>
             <div style={divStyle}>
-                  <ul>
-                    {this.renderDefiners() }
-                  </ul> 
-
+              {this.renderDefiners() }
             </div> 
-
-          </div>
-              
+          </div>              
         </div>
       
     );
   }
 }
 
-export default Definer;
+export default Organ;
+
+if (document.getElementById('organ')) {
+    ReactDOM.render(<Organ />, document.getElementById('organ'));
+}

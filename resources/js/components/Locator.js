@@ -93,6 +93,6 @@ class Locator extends Component {
 export default Locator;
 
 
-if (document.getElementById('locator')) {
-    ReactDOM.render(<Locator />, document.getElementById('locator'));
+if (document.getElementById('locators')) {
+    ReactDOM.render(<Locator />, document.getElementById('locators'));
 }

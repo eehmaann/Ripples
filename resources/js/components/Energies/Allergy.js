@@ -6,11 +6,6 @@ class Allergy extends Component {
   constructor(){
 
     super();
-    this.state = {
-        allergy:''
-        type:''
-        prognosis: ''
-    }
   }
   render() {
     return(

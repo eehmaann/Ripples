@@ -7,6 +7,7 @@
 	</title>
 
 <link href="/css/app.css" type='text/css' rel='stylesheet'>
+
 </head>
 
 	<body>
@@ -22,6 +23,8 @@
 	</header>
 	<section>
 		@yield('content')
+
 	</section>
 	</body>
+
 </html>

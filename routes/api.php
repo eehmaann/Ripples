@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('emotions', 'EmotionController@index');
+Route::get('potato', 'EmotionController@index');
 
 Route::get('locators', 'LocatorsController@index');
 

@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 
-class AllergyButton extends Component {
+class AllergyEntry extends Component {
   constructor(props) {
     super();
   }
   render() {
     return(
-      <button onClick={ () => { this.props.action(this.props.allergy) } }>
-        {this.props.allergy}
+      <button onClick={ () => { this.props.action(this.props.monkey) } }>
+        {this.props.monkey}
       </button>
     );
   }  
 }
 
-export default AllergyButton;
+export default AllergyEntry;

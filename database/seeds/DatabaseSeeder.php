@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(HormonesTableSeeder::class);
         $this->call(IntolerancesTableSeeder::class);
         $this->call(VitaminsTableSeeder::class);
+        $this->call(DiagnosesTableSeeder::class);
 
         // $this->call(UsersTableSeeder::class);
     }

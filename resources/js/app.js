@@ -13,9 +13,5 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/Example');
-require('./components/Emotion/EmotionGroup');
 require('./components/Locator');
-//require('./components/Energies/AHE');
-require('./components/Energies/Allergy/AllergyConstructor');
 
