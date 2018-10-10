@@ -1,14 +1,11 @@
 $(document).ready(function()
 {
-	var disp ="Base";
-	showNavigation(disp);
+	var disp ="Energy";
+	showNavigation("Base");
 
 	//When locator is clicked new locators and/ or diagnoses will show
 	$("#locators > ul > li" ).on('click',function (){
-    alert($(this).text());
-    disp=$(this).text();
-    console.log(disp + "is the new disp");
-    showNavigation(disp);
+    showNavigation($(this).value);
 	});
 
 
