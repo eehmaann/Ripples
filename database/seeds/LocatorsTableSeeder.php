@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Locator;
 
+use App\Locator;
 class LocatorsTableSeeder extends Seeder
 {
     /**
@@ -132,14 +132,13 @@ class LocatorsTableSeeder extends Seeder
 	    ];
          $count = count($locators);
 	    foreach ($locators as $key => $locatorData) {
+	        
 	        $locator = new Locator();
-
 	        $locator->created_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
 	        $locator->updated_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
 	        $locator->name = $locatorData[0];
 	        $locator->picture= $locatorData[1];
 	        $locator->category_type= $locatorData[2];
-
 	        $locator->save();
 	        $count--;
     } //

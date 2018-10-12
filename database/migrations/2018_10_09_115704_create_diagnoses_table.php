@@ -33,4 +33,6 @@ class CreateDiagnosesTable extends Migration
     {
         Schema::dropIfExists('diagnoses');
     }
+
+    
 }

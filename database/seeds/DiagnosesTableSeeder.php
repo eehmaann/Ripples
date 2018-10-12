@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Diagnosis;
+use App\Locator;
 
 class DiagnosesTableSeeder extends Seeder
 {
@@ -773,7 +774,11 @@ class DiagnosesTableSeeder extends Seeder
 
         ];           
 	    $count = count($diagnoses);         
-	    foreach ($diagnoses as $key => $diagnosisData) {             
+	    foreach ($diagnoses as $key => $diagnosisData) {
+	    	$cat = explode(' ', $diagnosisData[4]);
+        	$catType = array_pop($cat);
+        	$locator_id = Locator::where('category_type', '=', $catType)->pluck('id')->first();             
+	    	
 	    	$diagnosis = new Diagnosis();
 	        $diagnosis->created_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
 			$diagnosis->updated_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();

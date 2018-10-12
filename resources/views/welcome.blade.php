@@ -80,9 +80,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                   
-                    This is the ripples page
-                    <div id="example"></div>
+                  
+
                 </div>
 
                 <div class="links">

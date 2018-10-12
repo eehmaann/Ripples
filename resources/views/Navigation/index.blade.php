@@ -5,7 +5,7 @@
 
 
 @section('content')
-
+  <p> You are looking at <div id="test">Base</div></p>
 	<div id="locators" class="col-4" style="border: blue solid; display: inline-block;">
     <p>Do you need to look in this section</p>
     <ul>

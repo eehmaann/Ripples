@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCuresTable extends Migration
+
+class CreateCureDiagnosisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +14,14 @@ class CreateCuresTable extends Migration
      */
     public function up()
     {
-        Schema::create('cures', function (Blueprint $table) {
+        Schema::create('cure_diagnosis', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('name');
-            $table->longText('instructions')->nullable();
+            $table->integer('cure_id')->unsigned();
+            $table->integer('diagnosis_id')->unsigned();
+
+            $table->foreign('cure_id')->references('id')->on('cures');
+            $table->foreign('diagnosis_id')->references('id')->on('diagnoses');
         });
     }
 
@@ -28,6 +32,6 @@ class CreateCuresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cures');
+        Schema::dropIfExists('cure_diagnosis');
     }
 }
