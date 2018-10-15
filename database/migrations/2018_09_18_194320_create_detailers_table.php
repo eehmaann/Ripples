@@ -17,7 +17,6 @@ class CreateDetailersTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('name');
-            $table->string('category_type');
         });
     }
 

@@ -10,7 +10,7 @@
     <p>Do you need to look in this section</p>
     <ul>
       @foreach($locators as $locator)
-          <li class="{{$locator->category_type}}" value='{{$locator->name}}'> {{ $locator->name}}</li>
+          <li class="clickLocate" id='{{$locator->name}}' data-category="{{$locator->category_type}}"> {{ $locator->name}}</li>
       @endforeach
     </ul>
   </div>
@@ -19,7 +19,13 @@
     <p> Possible Causes</p>
     <ul>
       @foreach($diagnoses as $diagnosis)
-          <li class='{{$diagnosis->category_type}}' value='{{$diagnosis->name}}'> {{ $diagnosis->name}} </span> </li>
+        @if(strlen($diagnosis->destination)>1)
+          <li class='clickDiagnosis' value='{{$diagnosis->name}}'                
+            href='{{$diagnosis->destination}}' data-category="{{$diagnosis->category_type}}> 
+       
+            {{ $diagnosis->name}}
+          </li>
+         @endif
       @endforeach
     </ul>
   </div>

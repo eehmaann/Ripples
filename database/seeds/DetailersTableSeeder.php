@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Detailer;
+use App\Diagnosis;
 
 class DetailersTableSeeder extends Seeder
 {
@@ -149,15 +150,13 @@ class DetailersTableSeeder extends Seeder
     	];
     	$count = count($detailers);
 	    foreach ($detailers as $key => $detailerData) {
-            $cat = explode(' ', $detailerData[1]);
-            $catType = array_pop($cat);
-            $diagnosis_id = Diagnosis::where('category_type', '=', $catType)->pluck('id')->first(); 
+            $diagnosis_id = Diagnosis::where('name', '=', $detailerData[1])->pluck('id')->first(); 
 	    	$detailer = new Detailer();
 
 	        $detailer->created_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
 	        $detailer->updated_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
 	        $detailer->name = $detailerData[0];
-	        $detailer->category_type= $detailerData[1];
+            $detailer->diagnosis_id=$diagnosis_id;  
 
 	        $detailer->save();
 	        $count--;

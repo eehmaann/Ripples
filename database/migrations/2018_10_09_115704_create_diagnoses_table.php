@@ -21,6 +21,7 @@ class CreateDiagnosesTable extends Migration
             $table->string('trapped_emotions');
             $table->longText('picture')->nullable();
             $table->string('category_type');
+            $table->string('url')->nullable();
         });
     }
 

@@ -1,18 +1,12 @@
 $(document).ready(function()
 {
 	var disp="Base";
-	showNavigation("Base");
+	showNavigation(disp);
 
-	//When locator is clicked new locators and/ or diagnoses will show
-	//$("#locators > ul> li" ).on("click", function (){
-    //	showNavigation($(this).text());
-    //	disp=($(this).text());
-    //	alert(disp);
-    //	//alert($(this).text());
-	//});
-	$("#locators > ul> li" ).each(function(){ 
-   		$(this).click(function(){ 
-          showNavigation(this.text());
+	$(".clickLocate" ).each(function(){ 
+   		$(this).click(function(){
+   			disp= $(this).text();
+         	showNavigation(disp);
    		})
    	})
 });
@@ -20,8 +14,7 @@ $(document).ready(function()
 //show possible choices
 $.fn.showChoices = function(catType) {
     this.hide();
-    if(this.attr("class")===catType){
-    //if(this.hasClass(catType)){
+    if($(this).data('category')===catType){
 		this.show();
 	}
 }
@@ -29,10 +22,10 @@ $.fn.showChoices = function(catType) {
 // function to show both locators and diangnoses
 
 function showNavigation(choice){
-	$( "#locators > ul > li" ).each( function(){
+	$( ".clickLocate" ).each( function(){
 		$(this).showChoices(choice);
 	})
-	$( "#diagnoses > ul > li" ).each( function (){
+	$( ".clickDiagnose" ).each( function (){
 		$(this).showChoices(choice);
 	})
 }

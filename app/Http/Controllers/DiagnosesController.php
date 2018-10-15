@@ -38,9 +38,4 @@ class DiagnosesController extends Controller
     		->with(['diagnoses'=>$diagnosis]);
     }
 
-
-
-
-
-
 }

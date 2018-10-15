@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Diagnosis; 
-use App\Detailer; 
 
 class ConnectDiagnosisAndDetailers extends Migration
 {

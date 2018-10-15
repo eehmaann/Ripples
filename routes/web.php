@@ -15,8 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/emotion', 'EmotionController@index');
-Route::get('/potato',  'LocatorsController@index');
+Route::get('/navigation',  'LocatorsController@index');
 
+Route::get('/ahe/{id}/create', 'DiagnosesContoller@createAHE');
 Route::get('/debug', function () {
 
     $debug = [

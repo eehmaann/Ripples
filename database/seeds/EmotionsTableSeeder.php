@@ -22,8 +22,7 @@ class EmotionsTableSeeder extends Seeder
 			another is to be unfaithful in guarding or fulfilling a trust; to be disloyal or violate a confidence, to desert
 			someone who trusts you. Betrayal of the self is to break integrity; act against one’s morals, to abuse the
 			body or soul.'],
-        ['forlorn', '1', '1', 'Miserable; sad and lonely by reason of abandonment, desolation or emptiness; hopeless;
-			forsaken'],
+        ['forlorn', '1', '1', 'Miserable; sad and lonely by reason of abandonment, desolation or emptiness; hopeless; forsaken'],
         ['lost', '1',  '1', 'Unable to see the correct or acceptable course; having no direction. Physically lost most often
 			shows up from childhood- (e.g. being lost in the woods and cannot find the way home, etc.) Emotionally
 			lost refers to a feeling of being unable to see what the right decision or direction, being unable to find
