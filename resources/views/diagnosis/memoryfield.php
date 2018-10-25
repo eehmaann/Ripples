@@ -1,34 +1,29 @@
 @extends('layouts.diagnosis')
-
-
+ @section('pagejs')
+ <script src="/js/memory.js"></script>
+ @endsection
 @section('diagnosis')
 
-<h1>{{diagnois.name}}</h1>
-<div class="container">
-	<div class="row">
-		<div class="col-md-8">
-            <div class='form-group'>
-                <label>What is the Memory</label>
-                <input
-                    type='text'
-                    id='memory'
-                    name='memory'
-                    value=' "No Will to Live" Energy'>
-                 <label>What is the age</label>
-                <input
-                    type='number'
-                    id='age'
-                    name='age'
-                    value='Age of memory'>
+<label>What is the Memory</label>
+<input
+    type='text'
+    id='messagetext'
+    name='messagetext'
+    value=''>
+<p id="errormessage" class="error">There needs to be a memory</p>
+ 
+ <label>Where does the memory need to go?</label>
+<input
+    type='text'
+    id='memorysolutiontext'
+    name='memory'
+    value=''>
+<p>Suggestions</p>
+<ul >
+    <li class = id="clickableSolutions">Move the field from front to back</li>
+    <li class = id="clickableSolutions">Release from field entirely</li>
+</ul>
 
-               <label>Description</label>
-                <input
-                    type='text'
-                    id='description'
-                    name='description'
-                    value=' "No Will to Live" Energy'
-                    readonly>
-            </div>
-        </div>
-    </div>
-</div>
+ 
+
+@endsection

@@ -1,36 +1,21 @@
 @extends('layouts.diagnosis')
-
+@section('pagejs')
+ <script src="/js/heartwall.js"></script>
+@endsection
 
 @section('diagnosis')
-
-<h1>{{diagnois.name}}</h1>
-<div class="container">
-	<div class="row">
-		<div class="col-md-8">
-            <div class='form-group'>
-                <label> How long is the heartwall?></label>
-                <input
-                    type='number'
-                    id='length'
-                    name='length'
-                    value=''>
-                <label> What is the heartwall made of?></label>
-                <input
-                    type='text'
-                    id='material'
-                    name='material'
-                    value=''>
-
-                <!-- This will be made into string for symptoms table-->
-               <label>Description</label>
-                <input
-                    type='text'
-                    id='description'
-                    name='description'
-                    value=''
-                    readonly
-                >
-            </div>
-        </div>
-    </div>
-</div>
+    <label> How many miles long is the heartwall?</label>
+    <input
+        type='number'
+        id='length'
+        name='length'
+        value=''>
+    <p id="errormessage" class="error">You must be a number greater than 10 miles</p>
+    <label> What is the heartwall made of?</label>
+    <input
+        type='text'
+        id='material'
+        name='material'
+        value=''>
+    <p id="errormessage2" class="error">You must include a material</p>
+@endsection

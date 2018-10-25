@@ -16,6 +16,11 @@ class CreateProblemsTable extends Migration
         Schema::create('problems', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->integer('steps')->nullable();
+            $table->string('description');
+            $table->string('clearstatement')->nullable();
+            $table->boolean('cleared')->default('false');
+
         });
     }
 

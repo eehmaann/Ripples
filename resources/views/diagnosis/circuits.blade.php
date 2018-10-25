@@ -1,22 +1,27 @@
 @extends('layouts.diagnosis')
 
-
+@section('destination')'problemsb'
+@endsection
 @section('diagnosis')
+<table>
+    <tr>
+        <td> </td>
+        <td>Column A</td>
+        <td>Column B</td>
+    </tr>
+    <tr>
+        <td>Row {{diagnosis->trapped_emotions}}</td>
 
-<h1>{{diagnosis.name}}</h1>
-<div class="container">
-	<div class="row">
-		<div class="col-md-8">
-            <div class='form-group'>
-               <label>Description</label>
-                <input
-                    type='text'
-                    id='description'
-                    name='description'
-                    value='{{ old('description', '{{diagnosis.name}}') }}'
-                    readonly
-                >
-            </div>
-        </div>
-    </div>
-</div>
+        @for($column = 1; $column<=2; $column++ )
+            <td>                    
+                 @foreach($emotions as $emotion)
+                    @if($emotion->col_name==$column && $emotion->row_name=={{diagnosis->trapped_emotions}})
+                        <span class="emotion"> {{ $emotion->name}} </span> <br>
+                    @endif
+                 @endforeach
+            </td>
+        @endfor
+    </tr>
+ </table>
+@endsection
+                

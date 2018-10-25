@@ -49,7 +49,6 @@ class LocatorsTableSeeder extends Seeder
         	['Glands','','Circuits and Systems'],
         	['Chakras','','Circuits and Systems'],
            	['Systems','','Circuits and Systems'],
-           	['Disconnections','','Circuits and Systems'],
             ['Accupuncture System','','Circuits and Systems'],
             ['Circulatory System','','Systems'],
 			['Digestive System','','Systems'],                   	     	

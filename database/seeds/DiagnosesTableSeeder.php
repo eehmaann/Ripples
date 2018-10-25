@@ -23,7 +23,7 @@ class DiagnosesTableSeeder extends Seeder
 				This energy commonly creates addiction to negative emotions, sugar, food, drugs, 
 				alcohol, cigarettes, pornography, chronic illness, work or exercise. 
 				Addictive heart energy can also cause other obsessive, compulsive, addictive or 
-				destructive behaviors.','no', '', 'Energy','ahe/1/createt'],
+				destructive behaviors.','no', '', 'Energy','ahe'],
 
 			['Idea Allergy', 'Allergies are simply trapped energies in the body that create
 				a negative reaction to whatever it is you\'re allergic to. As you can be
@@ -31,14 +31,14 @@ class DiagnosesTableSeeder extends Seeder
 				which will typically cause emotional reactions, and  avoidance or sabotage
 				behaviors. Allergies to ideas are often created during a difficult emotional
 				time where you had negative feelings about that particular', 'yes', '',
-				'Allergy/Intolerance',''],
+				'Allergy/Intolerance','allergy'],
 
 			['Physical Allergy', 'An energy that develops from changes in the way the energy 
 				field reacts to the energy of something (i.e. a particle food, hair, dust)', 
-				'yes', '', 'Allergy/Intolerance',''],
+				'yes', '', 'Allergy/Intolerance','allergy'],
 
 			['Intolerance', 'An energy that causes the body to have a negative reaction to 
-				food or other elements.', 'no','', 'Allergy/Intolerance',],             
+				food or other elements.', 'no','', 'Allergy/Intolerance','intolerance'],             
 
 			['Trapped Emotion', 'Harmful emotional energies from negative past events that are 
 				stored in the body. They can cause depression, anxiety; they can block people 
@@ -52,7 +52,7 @@ class DiagnosesTableSeeder extends Seeder
 				level of protection your heart has needed during the course of your life. \r
 				Heart Wall Emotions – are trapped emotions (harmful emotional energies from
 				negative past events that are stored in the body) used by the subconscious build
-				a barrier of protection around the heart.", 'yes','', 'Emotional',''],
+				a barrier of protection around the heart.", 'yes','', 'Emotional','heartwall'],
 
 			['Emotional Resonance', 'A resonance develops during an intense emotional
 				experience that leaves the body &quot;ringing&quot; with the frequency of that 
@@ -63,21 +63,21 @@ class DiagnosesTableSeeder extends Seeder
 			['Broadcast Message', 'An energy that is continually sent out from the body to 
 				other people, who receive it subconsciously. It can influence ability to form 
 				and keep relationships, as well as attract negativity, wrong people, etc.', 
-				'no','', 'Mental',''],             
+				'no','', 'Mental','broadcast'],             
 
 			['Despair Anchor', 'This was the energy of a thought that was stuck in your 
 				energy field. A negative statement perceived as true that prompting your 
 				subconscious mind to verify or fulfill the &quot;truth&quot; of that thought.', 
-				'no','','Mental',''],             
+				'no','','Mental','anchor'],             
 
 			['Images', 'The trapped energy of a “picture in the mind”. The subconscious will 
 				attempt to fulfill this image, and will direct (or misdirect) behavior to make 
 				sure this image “comes true”. An image often interferes with goals and relationships, 
-				depending on what the image is.', 'no','', 'Mental',''],             
+				depending on what the image is.', 'no','', 'Mental','images'],             
 
 			['Memory Field', 'The energy of memories stored in the energy field often in front of a 
 				person. They are present when memories are traumatic and often recalled. That is why it
-				makes if it difficult to move forward in life.', 'no','', 'Mental',''],
+				makes if it difficult to move forward in life.', 'no','', 'Mental','memory'],
 
 			['No Will to Live', 'An energy that becomes trapped when life overwhelms us and
 				we lose the desire to live.', 'no', '', 'Mental',''],             
@@ -143,7 +143,7 @@ class DiagnosesTableSeeder extends Seeder
 			['Mold', 'The invasion and multiplication of opportunistic mold microorganisms
 				that are not normally present within the body. Mold causes a
 				wide variety of symptoms including joint and muscles pain, fatigue and 
-				brain fog.', 'no','', 'Pathogen' ],
+				brain fog.', 'no','', 'Pathogen',''],
 
 			//Toxins
 			['Heavy Metals','', 'no','', 'Toxins',''],             
@@ -221,7 +221,7 @@ class DiagnosesTableSeeder extends Seeder
 
 			['Color Deficiency','', 'no', '',  'Lifestyle & Nutrition',''], 
 
-			['Adjunctive Therapy','', 'no', '', 'Outside Needs' ], 
+			['Adjunctive Therapy','', 'no', '', 'Outside Needs',''], 
 
 			['Energy Techniques','','no','', 'Outside Needs',''], 
 
@@ -335,7 +335,7 @@ class DiagnosesTableSeeder extends Seeder
 				is referred to as the Abode of Kundalini, or the center of energy that is yet 
 				to realize its potential. Because of its location, the Sacral chakra relates 
 				to the water element and controls emotions that center around relationships,
-				sexuality, and intimacy such as desire.', 'no', '', 'Chakras' ],
+				sexuality, and intimacy such as desire.', 'no', '', 'Chakras',''],
 
 			['Root Chakra (Muladhara)','The Root chakra lies below the genitals and is the
 				first of three physical body energy centers. As the center for survival, security, 
@@ -783,7 +783,7 @@ class DiagnosesTableSeeder extends Seeder
 			$diagnosis->trapped_emotions= $diagnosisData[2];
 			$diagnosis->picture= $diagnosisData[3];   
 			$diagnosis->category_type=$diagnosisData[4];	
-			$diagnosis->url=$diagnosisData[5];	 
+			$diagnosis->url=$diagnosisData[5]; 
 			$diagnosis->locator_id=$locator_id;  
 	        $diagnosis->save();             
 	        $count--;     

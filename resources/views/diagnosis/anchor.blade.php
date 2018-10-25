@@ -1,29 +1,21 @@
 @extends('layouts.diagnosis')
-
+@section('pagejs')
+ <script src="/js/anchor.js"></script>
+@endsection
 
 @section('diagnosis')
-
-<h1>{{diagnois.name}}</h1>
-<div class="container">
-	<div class="row">
-		<div class="col-md-8">
-            <div class='form-group'>
-                <label> What is the anchor></label>
-                <input
-                    type='text'
-                    id='anchor'
-                    name='anchor'
-                    value=''>
-
-
-               <label>Description</label>
-                <input
-                    type='text'
-                    id='description'
-                    name='description'
-                    value=''
-                    readonly>
-            </div>
-        </div>
-    </div>
-</div>
+         <label> What is the message?</label>
+    <input
+        type='text'
+        id='messagetext'
+        name='message'
+        value=''>
+    <p id="errormessage" class="error">There needs to be a despair</p>
+    <label> What is the new message?</label>
+    <input
+        type='text'
+        id='improvedtext'
+        name='improved'
+        value=''>
+    <p id="errormessage2" class="error">Need a message to replace anchor?</p>
+@endsection

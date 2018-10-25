@@ -7,14 +7,21 @@ use App\Emotion;
 
 class Emotion extends Model
 {
-      public static function getForSelection() {
-    	
-        $emotions = Emotion::get();
-        $emotions_for_list = [];
-        foreach($emotionss as $emotion) {
-            $emotions_for_list[$emotion->id] = $emotion->name;
+   
+
+    public static function getForCheckboxes() {
+        $emotions = self::get();
+
+        $emotionsForCheckboxes = [];
+
+        foreach ($emotions as $emotion) {
+            $emotionsForCheckboxes[$emotion['id']] = $emotion->name;
         }
-        return $emotions_for_list;
+
+        return $emotionsForCheckboxes;
     }
-    //
+
+    public function problems() {
+        return $this->belongsToMany('App\Problem')->withTimestamps();
+    }
 }

@@ -17,7 +17,38 @@ Route::get('/', function () {
 Route::get('/emotion', 'EmotionController@index');
 Route::get('/navigation',  'LocatorsController@index');
 
-Route::get('/ahe/{id}/create', 'DiagnosesContoller@createAHE');
+Route::get('diagnosis/ahe/{id}/create', 'DiagnosesController@createAHE');
+Route::get('diagnosis/allergy/{id}/create', 'DiagnosesController@createAllergy');
+Route::get('diagnosis/anchor/{id}/create', 'DiagnosesController@createAnchor');
+Route::get('diagnosis/broadcast/{id}/create', 'DiagnosesController@createBroadcast');
+Route::get('diagnosis/circuits/{id}/create', 'DiagnosesController@createCircuits');
+Route::get('diagnosis/cording/{id}/create', 'DiagnosesController@createCording');
+Route::get('diagnosis/curse/{id}/create', 'DiagnosesController@createCurse');
+Route::get('diagnosis/drugs/{id}/create', 'DiagnosesController@createDrugs');
+Route::get('diagnosis/emotionalresonance/{id}/create', 'DiagnosesController@createEmotionalResonance');
+Route::get('diagnosis/entities/{id}/create', 'DiagnosesController@createEntities');
+Route::get('diagnosis/excess/{id}/create', 'DiagnosesController@createExcess');
+Route::get('diagnosis/heartwall/{id}/create', 'DiagnosesController@createHeartWall');
+Route::get('diagnosis/hypnotic/{id}/create', 'DiagnosesController@createHypnotic');
+Route::get('diagnosis/intolerance/{id}/create', 'DiagnosesController@createIntolerance');
+Route::get('diagnosis/inflammation/{id}/create', 'DiagnosesController@createInflammation');
+Route::get('diagnosis/image/{id}/create', 'DiagnosesController@createImage');
+Route::get('diagnosis/malnutrition/{id}/create', 'DiagnosesController@createMalnutrition');
+Route::get('diagnosis/memoryfield/{id}/create', 'DiagnosesController@createMemoryField');
+Route::get('diagnosis/miasm/{id}/create', 'DiagnosesController@createMiasm');
+Route::get('diagnosis/nowill/{id}/create', 'DiagnosesController@createNoWill');
+Route::get('diagnosis/psychictrauma/{id}/create', 'DiagnosesController@createPsychicTrauma');
+Route::get('diagnosis/pathogen/{id}/create', 'DiagnosesController@createPathogen');
+Route::get('diagnosis/saboteur/{id}/create', 'DiagnosesController@createSaboteur');
+Route::get('diagnosis/T3/{id}/create', 'DiagnosesController@createT3');
+Route::get('diagnosis/toxicity/{id}/create', 'DiagnosesController@createToxicity');
+Route::get('diagnosis/trappedemotion/{id}/create', 'DiagnosesController@createTrappedEmotion');
+Route::get('diagnosis/trauma/{id}/create', 'DiagnosesController@createTrauma');
+Route::get('diagnosis/willtodie/{id}/create', 'DiagnosesController@createWillToDie'); 
+
+Route::post('/problemsb', 'ProblemsController@storebasic');
+
+
 Route::get('/debug', function () {
 
     $debug = [
