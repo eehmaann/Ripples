@@ -196,9 +196,9 @@ class DiagnosesTableSeeder extends Seeder
 			is healthy for the human body. Most people have a too acid pH because of stress and 
 				diet.','no', '', 'Lifestyle & Nutrition',''],             
 
-			['PhysicalMalnutrition','A group of conditions generally related to poor quality or
+			['Physical Malnutrition','A group of conditions generally related to poor quality or
 				insufficient quantity of nutrient intake, absorption or utilization.','no','', 
-				'Malnutrition',''],             
+				'Malnutrition','malnutrition'],             
 
 			['Spiritual Malnutrition','A condition caused by lack of spiritual “food”. It is a 
 				need for more quiet, unhurried time. Around the world, roughly 53% of the 

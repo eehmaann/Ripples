@@ -130,9 +130,7 @@ class DiagnosesController extends Controller
     public function createPathogen($id){
         $diagnosis= Diagnosis::find($id);
         return view('diagnosis.pathogen')
-        ->with(['diagnosis'=>$diagnosis])
-        ->with('cures',Cure::all());
-    }
+        ->with(['diagnosis'=>$diagnosis]);}
 
     public function createPsychicTrauma($id){
     $diagnosis= Diagnosis::find($id);
@@ -170,5 +168,4 @@ class DiagnosesController extends Controller
     $diagnosis= Diagnosis::find($id);
         return view('diagnosis.willtodie')
             ->with(['diagnosis'=>$diagnosis]);}
-
 }

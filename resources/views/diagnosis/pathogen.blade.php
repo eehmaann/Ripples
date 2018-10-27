@@ -2,13 +2,14 @@
 
 
 @section('diagnosis')
-<label for ="cureselection">"Please select cure"</label>
-<select id="cureselection" name="cureselection style="width:350px;" tabindex="5">
-        @foreach($cures as $cure)
+<label for ="cureselection">Please select cure</label>
+<select id="cureselection" name="cureselection" style="width:50%;" tabindex="5">
+        @foreach($diagnosis->cures as $cure)
             <option value={{$cure->id}}>{{$cure->name}}</option>
         @endforeach
 </select>
 
+<br>
 
    <label>Amount at a time</label>
     <input

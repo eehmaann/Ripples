@@ -41,4 +41,12 @@ $(document).ready(function()
         }
         
     });
+
+     $( "#test" ).autocomplete({
+      source: "heartwall/autocomplete",
+     minLength: 2,
+      select: function(event, ui) {
+        $('#test').val(ui.item.value);
+      }
+    });
 });

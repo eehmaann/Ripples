@@ -73,7 +73,7 @@
 		<tr>
 			<td>Row {{$row}}</td>
 			@for($column = 1; $column<=4; $column++ )
-			<td>					
+			<td style="border: black thin solid;">					
       			@foreach($herbs as $herb)
       				@if($herb->columnNumber==$column && $herb->rowNumber==$row)
       					<label>
@@ -114,7 +114,7 @@
 		<tr>
 			<td>Row {{$row}}</td>
 			@for($column = 1; $column<=2; $column++ )
-				<td>					
+				<td style="border: black thin solid;">					
 	      		@foreach($vitamins as $vitamin)
 	      			@if($vitamin->columnNumber==$column && $vitamin->rowNumber==$row)
       				<label>

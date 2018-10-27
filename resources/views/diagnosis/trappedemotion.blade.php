@@ -4,13 +4,6 @@
 @endsection
 
 @section('diagnosis')
-  <label>What is the emotion?</label>
-    <input
-        type='text'
-        id='selectedEmotion'
-        name='selectedEmotion'
-        value=''
-        readonly>
 <p>When did the trapped emotion occur?</p>
 <ul> 
     <li id="self" class="timeselector">Current</li>

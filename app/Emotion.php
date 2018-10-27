@@ -15,7 +15,7 @@ class Emotion extends Model
         $emotionsForCheckboxes = [];
 
         foreach ($emotions as $emotion) {
-            $emotionsForCheckboxes[$emotion['id']] = $emotion->name;
+            $emotionsForCheckboxes[$emotion['id']] = $emotion->col_name->row_name->name;
         }
 
         return $emotionsForCheckboxes;

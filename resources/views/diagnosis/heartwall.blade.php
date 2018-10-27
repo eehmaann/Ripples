@@ -10,12 +10,14 @@
         id='length'
         name='length'
         value=''>
-    <p id="errormessage" class="error">You must be a number greater than 10 miles</p>
+    <p id="errormessage" class="error">You must input a number greater than 10 miles</p>
+    
     <label> What is the heartwall made of?</label>
     <input
         type='text'
         id='material'
         name='material'
+        autocomplete="on"
         value=''>
     <p id="errormessage2" class="error">You must include a material</p>
 @endsection

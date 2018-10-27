@@ -9,7 +9,13 @@ class Problem extends Model
     //
 	public function emotions()
 	{
-	    return $this->belongsToMany('App\Problem')->withTimestamps();
+	    return $this->belongsToMany('App\Emotion')->withTimestamps();
 	}
+
+	public function describable()
+	{
+		return $this->morphTo();
+	}
+
 	     
 }

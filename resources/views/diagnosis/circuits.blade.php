@@ -1,6 +1,6 @@
 @extends('layouts.diagnosis')
 
-@section('destination')'problemsb'
+@section('destination''problemsb')
 @endsection
 @section('diagnosis')
 <table>

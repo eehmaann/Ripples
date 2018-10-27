@@ -21,7 +21,7 @@ class CuresTableSeeder extends Seeder
     	 	['Activated Sodium Chlorite', 'This product is normally sold as two bottles: one bottle of 50% citric acid solution and one bottle of 28% sodium chlorite solution.  To make two drops of activated sodium cholrite, Put one drop of 50% citric acid soution into a glass.  Put one drop sodium chlorite solution into the glass.  Stir them together periodicall for three minutes.  The solution will turn brown.  Add 6 to 8 ounces or more of purified water and drink the water'],
     	 	['Neem Leaf capsule', ''],
     	 	['Coconut Oil', ''],
-    	 	['Tai-Ra-Chi & T4 from Systemic Labs'''],
+    	 	['Tai-Ra-Chi & T4 from Systemic Labs',''],
     	 	['Wild Oregano Oil or Leaf',''],
     	 	['Olive Leaf Extract',''],
     	 	['Colloidal Silver',''],
@@ -38,7 +38,7 @@ class CuresTableSeeder extends Seeder
 	        $cure->name = $cureData[0];
 	        $cure->instructions=$cureData[1];
 
-	        $intolerance->save();
+	        $cure->save();
 	        $count--;
         //
         }

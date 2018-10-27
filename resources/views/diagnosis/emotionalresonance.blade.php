@@ -4,7 +4,7 @@
 @endsection
 
 @section('diagnosis')
-@section('diagnosis')
-@include('layouts.emotions')
+@include('layouts.currentTrappedEmotion')
 
+@include('layouts.emotions')
 @endsection

@@ -16,6 +16,9 @@ class CreateHeartwallsTable extends Migration
         Schema::create('heartwalls', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->string('material');
+            $table->integer('starting_distance');
+            $table->integer('current_distance');
         });
     }
 

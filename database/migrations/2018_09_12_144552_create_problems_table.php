@@ -19,7 +19,11 @@ class CreateProblemsTable extends Migration
             $table->integer('steps')->nullable();
             $table->string('description');
             $table->string('clearstatement')->nullable();
-            $table->boolean('cleared')->default('false');
+            $table->string('parentproblem_id')->nullable();
+            //parentproblem_id is a holder until it is properly associated
+            $table->boolean('cleared')->default(false);
+            $table->integer('describable_id')->nullable();
+            $table->string('describable_type')->nullable();
 
         });
     }

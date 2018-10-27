@@ -19,7 +19,6 @@ class CreateCureDiagnosisTable extends Migration
             $table->timestamps();
             $table->integer('cure_id')->unsigned();
             $table->integer('diagnosis_id')->unsigned();
-
             $table->foreign('cure_id')->references('id')->on('cures');
             $table->foreign('diagnosis_id')->references('id')->on('diagnoses');
         });

@@ -7,7 +7,7 @@ $(document).ready(function()
 
 	});
 
-	$('#corded').change(function(){
+	$('.cordmultiple, .cord').change(function(){
 		var client;
 		for (client = 0; client < arbody.length; ++client) {
 			var cord;

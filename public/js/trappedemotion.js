@@ -1,7 +1,5 @@
 $(document).ready(function()
 {
-
-
 	var emotiontrap;
 	// track whether the rest of the time period is set
 	var timePrepared=false;

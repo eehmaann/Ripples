@@ -1,25 +1,35 @@
 @extends('layouts.diagnosis')
-
+@section('pagejs')
+ <script src="/js/curse.js"></script>
+@endsection
 
 @section('diagnosis')
-    <label> Who began the curse?></label>
+<fieldset>
+    <label> Who began the curse?</label>
         <input
             type='text'
-            id='origin'
+            id='inflicterinput'
             name='origin'
             value=''>
-        <label> What does the curse do?></label>
+        <p id="errormessage" class="error"> Please include who placed the curse</p>
+</fieldset>
+<fieldset>
+        <label> What does the curse do?</label>
         <input
             type='text'
-            id='curse'
+            id='curseinput'
             name='curse'
             value=''>
+        <p id="curseerror" class="error"> Please write what the curse does</p>
 
-       
-        <label> Where is the curse held?></label>
+</fieldset>
+   <fieldset>
+        <label> What age did this happen?</label>
         <input
-            type='text'
-            id='body'
-            name='body'
+            type='number'
+            id='ageinput'
+            name='age'
             value=''>
+        <p id="ageerror" class="error">Please state what age the sabotage occured</p>
+    </fieldset>
 @endsection

@@ -9,7 +9,7 @@
 			<tr>
 				<td>Row {{$row}}</td>
 				@for($column = 1; $column<=2; $column++ )
-				<td>					
+				<td style="border: thin black solid">					
       				@foreach($emotions as $emotion)
       					@if($emotion->col_name==$column && $emotion->row_name==$row)
       						<label>
