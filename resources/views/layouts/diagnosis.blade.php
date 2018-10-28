@@ -8,7 +8,7 @@
 
 @section('content')
     <h1>{{$diagnosis->name}}</h1>
-	<div id="diagnosisform">
+	<div id="diagnosisform" class="container">
 		<form method='POST' action=@yield('destination','../../../problemsb') >
 			@yield('diagnosis')
              {{ csrf_field() }}
@@ -36,10 +36,10 @@
                         readonly>
             </div>
             @yield('emotion')
-    		<div id="nextstep">
+    		<div id="nextstep" style="width: 15%;">
     			<p>Are there any underlying causes </p>
-    			<p id="lastcause" class="pathClicker">No</p>
-    			<p id="newcause" class="pathClicker">Yes</p>
+    			<p id="lastcause" class="pathClicker alert alert-danger">No</p>
+    			<p id="newcause" class="pathClicker alert alert-success">Yes</p>
     	   </div> 
 		</form>
 	</div>

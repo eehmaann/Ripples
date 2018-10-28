@@ -16,6 +16,8 @@ class CreateCasesTable extends Migration
         Schema::create('cases', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->string('reason');
+            $table->string('restated');
         });
     }
 

@@ -2,3 +2,4 @@
  @section('pagejs')
  <script src="/js/ahe.js"></script>
  @endsection
+

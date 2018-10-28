@@ -20,7 +20,7 @@ class CreateDiagnosesTable extends Migration
             $table->longText('definition')->nullable();
             $table->string('trapped_emotions');
             $table->longText('picture')->nullable();
-            $table->string('category_type');
+            $table->string('category_type')->default('circuits');
             $table->string('url')->nullable();
         });
     }

@@ -43,7 +43,7 @@ class DiagnosesTableSeeder extends Seeder
 			['Trapped Emotion', 'Harmful emotional energies from negative past events that are 
 				stored in the body. They can cause depression, anxiety; they can block people 
 				from love and happiness and make them feel disconnected from others.', 
-				'yes','', 'Emotional',''],
+				'yes','', 'Emotional','trappedemotion'],
 
 			['Heart-Wall', "Heart Wall is made of layers of trapped emotions that have been
 				designated as a buffer to protect your heart from being broken. Your heart-wall
@@ -58,7 +58,7 @@ class DiagnosesTableSeeder extends Seeder
 				experience that leaves the body &quot;ringing&quot; with the frequency of that 
 				emotional vibration. Resonances often affect the whole body, as opposed to a 
 				trapped emotion which is smaller and more acute, but resonances do cause similar 
-				emotional difficulties.', 'yes','','Emotional',''],             
+				emotional difficulties.', 'yes','','Emotional','emotionalresonance'],             
 
 			['Broadcast Message', 'An energy that is continually sent out from the body to 
 				other people, who receive it subconsciously. It can influence ability to form 
@@ -80,12 +80,17 @@ class DiagnosesTableSeeder extends Seeder
 				makes if it difficult to move forward in life.', 'no','', 'Mental','memory'],
 
 			['No Will to Live', 'An energy that becomes trapped when life overwhelms us and
-				we lose the desire to live.', 'no', '', 'Mental',''],             
+				we lose the desire to live.', 'no', '', 'Mental','nowill'],             
 
-			['Need For T3 Session', '', 'no','', 'Mental',''],             
+			['Need For T3 Session', '', 'no','', 'Mental','T3'],             
 
 			['Will to Die', 'A energy that develops from wishing for death, either as an escape 
-				or from self-abusive thoughts.', 'no','', 'Mental',''],
+				or from self-abusive thoughts.', 'no','', 'Mental','willtodie'],
+			
+			['Cording', 'An energetic connection between two people. The healthy “heart
+					to heart” cord enables the exchange of positive energy. All the rest are 
+					unhealthy cords and are channels for the exchange of negative energy.', 'no', 
+					'','Offensive','cording'],
 
 			['Post-Hypnotic Suggestion', 'A negative statement became stuck in the subconscious 
 				mind during a time when people are in a semi-hypnotic state and their mind was open to
@@ -94,56 +99,56 @@ class DiagnosesTableSeeder extends Seeder
 				come from negative vibrations in the media itself or it can also come from dark entities 
 				who take advantage of one’s semi-hypnotic state. A Post Hypnotic Suggestion is perceived 
 				as a truth by the subconscious mind, which will then seek to verify or fulfill it by creating
-				emotions and behaviors accordingly.', 'no','', 'Offensive',''],
+				emotions and behaviors accordingly.', 'no','', 'Offensive','hypnotic'],
 
 			['Saboteur', 'These are weapons made of pure, invisible energy that are either
 				self-inflicted or inflicted by another person. These are often a manifestation of 
-				someone\'s negative feelings', 'no', '', 'Offensive',''],
+				someone\'s negative feelings', 'no', '', 'Offensive','saboteur'],
 
 			['Entity', "Dark spirit(s) that exerts a negative influence on a person's  body
-				and energy field.", 'no','', 'offensive',''],             
+				and energy field.", 'no','', 'offensive','entities'],             
 			
 			['Curses', 'A very negative energy that has been deliberately placed into a person\’s 
-			energy field by another person or entity with a more nefarious purpose than
-			merely causing pain.', 'no','', 'Offensive',''],             
+				energy field by another person or entity with a more nefarious purpose than
+				merely causing pain.', 'no','', 'Offensive','curse'],             
 
 			['Inflamation', 'An energy that indicates the body is trying to heal, but that the 
 				healing cycles have been stopped/blocked from progressing.  When this energy
 				is cleared, the healing cycle is restarted and as a result new or additional
-				inflammation can be felt.', 'no','', 'Post-Traumatic',''],             
+				inflammation can be felt.', 'no','', 'Post-Traumatic','inflammation'],             
 
 			['Miasm', 'An inherited distortion of the energy field from suppressed 
 				disease that occurred during an ancestor’s life. It influences the balance
-				of body and mind.', 'no','', 'Post-Traumatic',''],             
+				of body and mind.', 'no','', 'Post-Traumatic','miasm'],             
 
 			['Physical Trauma', 'An energy that occurs when the body is under extreme or 
 				sudden physical stress. Can also be from emotional trauma or event or extreme 
-				prolonged stress.', 'no','', 'Post-Traumatic',''],             
+				prolonged stress.', 'no','', 'Post-Traumatic','trauma'],             
 
-			['Psychich Trauma', 'Similar to a trapped emotion but must be identified as a 
+			['Psychic Trauma', 'Similar to a trapped emotion but must be identified as a 
 				psychic trauma. When two or more emotions are felt simultaneously, 
-				they become trapped into one sphere of energy.', 'yes','', 'Post-Traumatic',''],
+				they become trapped into one sphere of energy.', 'yes','', 'Post-Traumatic','psychictrauma'],
 
 		    //Pathogens
 		    ['Parasites', 'Organisms grow, shelter, and feed in the body. There
 				are many different strains, ranging from microscopic to large organisms. They
 				steal nutrients, invade bodily tissues and create poisonous toxic waste. 
 				85-90% of people in the U.S. have parasites not found in medical testing. 
-				Herbal Corrective Suggestion:', 'no', '', 'Pathogen',''],
+				Herbal Corrective Suggestion:', 'no', '', 'Pathogen','pathogen'],
 
 			['Fungal', 'The invasion and multiplication of opportunistic mold microorganisms
 				that are not normally present within the body. Mold causes a
 				wide variety of symptoms including joint and muscles pain,
-				fatigue and brain fog.', 'no','', 'Pathogen',''],             
+				fatigue and brain fog.', 'no','', 'Pathogen','pathogen'],             
 			
-			['Bacterial', '', 'no','', 'Pathogen',''],             
+			['Bacterial', '', 'no','', 'Pathogen','pathogen'],             
 			
-			['Viral', '', 'no', '', 'Pathogen',''],
+			['Viral', '', 'no', '', 'Pathogen','pathogen'],
 			
 			['Mold', 'The invasion and multiplication of opportunistic mold microorganisms
 				that are not normally present within the body. Mold causes a
 				wide variety of symptoms including joint and muscles pain, fatigue and 
-				brain fog.', 'no','', 'Pathogen',''],
+				brain fog.', 'no','', 'Pathogen','pathogen'],
 
 			//Toxins
 			['Heavy Metals','', 'no','', 'Toxins',''],             
@@ -154,43 +159,43 @@ class DiagnosesTableSeeder extends Seeder
 			//Nutrietion and LifeStyles
 			['Stress Hormones','Adrenalin and Cortisol are considered the “stress hormones”
 				of the body. They can be produced in excess during difficult
-				times, becoming toxic to the body.', 'no','', 'Excesses',''],
+				times, becoming toxic to the body.', 'no','', 'Excesses','excess'],
 
 			['Metabolic Waste', 'The by-products of all metabolic processes. If the organs
 				of elimination are compromised in any way, or are working less
 				efficiently than they should, metabolic waste can build up in
-				the body.', 'no','', 'Excesses',''],             
+				the body.', 'no','', 'Excesses','excess'],             
 
-			['Free Radicals', '', 'no','','Excesses',''],             
+			['Free Radicals', '', 'no','','Excesses','excess'],             
 
-			['Six Pernicious Influences', '', 'no','', 'Excesses',''],
+			['Six Pernicious Influences', '', 'no','', 'Excesses','excess'],
 
 			['Environmental', 'Environmental Toxicity – toxins in the environment (outdoors,
 				home, office, etc.) that are absorbed through the skin, lungs
-				digestive system.', 'no', '','Chemicals',''],             
+				digestive system.', 'no', '','Chemicals','excess'],             
 
 			['Food Additives', 'Our modern processed food is filled with all sorts of 
 			chemicals that prolong shelf life, enhance flavor, etc. They interfere with 
-			metabolic processes and create abnormal cells.', 'no', '', 'Chemicals',''],
+			metabolic processes and create abnormal cells.', 'no', '', 'Chemicals','excess'],
 
 			['Recreational Drugs', 'generally are very imbalancing to the energy field, and
 				will often lead to weakness in the chakras as well as liver damage, kidney 
 				damage, etc. Drugs can open the body to invasion by entities.', 'no','', 
-				'Chemicals',''],             
+				'Chemicals','drugs'],             
 
-			['Vaccination','','no', '','Medical',''],
+			['Vaccination','','no', '','Medical','excess'],
 
-			['Medications','','no', '', 'Medical',''],             
+			['Medications','','no', '', 'Medical','excesss'],             
 
-			['Cavitation','','no','','Dental',''],             
+			['Cavitation','','no','','Dental','excess'],             
 
-			['Root Canal', '', 'no', '', 'Dental',''],
+			['Root Canal', '', 'no', '', 'Dental','excess'],
 			
-			['Cavity','','no','','Dental',''],             
+			['Cavity','','no','','Dental','excess'],             
 
-			['Fluoride','','no','','Dental',''],
+			['Fluoride','','no','','Dental','excess'],
 
-			['Mercury Amalgam','','no','','Dental',''],             
+			['Mercury Amalgam','','no','','Dental','excess'],             
 
 			['pH Imbalance','pH measures the acidity or alkalinity of the body. A pH of 7.3 -7.5 
 			is healthy for the human body. Most people have a too acid pH because of stress and 
@@ -213,11 +218,11 @@ class DiagnosesTableSeeder extends Seeder
 
 			['Nutrients','','no', '', 'Foods, Herbs & Nutrients',''], 
 
-			['Dehydration','', 'no', '', 'Lifestyle & Nutrition',''], 
+			['Dehydration','', 'no', '', 'Lifestyle & Nutrition','dehydration'], 
 
 			['Magnertic Field','', 'no', '', 'Lifestyle & Nutrition',''], 
 
-			['Sleep','', 'no', '',  'Lifestyle & Nutrition',''], 
+			['Sleep','', 'no', '',  'Lifestyle & Nutrition','sleep'], 
 
 			['Color Deficiency','', 'no', '',  'Lifestyle & Nutrition',''], 
 

@@ -16,4 +16,7 @@ class Diagnosis extends Model
     return $this->belongsToMany('App\Cure')->withTimestamps();
 	}
   
+  	 public function problem(){
+        return $this->belongsTo('App\Problem');
+    }
 }

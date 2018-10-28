@@ -17,7 +17,7 @@
     <ul>
             <li><a href='#'>Home</a></li>
             <li><a href='#'>Heart Wall</a></li>
-            <li><a href='#'>Past Life</a></li>
+   
     </ul>
 </nav>
 	</header>

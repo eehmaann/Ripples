@@ -40,6 +40,7 @@ Route::get('diagnosis/nowill/{id}/create', 'DiagnosesController@createNoWill');
 Route::get('diagnosis/psychictrauma/{id}/create', 'DiagnosesController@createPsychicTrauma');
 Route::get('diagnosis/pathogen/{id}/create', 'DiagnosesController@createPathogen');
 Route::get('diagnosis/saboteur/{id}/create', 'DiagnosesController@createSaboteur');
+Route::get('diagnosis/sleep/{id}/create', 'DiagnosesController@createSaboteur');
 Route::get('diagnosis/T3/{id}/create', 'DiagnosesController@createT3');
 Route::get('diagnosis/toxicity/{id}/create', 'DiagnosesController@createToxicity');
 Route::get('diagnosis/trappedemotion/{id}/create', 'DiagnosesController@createTrappedEmotion');
