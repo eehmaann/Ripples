@@ -155,9 +155,11 @@ class DiagnosesController extends Controller
 
     public function createTrappedEmotion($id){
     $diagnosis= Diagnosis::find($id);
+    $emotions=Emotion::all();
         return view('diagnosis.trappedemotion')
-            ->with('emotions',Emotion::all())
-            ->with(['diagnosis'=>$diagnosis]);}
+            //->with('emotions',Emotion::all())
+            ->with(['diagnosis'=>$diagnosis,
+                    'emotions'=>$emotions]);}
 
     public function createTrauma($id){
     $diagnosis= Diagnosis::find($id);

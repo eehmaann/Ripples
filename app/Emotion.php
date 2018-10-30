@@ -9,17 +9,16 @@ class Emotion extends Model
 {
    
 
-    public static function getForCheckboxes() {
-        $emotions = self::get();
+   // public static function getForCheckboxes() {
+     //   $emotions = self::get();
+       // $emotions_for_checkboxes = [];
 
-        $emotionsForCheckboxes = [];
+        //foreach ($emotions as $emotion) {
+          //  $emotions_for_checkboxes[$emotion['id']] = $emotion->col_name->row_name->name;
+        //}
 
-        foreach ($emotions as $emotion) {
-            $emotionsForCheckboxes[$emotion['id']] = $emotion->col_name->row_name->name;
-        }
-
-        return $emotionsForCheckboxes;
-    }
+        //return $emotions_for_checkboxes;
+    //}
 
     public function problems() {
         return $this->belongsToMany('App\Problem')->withTimestamps();

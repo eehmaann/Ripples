@@ -2,14 +2,14 @@
 @section('pagejs')
  <script src="/js/psychic.js"></script>
 @endsection
-
-@section('diagnosis') 
+@section('diagnosis')
+@section('destination','../../../problemsemotion') 
 <label>At what age did this occur?</label>
     <input
         type='text'
-        id='age'
-        name='age'
+        id='ageinput'
+        name='ageinput'
         value=''>
 
-@extends('layouts.emotions')
+@include('layouts.emotions')
 @endsection

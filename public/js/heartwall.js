@@ -2,7 +2,7 @@ $(document).ready(function()
 {
 	navigation.hideErrorAndAdancement();
 
-    $('#length').blur(function(){
+    $('#lengthinput').blur(function(){
         //Test whether length is correct if incorrect throw error
         if((!$.isNumeric($(this).val()))||($(this).val()<10)){
             navigation.showError();
@@ -16,7 +16,7 @@ $(document).ready(function()
         else{ 
            
             $('#description').val($("#diagnosisname").text()+ 
-            " "+ $('#length').val() + " miles long made of "
+            " "+ $('#lengthinput').val() + " miles long made of "
             + $('#material').val()+".");
             navigation.showAdvancement();
         }
@@ -24,9 +24,9 @@ $(document).ready(function()
     });
 
     $('#material').keyup(function () {
-        if($('#length').val()>10 && $(this).val().length>=3){
+        if($('#lengthinput').val()>10 && $(this).val().length>=3){
              $('#description').val($("#diagnosisname").text()+ 
-             " "+ $('#length').val() + " miles long made of "
+             " "+ $('#lengthinput').val() + " miles long made of "
             + $('#material').val()+".");
             navigation.showAdvancement();
         }
@@ -42,11 +42,11 @@ $(document).ready(function()
         
     });
 
-     $( "#test" ).autocomplete({
-      source: "heartwall/autocomplete",
-     minLength: 2,
-      select: function(event, ui) {
-        $('#test').val(ui.item.value);
-      }
-    });
+//     $( "#test" ).autocomplete({
+  //    source: "heartwall/autocomplete",
+    // minLength: 2,
+      //select: function(event, ui) {
+        //$('#test').val(ui.item.value);
+     // }
+   // });
 });

@@ -12,20 +12,20 @@ class Problem extends Model
 	    return $this->belongsToMany('App\Emotion')->withTimestamps();
 	}
 
-	   public function heartwall()
-    {
-        return $this->hasOne('App\Heartwall', $foreignKey = null, $localKey = null);
-    }
+	//   public function heartwall()
+    //{
+    //    return $this->hasOne('App\Heartwall');
+    //}
 
-       public function cording()
-    {
-        return $this->hasOne('App\Cord', $foreignKey = null, , $localKey = null);
-    }
+  //     public function cording()
+    //{
+     //   return $this->hasOne('App\Cord', $foreignKey = null, $localKey = null);
+    //}
 
-       public function diagnosis()
-    {
-        return $this->hasOne('App\Diagnosis', $foreignKey = null, $localKey = null);
-    }
+      // public function diagnosis()
+   // {
+     //   return $this->hasOne('App\Diagnosis', $foreignKey = null, $localKey = null);
+    //}
 
 	public function describable()
 	{

@@ -3,7 +3,9 @@
  <script src="/js/cording.js"></script>
  @endsection
 @section('diagnosis')
+ @section('destination','../../../problemsc')
 
+<fieldset>
 <label>Corded to who</label>
 <input
     type='text'
@@ -11,6 +13,8 @@
     name='corded'
     value=''>
     <br>
+    <p id="errormessage" class="error">Please state who/what the cord is connected to</p>
+</fieldset>
 <?php
     $cordport = array("Brain", "Heart", "Gut", "Privates");
     $alength = count($cordport);?>

@@ -10,17 +10,18 @@ $(document).ready(function()
         else{
             showAgeError();
         }
+    });
 
     function testAgeEntered(){
-       return ($("#ageinput")>0);
+       return ($("#ageinput").val()>0);
     }
 
 
     function hideAgeError(){
-    {
         currentPhrase=($("#diagnosisname").text()+" from age "+ $("#ageinput").val());
-         $("#ageerror").hide();
+        $("#ageerror").hide();
     }
+
     function showAgeError(){
         $("#ageerror").show()
         markUnready(); 
@@ -31,15 +32,18 @@ $(document).ready(function()
         currentPhrase=''; 
     }
 
-    $('.emotionCheckBox').change(function(){
-        if(!(testAgeEntered())){
+    $('.emotionCheckBox').click(function(){
+
+    
+       if(!(testAgeEntered())){
            showAgeError(); 
            return;
         }
-        if ($('.emotionCheckBox:checked').size()>0){
+        
+        if ($("input[name='emotions[]']:checked").length>0){
             $("#description").val(currentPhrase);
         }
-        else{
+       else{
             $('#description').val('');
         }
     });

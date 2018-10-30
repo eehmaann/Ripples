@@ -4,15 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Heartwall extends Model
+class Solution extends Model
 {
     //
-//	public function problem(){
-  //      return $this->belongsTo('App\Problem');
-   // }
-
-
-    public function problem()
+        public function problem()
     {
         return $this->morphMany('App\Problem', 'describable');
     }

@@ -13,7 +13,7 @@ class CreateEmotionProblemTable extends Migration
      */
     public function up()
     {
-        Schema::create('book_tag', function (Blueprint $table) {
+        Schema::create('emotion_problem', function (Blueprint $table) {
 
             $table->increments('id');
             $table->timestamps();

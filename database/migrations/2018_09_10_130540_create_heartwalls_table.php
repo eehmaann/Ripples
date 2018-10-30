@@ -17,8 +17,8 @@ class CreateHeartwallsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('material');
-            $table->integer('starting_distance');
-            $table->integer('current_distance');
+            $table->integer('starting_distance')->nullable();
+            $table->integer('current_distance')->nullable();
         });
     }
 

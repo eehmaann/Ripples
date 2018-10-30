@@ -4,6 +4,7 @@
 @endsection
 
 @section('diagnosis')
+    @section('destination','../../../problemsb') 
     <label> What is the message?</label>
     <input
         type='text'

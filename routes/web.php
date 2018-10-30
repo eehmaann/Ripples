@@ -48,6 +48,10 @@ Route::get('diagnosis/trauma/{id}/create', 'DiagnosesController@createTrauma');
 Route::get('diagnosis/willtodie/{id}/create', 'DiagnosesController@createWillToDie'); 
 
 Route::post('/problemsb', 'ProblemsController@storebasic');
+Route::post('/problemsh', 'ProblemsController@storeHeartwall');
+Route::post('/problemsc', 'ProblemsController@storeCord');
+Route::post('/problemstrapped', 'ProblemsController@storeTrapped');
+Route::post('/problemsemotion', 'ProblemsController@storeEmotions');
 
 Route::get('heartwall/autocomplete', 'HeartwallController@autocomplete');
 

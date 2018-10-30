@@ -3,7 +3,6 @@ $(document).ready(function()
 	$(".error").hide();
 
 	$('fieldset').change(function(){
-		//checkFieldset($(this));
 		var data=$(this).children('input').val();
 		alert(testValid(data));
 		if(!($.isNumeric(data))){
@@ -44,17 +43,6 @@ $(document).ready(function()
 		 	+" in " + $('#bodyinput').val()+ " [age " + 
 		 	$('#ageinput').val() +"] from " +$("#saboteurinput").val());	
 	}
-
-
-	//function checkFieldset(fieldset){
-		//var text=$(this).children('input').text();
-		//if(!($.isNumeric(text))){
-		//	showError(text.length()<4, $(this));
-		//}
-		//else{
-		//	showError(text<0, $(this));
-		//}
-	//}
 
 
 

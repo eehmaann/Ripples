@@ -4,6 +4,7 @@
 @endsection
 
 @section('diagnosis')
+@section('destination','../../../problemstrapped')
 <p>When did the trapped emotion occur?</p>
 <ul> 
     <li id="self" class="timeselector">Current</li>

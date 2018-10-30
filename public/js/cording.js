@@ -1,5 +1,6 @@
 $(document).ready(function()
 {
+	var cordTypesCount=0;
 	var arbody = new Array("Brain", "Heart", "Gut", "Privates");	
 	$('.cord').keydown(function(){
 		forceLength($(this));
@@ -8,17 +9,21 @@ $(document).ready(function()
 	});
 
 	$('.cordmultiple, .cord').change(function(){
+		var count =0;
 		var client;
 		for (client = 0; client < arbody.length; ++client) {
 			var cord;
 			for (cord =0; cord <arbody.length; ++cord){
 				if(checkContent($("#"+arbody[client]+"to"+arbody[cord]+"number"), 
 				$("#"+arbody[client]+"to"+arbody[cord]+"multiplier"))){
+					//if begins
 					$('#'+arbody[client]+'to'+arbody[cord]+'text').text
-						(writeTextAreas(arbody[client], arbody[cord]));
+					(writeTextAreas(arbody[client], arbody[cord]));
+					count++;
 				}
 			}
 		}
+		cordTypesCount=count;
 	});
 
 
@@ -32,6 +37,42 @@ $(document).ready(function()
 		function checkContent(id1, id2){
 			return(id1.val()>2 && id2.val()>2);
 		}
+		$(".error").hide();
+		$('fieldset').change(function(){
+		var data=$(this).children('input').val();
+			showError(data.length <2, $(this));
+	});
+
+	$(".pathClicker").click(function(){
+		var isValid;
+
+		$( "fieldset" ).each(function() {
+			var data=$(this).children('input').val();
+				isValid= testValid(data);
+		});
+		if(isValid && cordTypesCount>0){
+			constructDescription();
+		}
+	});
+
+	function constructDescription(){
+		$("#description").val("Unhealthy cording to " + $('#corded').val());
+	}
+
+
+
+	function showError(condition, fieldset){
+		if(condition){
+			$(fieldset).children('.error').show()
+		}
+		else{
+			$(fieldset).children('.error').hide();
+		}
+	}
+
+	function testValid(text){
+		return(text.length>2);
+	}
 });
 
 function forceLength(input){
