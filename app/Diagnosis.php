@@ -17,6 +17,6 @@ class Diagnosis extends Model
 	}
   
   	 public function problem(){
-        return $this->belongsTo('App\Problem');
+        return $this->hasMany('App\Problem');
     }
 }

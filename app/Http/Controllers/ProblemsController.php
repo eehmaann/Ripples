@@ -72,13 +72,19 @@ class ProblemsController extends Controller
         //Store Problem entry
         $cord_match =Cord::latest()->first();
         $problem = new Problem();
-        $problem->description = $request->input('description');
+        $problem->description = $request->input('description'); 
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->describable_type='App\Cord';
         $problem->describable_id=$cord_match->id;
+        if(Problem::where(['cleared' => 0])->count()>0){
+            $parent_problem =Problem::where(['cleared' => 0])->latest()->first();
+            $problem->steps=$parent_problem->steps+1;
+            $problem->cleared=true;
+            $problem->parentproblem_id=$parent_problem->id;
+        }  
         $problem->save();
 
-        return redirect('/navigation');
+        return redirect('/problems/show');
     }
 
     public function storeEmotions(Request $request){
@@ -91,9 +97,15 @@ class ProblemsController extends Controller
         $problem->description = $request->input('description');
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->cleared=true;
+        if(Problem::where(['cleared' => 0])->count()>0){
+            $parent_problem =Problem::where(['cleared' => 0])->latest()->first();
+            $problem->steps=$parent_problem->steps+1;
+            $problem->parentproblem_id=$parent_problem->id;
+        }  
         $problem->save();
 
         $emotions = ($request->emotions)?: [];
+
         $problem->emotions()->sync($emotions);
         $problem->save();
 
@@ -121,6 +133,11 @@ class ProblemsController extends Controller
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->describable_type='App\Heartwall';
         $problem->describable_id=$heartwall_match->id;
+        if(Problem::where(['cleared' => 0])->count()>0){
+            $parent_problem =Problem::where(['cleared' => 0])->latest()->first();
+            $problem->steps=$parent_problem->steps+1;
+            $problem->parentproblem_id=$parent_problem->id;
+        }  
         $problem->save();
 
         return redirect('/diagnosis/trappedemotion/5/create');
@@ -134,6 +151,11 @@ class ProblemsController extends Controller
         $problem = new Problem();
         $problem->description = $request->input('description');
         $problem->diagnosis_id = $request->input('diagnosis_id');
+        if(Problem::where(['cleared' => 0])->count()>0){
+            $parent_problem =Problem::where(['cleared' => 0])->latest()->first();
+            $problem->steps=$parent_problem->steps+1;
+            $problem->parentproblem_id=$parent_problem->id;
+        }  
         $problem->save();
 
         $emotions = ($request->emotions)?: [];
@@ -162,6 +184,11 @@ class ProblemsController extends Controller
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->describable_type='App\Solution';
         $problem->describable_id=$solution_match->id;
+        if(Problem::where(['cleared' => 0])->count()>0){
+            $parent_problem =Problem::where(['cleared' => 0])->latest()->first();
+            $problem->steps=$parent_problem->steps+1;
+            $problem->parentproblem_id=$parent_problem->id;
+        }  
         $problem->save();
 
         return redirect('/navigation');
@@ -178,6 +205,11 @@ class ProblemsController extends Controller
         $problem->description = $request->input('description');
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->cleared=true;
+        if(Problem::where(['cleared' => 0])->count()>0){
+            $parent_problem =Problem::where(['cleared' => 0])->latest()->first();
+            $problem->steps=$parent_problem->steps+1;
+            $problem->parentproblem_id=$parent_problem->id;
+        }  
         $problem->save();
 
         $emotions = ($request->emotions)?: [];
@@ -187,5 +219,20 @@ class ProblemsController extends Controller
         return redirect('/diagnosis/trappedemotion/5/create');
     }
 
+    public function showProblems(){
+        $problem=Problem::where(['cleared' => 0])->get();
+        return view('Navigation.clearproblems')
+        ->with(['problems'=>$problem]);
+
+    }
+
+    public function updateClear($id){
+         $problem = Problem::find($id);
+         $problem->cleared=true;
+         $problem->save();
+    return redirect('/problems/show');
+        
+
+    }
 
 }

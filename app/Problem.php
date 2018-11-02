@@ -12,6 +12,14 @@ class Problem extends Model
 	    return $this->belongsToMany('App\Emotion')->withTimestamps();
 	}
 
+  public function diagnosis(){
+    return $this->belongsTo('App\Diagnosis');
+  }
+
+  public function sessions(){
+    return $this->belongsToMany('App\Session');
+  }
+
 	//   public function heartwall()
     //{
     //    return $this->hasOne('App\Heartwall');
@@ -27,10 +35,17 @@ class Problem extends Model
      //   return $this->hasOne('App\Diagnosis', $foreignKey = null, $localKey = null);
     //}
 
-	public function describable()
-	{
+	public function describable(){
 		return $this->morphTo();
 	}
 
-	     
+  //self join
+  public function parent_problem(){
+      return $this->hasMany(self::class, 'parentproblem_id', 'id');
+  }
+
+  public function children_problem(){
+    return $this->belongsTo(self::class, 'id', 'parentproblem_id' )->with('children_problem');
+  }	     
+
 }

@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/emotion', 'EmotionController@index');
+
+Route::get('/sessionstart', 'SessionController@create');
+
+
 Route::get('/navigation',  'LocatorsController@index');
 
 Route::get('diagnosis/ahe/{id}/create', 'DiagnosesController@createAHE');
@@ -52,6 +56,10 @@ Route::post('/problemsh', 'ProblemsController@storeHeartwall');
 Route::post('/problemsc', 'ProblemsController@storeCord');
 Route::post('/problemstrapped', 'ProblemsController@storeTrapped');
 Route::post('/problemsemotion', 'ProblemsController@storeEmotions');
+Route::post('/problemssolution', 'ProblemsController@storeSolution');
+Route::post('/problemspastlife', 'ProblemsController@storePastLife');
+Route::get('/problems/show', 'ProblemsController@showProblems');
+Route::get('/problems/{id}/clear', 'ProblemsController@updateClear');
 
 Route::get('heartwall/autocomplete', 'HeartwallController@autocomplete');
 

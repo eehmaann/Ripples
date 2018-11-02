@@ -17,7 +17,8 @@ class CreateCasesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('reason');
-            $table->string('restated');
+            $table->string('goal');
+            $table->integer('user_id');
         });
     }
 

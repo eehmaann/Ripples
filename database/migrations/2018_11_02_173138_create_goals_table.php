@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSessionsTable extends Migration
+class CreateGoalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateSessionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sessions', function (Blueprint $table) {
+        Schema::create('goals', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->boolean('showable')->default(false);
-            $table->integer('goal_id');
+            $table->string('reason');
+            $table->string('goal');
+            $table->integer('user_id');
         });
     }
 
@@ -28,6 +29,6 @@ class CreateSessionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('goals');
     }
 }
