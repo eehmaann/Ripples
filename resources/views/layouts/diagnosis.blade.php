@@ -5,15 +5,15 @@
     @yield('pagejs')
     <script src="/js/navigation.js"></script>
 @endsection
-
 @section('content')
     <h1>{{$diagnosis->name}}</h1>
 	<div id="diagnosisform" class="container">
-		<form method='POST' action=@yield('destination','../../../problemsb') >
+		<form id="barrierform" method='POST' action=@yield('destination','../../../problemsb') >
 			@yield('diagnosis')
              {{ csrf_field() }}
             <div>
                 <p id="diagnosisname">{{$diagnosis->name}}</p>
+                <p id="appointmentnumber">{{$appointment->id}}</p>
                 <label>Diagnosis ID</label>
                 <input
                     type='text'

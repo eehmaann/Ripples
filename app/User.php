@@ -27,12 +27,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    public function case(){
+    public function goals(){
         return $this->hasMany('App\Goal');
     }
 
-    public function sessions()
+    public function appointment()
     {
-        return $this->hasManyThrough('App\Session', 'App\Goal');
+        return $this->hasManyThrough('App\Appointment', 'App\Goal');
     }
 }

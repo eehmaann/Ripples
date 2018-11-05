@@ -16,8 +16,8 @@ class Problem extends Model
     return $this->belongsTo('App\Diagnosis');
   }
 
-  public function sessions(){
-    return $this->belongsToMany('App\Session');
+  public function appointments(){
+    return $this->belongsToMany('App\Appointment');
   }
 
 	//   public function heartwall()

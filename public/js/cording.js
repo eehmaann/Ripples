@@ -1,12 +1,14 @@
 $(document).ready(function()
 {
 	var cordTypesCount=0;
-	var arbody = new Array("Brain", "Heart", "Gut", "Privates");	
+	var arbody = new Array("Brain", "Heart", "Gut", "Privates");
+	var destination = '../../../../problemsc/'+ $('#appointmentnumber').text();	
 	$('.cord').keydown(function(){
 		forceLength($(this));
 		insertDecimal($(this));
 
 	});
+	$('#barrierform').attr('action', destination);
 
 	$('.cordmultiple, .cord').change(function(){
 		var count =0;

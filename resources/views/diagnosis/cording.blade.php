@@ -3,7 +3,7 @@
  <script src="/js/cording.js"></script>
  @endsection
 @section('diagnosis')
- @section('destination','../../../problemsc')
+ @section('destination','../../../problemsc/')
 
 <fieldset>
 <label>Corded to who</label>

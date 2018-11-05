@@ -17,22 +17,22 @@ class CreateCordsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('Cordedto');
-            $table->string('brain_to_brain_cord')->nullable();
-            $table->string('brain_to_heart_cord')->nullable();
-            $table->string('brain_to_gut_cord')->nullable();
-            $table->string('brain_to_privates_cord')->nullable();
-            $table->string('heart_to_brain_cord')->nullable();
-            $table->string('heart_to_heart_cord')->nullable();
-            $table->string('heart_to_gut_cord')->nullable();
-            $table->string('heart_to_privates_cord')->nullable();
-            $table->string('gut_to_brain_cord')->nullable();
-            $table->string('gut_to_heart_cord')->nullable();
-            $table->string('gut_to_gut_cord')->nullable();
-            $table->string('gut_to_privates_cord')->nullable();
-            $table->string('privates_to_brain_cord')->nullable();
-            $table->string('privates_to_heart_cord')->nullable();
-            $table->string('privates_to_gut_cord')->nullable();
-            $table->string('privates_to_privates_cord')->nullable();
+            $table->longText('brain_to_brain_cord')->nullable();
+            $table->longText('brain_to_heart_cord')->nullable();
+            $table->longText('brain_to_gut_cord')->nullable();
+            $table->longText('brain_to_privates_cord')->nullable();
+            $table->longText('heart_to_brain_cord')->nullable();
+            $table->longText('heart_to_heart_cord')->nullable();
+            $table->longText('heart_to_gut_cord')->nullable();
+            $table->longText('heart_to_privates_cord')->nullable();
+            $table->longText('gut_to_brain_cord')->nullable();
+            $table->longText('gut_to_heart_cord')->nullable();
+            $table->longText('gut_to_gut_cord')->nullable();
+            $table->longText('gut_to_privates_cord')->nullable();
+            $table->longText('privates_to_brain_cord')->nullable();
+            $table->longText('privates_to_heart_cord')->nullable();
+            $table->longText('privates_to_gut_cord')->nullable();
+            $table->longText('privates_to_privates_cord')->nullable();
            
         });
     }

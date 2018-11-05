@@ -6,7 +6,9 @@ use App\Diagnosis;
 use App\Heartwall;
 use App\Cord;
 use App\Solution;
+use App\Appointment;
 use DB;
+use Redirect;
 
 use Illuminate\Http\Request;
 
@@ -26,7 +28,7 @@ class ProblemsController extends Controller
 //
     }
 
-        public function storeCord(Request $request){
+        public function storeCord(Request $request, $appointment_id){
         $this->validate($request, [
             'description' => 'required|min:3',
             'diagnosis_id'=> 'required|numeric',
@@ -47,7 +49,6 @@ class ProblemsController extends Controller
             'PrivatestoGuttext',
             'PrivatestoPrivatestext',
         ]);
-         
         //Store Cord entry
         $cord = new Cord();
         $cord->Cordedto=$request->input('corded');
@@ -70,6 +71,7 @@ class ProblemsController extends Controller
         $cord->save();
 
         //Store Problem entry
+        $appointments=Appointment::find($appointment_id);
         $cord_match =Cord::latest()->first();
         $problem = new Problem();
         $problem->description = $request->input('description'); 
@@ -82,10 +84,10 @@ class ProblemsController extends Controller
             $problem->cleared=true;
             $problem->parentproblem_id=$parent_problem->id;
         }  
+        $problem->appointments()->sync($appointments);
         $problem->save();
-
-        return redirect('/problems/show');
-    }
+        return \Redirect::route('problems.show');
+    } 
 
     public function storeEmotions(Request $request){
         $this->validate($request, [

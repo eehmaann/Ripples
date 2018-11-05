@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGoalsTable extends Migration
+class CreateAppointmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateGoalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('goals', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('reason');
-            $table->string('goal')->nullable();
-            $table->integer('user_id');
+            $table->boolean('showable')->default(false);
+            $table->integer('goal_id');
         });
     }
 
@@ -29,6 +28,6 @@ class CreateGoalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('goals');
+        Schema::dropIfExists('appointments');
     }
 }

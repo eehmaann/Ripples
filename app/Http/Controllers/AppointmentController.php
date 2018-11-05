@@ -2,43 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Goal;
-use App\Session;
+use App\Appointment;
 use App\User;
 use App\Diagnosis;
 use App\Locator;
-use Illuminate\Http\Request;
 use Redirect;
 use DB;
 
-class SessionController extends Controller
+class AppointmentController extends Controller
 {
-   public function create(){
+    //
+    public function create(){
     	return View('navigation.practitionerstart')
     		->with('users',User::orderBy('name')->get());
     }
 
-    public function storeSession(Request $request){
+    public function storeAppointment(Request $request){
     	$this->validate($request, [
     		'goal_id'=> 'required|numeric',
     	]);
-    	$session =new Session();
-    	$session->goal_id=$request->input('goal_id');
-    	$session->save();
+    	$appointment =new Appointment();
+    	$appointment->goal_id=$request->input('goal_id');
+    	$appointment->save();
     	
-    	$diagnosis= Diagnosis::all();
-    	$locators=Locator::all();
-    	return View('navigation.index')
-    		->with(['diagnoses'=>$diagnosis,
-    				'locators'=>$locators,
-    				'session'=>$session]);
-    	//return Redirect::route('navigation',$session->id);
-    	//return redirect('/navigation'/$session->id);
-    		//  ->with(['diagnosis'=>$diagnosis,
-              //      'emotions'=>$emotions]);}
+
+    	return \Redirect::route('navigation.show', $appointment);
     }
 
-    public function storeGoalSession(Request $request){
+    public function storeGoalAppointment(Request $request){
     	$this->validate($request, [
     		'user_id'=> 'required|numeric',
     		'case_description'=>'required|min:5',
@@ -51,15 +44,15 @@ class SessionController extends Controller
     	$goal->save();
     	
     	$goal_match =Goal::latest()->first();
-    	$session =new Session();
-    	$session->goal_id=$goal_match->id;
-    	$session->save();
+    	$appointment =new Appointment();
+    	$appointment->goal_id=$goal_match->id;
+    	$appointment->save();
     	return redirect('/navigation');
 
 
     }
 
-    public function storeUserGoalSession(Request $request){
+    public function storeUserGoalAppointment(Request $request){
     	$this->validate($request, [
     		'client_name'=> 'required|min:5',
     		'client_email'=>'required',
@@ -82,9 +75,9 @@ class SessionController extends Controller
     	$goal->save();
 
     	$goal_match =Goal::latest()->first();
-    	$session =new Session();
-    	$session->goal_id=$goal_match->id;
-    	$session->save();
+    	$appointment =new Appointment();
+    	$appointment->goal_id=$goal_match->id;
+    	$appointment->save();
     	return redirect('/navigation');
     }
 }

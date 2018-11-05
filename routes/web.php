@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,7 +9,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('dropdown/Goals/{id}', 'UserController@getGoals');
+Route::get('statedGoal/Goals/{id}', 'GoalController@getRestatedGoal');
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,47 +19,51 @@ Route::get('/emotion', 'EmotionController@index');
 Route::get('/sessionstart', 'SessionController@create');
 
 
-Route::get('/navigation',  'LocatorsController@index');
+Route::get('/navigation/{appointment}', ['as'=>'navigation.show', 'uses' => 'LocatorsController@index']);
 
-Route::get('diagnosis/ahe/{id}/create', 'DiagnosesController@createAHE');
-Route::get('diagnosis/allergy/{id}/create', 'DiagnosesController@createAllergy');
-Route::get('diagnosis/anchor/{id}/create', 'DiagnosesController@createAnchor');
-Route::get('diagnosis/broadcast/{id}/create', 'DiagnosesController@createBroadcast');
-Route::get('diagnosis/circuits/{id}/create', 'DiagnosesController@createCircuits');
-Route::get('diagnosis/cording/{id}/create', 'DiagnosesController@createCording');
-Route::get('diagnosis/curse/{id}/create', 'DiagnosesController@createCurse');
-Route::get('diagnosis/drugs/{id}/create', 'DiagnosesController@createDrugs');
-Route::get('diagnosis/emotionalresonance/{id}/create', 'DiagnosesController@createEmotionalResonance');
-Route::get('diagnosis/entities/{id}/create', 'DiagnosesController@createEntities');
-Route::get('diagnosis/excess/{id}/create', 'DiagnosesController@createExcess');
-Route::get('diagnosis/heartwall/{id}/create', 'DiagnosesController@createHeartWall');
-Route::get('diagnosis/hypnotic/{id}/create', 'DiagnosesController@createHypnotic');
-Route::get('diagnosis/intolerance/{id}/create', 'DiagnosesController@createIntolerance');
-Route::get('diagnosis/inflammation/{id}/create', 'DiagnosesController@createInflammation');
-Route::get('diagnosis/image/{id}/create', 'DiagnosesController@createImage');
-Route::get('diagnosis/malnutrition/{id}/create', 'DiagnosesController@createMalnutrition');
-Route::get('diagnosis/memoryfield/{id}/create', 'DiagnosesController@createMemoryField');
-Route::get('diagnosis/miasm/{id}/create', 'DiagnosesController@createMiasm');
-Route::get('diagnosis/nowill/{id}/create', 'DiagnosesController@createNoWill');
-Route::get('diagnosis/psychictrauma/{id}/create', 'DiagnosesController@createPsychicTrauma');
-Route::get('diagnosis/pathogen/{id}/create', 'DiagnosesController@createPathogen');
-Route::get('diagnosis/saboteur/{id}/create', 'DiagnosesController@createSaboteur');
-Route::get('diagnosis/sleep/{id}/create', 'DiagnosesController@createSaboteur');
-Route::get('diagnosis/T3/{id}/create', 'DiagnosesController@createT3');
-Route::get('diagnosis/toxicity/{id}/create', 'DiagnosesController@createToxicity');
-Route::get('diagnosis/trappedemotion/{id}/create', 'DiagnosesController@createTrappedEmotion');
-Route::get('diagnosis/trauma/{id}/create', 'DiagnosesController@createTrauma');
-Route::get('diagnosis/willtodie/{id}/create', 'DiagnosesController@createWillToDie'); 
+Route::get('diagnosis/ahe/{id}/create/{appointment}', 'DiagnosesController@createAHE');
+Route::get('diagnosis/allergy/{id}/create/{appointment}', 'DiagnosesController@createAllergy');
+Route::get('diagnosis/anchor/{id}/create/{appointment}', 'DiagnosesController@createAnchor');
+Route::get('diagnosis/broadcast/{id}/create/{appointment}', 'DiagnosesController@createBroadcast');
+Route::get('diagnosis/circuits/{id}/create/{appointment}', 'DiagnosesController@createCircuits');
+Route::get('diagnosis/cording/{id}/create/{appointment}', 'DiagnosesController@createCording');
+Route::get('diagnosis/curse/{id}/create{appointment}', 'DiagnosesController@createCurse');
+Route::get('diagnosis/drugs/{id}/create{appointment}', 'DiagnosesController@createDrugs');
+Route::get('diagnosis/emotionalresonance/{id}/create/{appointment}', 'DiagnosesController@createEmotionalResonance');
+Route::get('diagnosis/entities/{id}/create/{appointment}', 'DiagnosesController@createEntities');
+Route::get('diagnosis/excess/{id}/create/{appointment}', 'DiagnosesController@createExcess');
+Route::get('diagnosis/heartwall/{id}/create/{appointment}', 'DiagnosesController@createHeartWall');
+Route::get('diagnosis/hypnotic/{id}/create/{appointment}', 'DiagnosesController@createHypnotic');
+Route::get('diagnosis/intolerance/{id}/create/{appointment}', 'DiagnosesController@createIntolerance');
+Route::get('diagnosis/inflammation/{id}/create/{appointment}', 'DiagnosesController@createInflammation');
+Route::get('diagnosis/image/{id}/create/{appointment}', 'DiagnosesController@createImage');
+Route::get('diagnosis/malnutrition/{id}/create/{appointment}', 'DiagnosesController@createMalnutrition');
+Route::get('diagnosis/memoryfield/{id}/create/{appointment}', 'DiagnosesController@createMemoryField');
+Route::get('diagnosis/miasm/{id}/create/{appointment}', 'DiagnosesController@createMiasm');
+Route::get('diagnosis/nowill/{id}/create/{appointment}', 'DiagnosesController@createNoWill');
+Route::get('diagnosis/psychictrauma/{id}/create/{appointment}', 'DiagnosesController@createPsychicTrauma');
+Route::get('diagnosis/pathogen/{id}/create/{appointment}', 'DiagnosesController@createPathogen');
+Route::get('diagnosis/saboteur/{id}/create/{appointment}', 'DiagnosesController@createSaboteur');
+Route::get('diagnosis/sleep/{id}/create/{appointment}', 'DiagnosesController@createSaboteur');
+Route::get('diagnosis/T3/{id}/create/{appointment}', 'DiagnosesController@createT3');
+Route::get('diagnosis/toxicity/{id}/create/{appointment}', 'DiagnosesController@createToxicity');
+Route::get('diagnosis/trappedemotion/{id}/create/{appointment}', 'DiagnosesController@createTrappedEmotion');
+Route::get('diagnosis/trauma/{id}/create/{appointment}', 'DiagnosesController@createTrauma');
+Route::get('diagnosis/willtodie/{id}/create/{appointment}', 'DiagnosesController@createWillToDie'); 
 
-Route::post('/problemsb', 'ProblemsController@storebasic');
-Route::post('/problemsh', 'ProblemsController@storeHeartwall');
-Route::post('/problemsc', 'ProblemsController@storeCord');
-Route::post('/problemstrapped', 'ProblemsController@storeTrapped');
-Route::post('/problemsemotion', 'ProblemsController@storeEmotions');
-Route::post('/problemssolution', 'ProblemsController@storeSolution');
-Route::post('/problemspastlife', 'ProblemsController@storePastLife');
-Route::get('/problems/show', 'ProblemsController@showProblems');
+Route::post('/problemsb/{appointment}', 'ProblemsController@storebasic');
+Route::post('/problemsh/{appointment}', 'ProblemsController@storeHeartwall');
+Route::post('/problemsc/{appointment_id}', 'ProblemsController@storeCord');
+Route::post('/problemstrapped/{appointment}', 'ProblemsController@storeTrapped');
+Route::post('/problemsemotion/{appointment}', 'ProblemsController@storeEmotions');
+Route::post('/problemssolution/{appointment}', 'ProblemsController@storeSolution');
+Route::post('/problemspastlife/{appointment}', 'ProblemsController@storePastLife');
+Route::get('/problems/show/', ['as' =>'problems.show', 'uses' => 'ProblemsController@showProblems']);
 Route::get('/problems/{id}/clear', 'ProblemsController@updateClear');
+
+Route::post('/appointment/storeall', 'AppointmentController@storeUserGoalAppointment');
+Route::post('/appointment/storegoalsession', 'AppointmentController@storeGoalAppointment');
+Route::post('/appointment/storesession', 'AppointmentController@storeAppointment');
 
 Route::get('heartwall/autocomplete', 'HeartwallController@autocomplete');
 

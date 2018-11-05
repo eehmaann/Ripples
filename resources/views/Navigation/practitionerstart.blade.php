@@ -1,4 +1,12 @@
-
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="/css/app.css" type='text/css' rel='stylesheet'>
+    <script   src="https://code.jquery.com/jquery-3.3.1.js"   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="   crossorigin="anonymous"></script>
+     <script src="/js/sessioncreation.js"></script>
+</head>
 <p>Is this a new not yet registered client</p>
 <ul class= "clicker" id="clientbuild">
 	<li class="userClicker">Yes</li>
@@ -6,13 +14,19 @@
 </ul>
 
 <!--Only shows if user exists-->
-<div id="existingcustomer">
-	<h3> Existing Customer</h3>
-	<select name="userSelector" id="user" class="form-control input-sm">
-        <option value=""></option>
+<div class="form-group" id="existingcustomer">
+	<label> Existing Customer
+	<select name="userSelector" id="userSelector" class="form-control input-sm">
+		<option value></option>
+         @foreach($users as $user)
+        <option value={{$user->id}}>
+        	{{$user->name}}</option>
+        @endforeach
     </select>
+	</label>
     <p class='error' id="usererror">Please select a user</p>
 </div>
+
 <div id="newcustomer">
 	<label> Customer full name</label>
 	<input
@@ -40,7 +54,8 @@
 </div>
 		
 <div id ="existingCaseRetriever"> 
-	        <select id="caseSelector" class="form-control input-sm" name="case_id">
+	<label>Case</label>
+	        <select id="caseSelector" class="form-control input-sm" name="goal_id">
             <option value=""></option>
        </select>
        <p class="error" id="caseerror"> Please select a case</p>
@@ -55,7 +70,7 @@
     value=''> 
     <p class="error" id="reasonerror"> Please enter why the customer schedule appointment</p>
 </div>
-<div id="reasonBuilder"
+<div id="reasonBuilder">
     <label>What is the goal</label>
     <input
     type='text'
@@ -69,7 +84,7 @@
 	<form post = location determined by questions to create User, case and session: case and session, or just session
 -->
 <div id="sessionform" class="container">
-	<form method='POST' action='' >
+	<form id="creationForm" method='POST' action='' >
         {{ csrf_field() }}
    		<div>
             <input
@@ -92,8 +107,8 @@
                 readonly>
             <input
                 type='number'
-                id='case_id'
-                name='case_id'
+                id='goal_id'
+                name='goal_id'
                 value=''
                 readonly>
             <input
