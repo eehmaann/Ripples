@@ -40,12 +40,11 @@
             name={{$cordport[$client]}}to{{$cordport[$corded]}}multiplier
             value=''> <br>
 
-        <textarea 
-            rows="1" 
-            cols="50" 
+        <input
+            type='text' 
             readonly 
             id={{$cordport[$client]}}to{{$cordport[$corded]}}text> 
-        </textarea>
+        </input>
         <br>
 
         @endfor

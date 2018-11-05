@@ -14,17 +14,20 @@ use Illuminate\Http\Request;
 
 class ProblemsController extends Controller
 {
-    public function storeBasic(Request $request){
+    public function storeBasic(Request $request, $appointment_id){
         $this->validate($request, [
             'description' => 'required|min:3',
             'diagnosis_id'=> 'required|numeric',
         ]);
-         
+        
+        $appointments=Appointment::find($appointment_id);
         $problem = new Problem();
         $problem->description = $request->input('description');
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->save();
-        return redirect('/navigation');
+        $problem->appointments()->sync($appointments);
+
+        return \Redirect::route('problems.show', $appointment_id);
 //
     }
 
@@ -81,15 +84,16 @@ class ProblemsController extends Controller
         if(Problem::where(['cleared' => 0])->count()>0){
             $parent_problem =Problem::where(['cleared' => 0])->latest()->first();
             $problem->steps=$parent_problem->steps+1;
-            $problem->cleared=true;
             $problem->parentproblem_id=$parent_problem->id;
         }  
-        $problem->appointments()->sync($appointments);
+  
         $problem->save();
-        return \Redirect::route('problems.show');
+        $problem->appointments()->sync($appointments);
+
+        return \Redirect::route('problems.show', $appointment_id);
     } 
 
-    public function storeEmotions(Request $request){
+    public function storeEmotions(Request $request,$appointment_id){
         $this->validate($request, [
             'description' => 'required|min:3',
             'diagnosis_id'=> 'required|numeric',
@@ -111,9 +115,12 @@ class ProblemsController extends Controller
         $problem->emotions()->sync($emotions);
         $problem->save();
 
-        return redirect('/navigation');
+        $appointments=Appointment::find($appointment_id);
+        $problem->appointments()->sync($appointments);
+        return \Redirect::route('problems.show', $appointment_id);
+
     }
-    public function storeHeartwall(Request $request){
+    public function storeHeartwall(Request $request, $appointment_id){
         $this->validate($request, [
             'description' => 'required|min:3',
             'diagnosis_id'=> 'required|numeric',
@@ -141,8 +148,11 @@ class ProblemsController extends Controller
             $problem->parentproblem_id=$parent_problem->id;
         }  
         $problem->save();
+        $appointments=Appointment::find($appointment_id);
+        $problem->appointments()->sync($appointments);
+        return \Redirect::route('problems.show', $appointment_id);
 
-        return redirect('/diagnosis/trappedemotion/5/create');
+        return redirect('trappedemotion.create', $appointment_id);
     }
          public function storePastLife(Request $request){
         $this->validate($request, [
@@ -164,10 +174,14 @@ class ProblemsController extends Controller
         $problem->emotions()->sync($emotions);
         $problem->save();
 
-        return redirect('/diagnosis/trappedemotion/5/create');
+        $appointments=Appointment::find($appointment_id);
+        $problem->appointments()->sync($appointments);
+        return \Redirect::route('problems.show', $appointment_id);
+
+        return redirect('trappedemotion.create', $appointment_id);
     }
 
-     public function storeSolution(Request $request){
+     public function storeSolution(Request $request, $appointment_id){
         $this->validate($request, [
             'description' => 'required|min:3',
             'diagnosis_id'=> 'required|numeric',
@@ -192,12 +206,13 @@ class ProblemsController extends Controller
             $problem->parentproblem_id=$parent_problem->id;
         }  
         $problem->save();
-
-        return redirect('/navigation');
+        $appointments=Appointment::find($appointment_id);
+        $problem->appointments()->sync($appointments);
+        return \Redirect::route('problems.show', $appointment_id);
     }
 
 
-     public function storeTrapped(Request $request){
+     public function storeTrapped(Request $request, $appointment_id){
         $this->validate($request, [
             'description' => 'required|min:3',
             'diagnosis_id'=> 'required|numeric',
@@ -218,21 +233,27 @@ class ProblemsController extends Controller
         $problem->emotions()->sync($emotions);
         $problem->save();
 
-        return redirect('/diagnosis/trappedemotion/5/create');
+        $appointments=Appointment::find($appointment_id);
+        $problem->appointments()->sync($appointments);
+        return \Redirect::route('problems.show', $appointment_id);
+
+        return redirect('trappedemotion.create' $appointment_id);
     }
 
-    public function showProblems(){
+    public function showProblems($appointment_id){
+        $appointments=Appointment::find($appointment_id);
         $problem=Problem::where(['cleared' => 0])->get();
         return view('Navigation.clearproblems')
-        ->with(['problems'=>$problem]);
+        ->with(['problems'=>$problem,
+                'appointments'=>$appointments]);
 
     }
 
-    public function updateClear($id){
+    public function updateClear($id, $appointment_id){
          $problem = Problem::find($id);
          $problem->cleared=true;
          $problem->save();
-    return redirect('/problems/show');
+    return \Redirect::route('problems.show', $appointment_id);
         
 
     }

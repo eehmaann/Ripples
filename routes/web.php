@@ -47,7 +47,8 @@ Route::get('diagnosis/saboteur/{id}/create/{appointment}', 'DiagnosesController@
 Route::get('diagnosis/sleep/{id}/create/{appointment}', 'DiagnosesController@createSaboteur');
 Route::get('diagnosis/T3/{id}/create/{appointment}', 'DiagnosesController@createT3');
 Route::get('diagnosis/toxicity/{id}/create/{appointment}', 'DiagnosesController@createToxicity');
-Route::get('diagnosis/trappedemotion/{id}/create/{appointment}', 'DiagnosesController@createTrappedEmotion');
+Route::get('diagnosis/trappedemotion/{id}/create/{appointment}', 
+    ['as' => 'trappedemotion.create', 'uses' => 'DiagnosesController@createTrappedEmotion']);
 Route::get('diagnosis/trauma/{id}/create/{appointment}', 'DiagnosesController@createTrauma');
 Route::get('diagnosis/willtodie/{id}/create/{appointment}', 'DiagnosesController@createWillToDie'); 
 
@@ -58,8 +59,8 @@ Route::post('/problemstrapped/{appointment}', 'ProblemsController@storeTrapped')
 Route::post('/problemsemotion/{appointment}', 'ProblemsController@storeEmotions');
 Route::post('/problemssolution/{appointment}', 'ProblemsController@storeSolution');
 Route::post('/problemspastlife/{appointment}', 'ProblemsController@storePastLife');
-Route::get('/problems/show/', ['as' =>'problems.show', 'uses' => 'ProblemsController@showProblems']);
-Route::get('/problems/{id}/clear', 'ProblemsController@updateClear');
+Route::get('/problems/show/{appointment}', ['as' =>'problems.show', 'uses' => 'ProblemsController@showProblems']);
+Route::get('/problems/{id}/clear/{appointment}',  'ProblemsController@updateClear');
 
 Route::post('/appointment/storeall', 'AppointmentController@storeUserGoalAppointment');
 Route::post('/appointment/storegoalsession', 'AppointmentController@storeGoalAppointment');
@@ -94,3 +95,6 @@ Route::get('/debug', function () {
 
     dump($debug);
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

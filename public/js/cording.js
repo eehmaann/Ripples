@@ -19,8 +19,7 @@ $(document).ready(function()
 				if(checkContent($("#"+arbody[client]+"to"+arbody[cord]+"number"), 
 				$("#"+arbody[client]+"to"+arbody[cord]+"multiplier"))){
 					//if begins
-					$('#'+arbody[client]+'to'+arbody[cord]+'text').text
-					(writeTextAreas(arbody[client], arbody[cord]));
+					$('#'+arbody[client]+'to'+arbody[cord]+'text').val(writeTextAreas(arbody[client], arbody[cord]));
 					count++;
 				}
 			}

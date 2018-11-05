@@ -20,7 +20,7 @@
       @foreach($diagnoses as $diagnosis)
           <li class='clickDiagnose'                      
             data-category="{{$diagnosis->category_type}}"> 
-            <a href='diagnosis/{{$diagnosis->url}}/{{$diagnosis->id}}/create/{{$appointment->id}}'>  
+            <a href='../diagnosis/{{$diagnosis->url}}/{{$diagnosis->id}}/create/{{$appointment->id}}'>  
               {{ $diagnosis->name}}
             </a>
           </li>
