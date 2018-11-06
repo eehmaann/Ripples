@@ -14,4 +14,9 @@ class Goal extends Model
   public function appointment(){
         return $this->hasMany('App\Appointment');
     }
+
+ public function problems()
+    {
+        return $this->hasManyThrough('App\Problem', 'App\Appointment');
+    }
 }

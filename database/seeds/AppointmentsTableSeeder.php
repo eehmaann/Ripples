@@ -27,6 +27,7 @@ class AppointmentsTableSeeder extends Seeder
 	        $appointment->created_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
 	        $appointment->updated_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
 	        $appointment->goal_id = $appointmentData[0];
+            
 
 	        $appointment->save();
 	        $count--;

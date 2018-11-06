@@ -23,10 +23,14 @@ class AppointmentController extends Controller
     	$this->validate($request, [
     		'goal_id'=> 'required|numeric',
     	]);
+        $goal='goal_id';
+        $appointments=Appointment::where('goal_id', '=', $goal)->get()?:[];
+        $attachedproblems=$appointments->problems()->where('cleared', '=', 0)->get()?:[];
     	$appointment =new Appointment();
     	$appointment->goal_id=$request->input('goal_id');
     	$appointment->save();
-    	
+
+        $appointment->problems()->sync($attachedproblems);
 
     	return \Redirect::route('navigation.show', $appointment);
     }
@@ -47,7 +51,7 @@ class AppointmentController extends Controller
     	$appointment =new Appointment();
     	$appointment->goal_id=$goal_match->id;
     	$appointment->save();
-    	return redirect('/navigation');
+    	return \Redirect::route('navigation.show', $appointment);
 
 
     }
@@ -78,6 +82,6 @@ class AppointmentController extends Controller
     	$appointment =new Appointment();
     	$appointment->goal_id=$goal_match->id;
     	$appointment->save();
-    	return redirect('/navigation');
+    	return \Redirect::route('navigation.show', $appointment);
     }
 }

@@ -10,7 +10,7 @@
 |
 */
 Route::get('dropdown/Goals/{id}', 'UserController@getGoals');
-Route::get('statedGoal/Goals/{id}', 'GoalController@getRestatedGoal');
+Route::get('textbox/Goals/{id}', 'GoalController@getRelatedGoals');
 Route::get('/', function () {
     return view('welcome');
 });

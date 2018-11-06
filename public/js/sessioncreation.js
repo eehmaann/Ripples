@@ -70,6 +70,18 @@ $(document).ready(function(){
 			hideUserError();
 		});
 
+      $("#caseSelector").change(function(){
+      	$.getJSON("../textbox/Goals/"+$('#caseSelector').val(), function(data){
+      		$.each(data, function(index, value){
+      			$('#reasonStater').text(value); 
+      			$('#goaltext').val(value); 
+      		});
+      	});
+      	$('#goal_id').val($(this).val());
+		hideCaseError();
+      	    	
+      });
+
 
 	$('#nametext').change(function(){
 		$('#client_name').val($(this).val());
@@ -81,11 +93,11 @@ $(document).ready(function(){
 		//hideEmailError();
 	});
 
-	$('#caseSelector').change(function(){
-		$('#goaltext').val($.getJSON("../statedGoal/Goals" + $("#caseSelector").val()));
-		$('#goal_id').val($(this).val());
-		hideCaseError();
-	});
+	//$('#caseSelector').change(function(){
+		//$('#goaltext').val($.getJSON("../statedGoal/Goals" + $("#caseSelector").val()));
+	//	$('#goal_id').val($(this).val());
+	//	hideCaseError();
+	//});
 
 	$('#reasontext').change(function(){
 		$('#case_description').val($(this).val());

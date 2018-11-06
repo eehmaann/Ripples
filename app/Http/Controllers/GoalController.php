@@ -9,10 +9,15 @@ use App\Goal;
 class GoalController extends Controller
 {
     //
-   	public function getRestatedGoal($id)
+    public function getRelatedGoals($id)
 	{
-		$goal = Goal::where('goal_id', '=', $id)->value('goal');
+		$goals = Goal::where('id', '=', $id)->get();
+		$options = array();
 
-		return Response::json($goal);
+		foreach ($goals as $goal) {
+			$options += array($goal->id => $goal->goal);
+		}
+
+		return Response::json($options);
 	}
 }
