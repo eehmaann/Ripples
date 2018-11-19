@@ -25,10 +25,15 @@ class ProblemsController extends Controller
         $problem->description = $request->input('description');
         $problem->diagnosis_id = $request->input('diagnosis_id');
         if(Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })
             ->count()>0){
             $parent_problem =Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)->latest()->first();
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })
+            ->latest()->first();
             $problem->steps=$parent_problem->steps+1;
             $problem->parentproblem_id=$parent_problem->id;
         } 
@@ -51,10 +56,14 @@ class ProblemsController extends Controller
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->cleared=true;
          if(Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })
             ->count()>0){
             $parent_problem =Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)->latest()->first();
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })->latest()->first();
             $problem->steps=$parent_problem->steps+1;
             $problem->parentproblem_id=$parent_problem->id;
         } 
@@ -117,10 +126,10 @@ class ProblemsController extends Controller
         $problem->describable_type='App\Cord';
         $problem->describable_id=$cord_match->id;
          if(Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)
+            ->whereHas('appointment_id', $appointment_id)
             ->count()>0){
             $parent_problem =Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)->latest()->first();
+            ->whereHas('appointment_id', $appointment_id)->latest()->first();
             $problem->steps=$parent_problem->steps+1;
             $problem->parentproblem_id=$parent_problem->id;
         } 
@@ -141,10 +150,10 @@ class ProblemsController extends Controller
         $problem->description = $request->input('description');
         $problem->diagnosis_id = $request->input('diagnosis_id');
         if(Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)
+            ->whereHas('appointment_id', $appointment_id)
             ->count()>0){
             $parent_problem =Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)->latest()->first();
+            ->whereHas('appointment_id', $appointment_id)->latest()->first();
             $problem->steps=$parent_problem->steps+1;
             $problem->parentproblem_id=$parent_problem->id;
         } 
@@ -170,10 +179,10 @@ class ProblemsController extends Controller
         $problem->description = $request->input('description');
         $problem->diagnosis_id = $request->input('diagnosis_id');
          if(Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)
+            ->whereHas('appointment_id', $appointment_id)
             ->count()>0){
             $parent_problem =Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)->latest()->first();
+            ->whereHas('appointment_id', $appointment_id)->latest()->first();
             $problem->steps=$parent_problem->steps+1;
             $problem->parentproblem_id=$parent_problem->id;
         } 
@@ -199,10 +208,10 @@ class ProblemsController extends Controller
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->cleared=true;
          if(Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)
+            ->whereHas('appointment_id', $appointment_id)
             ->count()>0){
             $parent_problem =Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)->latest()->first();
+            ->whereHas('appointment_id', $appointment_id)->latest()->first();
             $problem->steps=$parent_problem->steps+1;
             $problem->parentproblem_id=$parent_problem->id;
         } 
@@ -230,10 +239,10 @@ class ProblemsController extends Controller
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->cleared=true;
          if(Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)
+            ->whereHas('appointment_id', $appointment_id)
             ->count()>0){
             $parent_problem =Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)->latest()->first();
+            ->whereHas('appointment_id', $appointment_id)->latest()->first();
             $problem->steps=$parent_problem->steps+1;
             $problem->parentproblem_id=$parent_problem->id;
         } 
@@ -259,10 +268,10 @@ class ProblemsController extends Controller
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->cleared=true;
          if(Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)
+            ->whereHas('appointment_id', $appointment_id)
             ->count()>0){
             $parent_problem =Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)->latest()->first();
+            ->whereHas('appointment_id', $appointment_id)->latest()->first();
             $problem->steps=$parent_problem->steps+1;
             $problem->parentproblem_id=$parent_problem->id;
         } 
@@ -301,10 +310,10 @@ class ProblemsController extends Controller
         $problem->describable_type='App\Heartwall';
         $problem->describable_id=$heartwall_match->id;
          if(Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)
+            ->whereHas('appointment_id', $appointment_id)
             ->count()>0){
             $parent_problem =Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)->latest()->first();
+            ->whereHas('appointment_id', $appointment_id)->latest()->first();
             $problem->steps=$parent_problem->steps+1;
             $problem->parentproblem_id=$parent_problem->id;
         } 
@@ -351,10 +360,10 @@ class ProblemsController extends Controller
         $problem->describable_type='App\Solution';
         $problem->describable_id=$solution_match->id;
          if(Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)
+            ->whereHas('appointment_id', $appointment_id)
             ->count()>0){
             $parent_problem =Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)->latest()->first();
+            ->whereHas('appointment_id', $appointment_id)->latest()->first();
             $problem->steps=$parent_problem->steps+1;
             $problem->parentproblem_id=$parent_problem->id;
         } 
@@ -383,10 +392,10 @@ class ProblemsController extends Controller
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->describable_type='App\Solution';
          if(Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)
+            ->whereHas('appointment_id', $appointment_id)
             ->count()>0){
             $parent_problem =Problem::where('cleared', false)
-            ->where('appointment_id', $appointment_id)->latest()->first();
+            ->whereHas('appointment_id', $appointment_id)->latest()->first();
             $problem->steps=$parent_problem->steps+1;
             $problem->parentproblem_id=$parent_problem->id;
         } 
