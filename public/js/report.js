@@ -15,52 +15,53 @@ $('#defitionsshower').click(function(){
 });
 //Display a different number style for each level of nesting
 $( ".1step" ).each( function(){
-		$(this).prepend(toRoman(parseInt($(this).attr('id')))+".");
+		$(this).children(".barrier").prepend(toRoman(parseInt($(this).attr('id')))+".");
 	});
 $(".2step").each(function(){
-	$(this).prepend(toLetter(parseInt($(this).attr('id')))+".");
+	$(this).children(".barrier").prepend(toLetter(parseInt($(this).attr('id')))+".");
 });
 
 $(".3step").each(function(){
-	$(this).prepend(parseInt($(this).attr('id'))+".");
+	$(this).children(".barrier").prepend(parseInt($(this).attr('id'))+".");
 });
 
 $(".4step").each(function(){
-	$(this).prepend(toLetter(parseInt($(this).attr('id'))).toLowerCase()+".");
+	$(this).children(".barrier").prepend(toLetter(parseInt($(this).attr('id'))).toLowerCase()+".");
 });
 
 $(".5step").each(function(){
-	$(this).prepend(parseInt($(this).attr('id'))+"]");
+	$(this).children(".barrier").prepend(parseInt($(this).attr('id'))+"]");
 });
 
 $(".6step").each(function(){
-	$(this).prepend(toLetter(parseInt($(this).attr('id'))).toLowerCase()+"]");
+	$(this).children(".barrier").prepend(toLetter(parseInt($(this).attr('id'))).toLowerCase()+"]");
 });
 
 $(".7step").each(function(){
-	$(this).prepend("["+parseInt($(this).attr('id'))+"]");
+	$(this).children("barrier").prepend("["+parseInt($(this).attr('id'))+"]");
 });
 
 $(".8step").each(function(){
-	$(this).prepend("["+toLetter(parseInt($(this).attr('id'))).toLowerCase()+"]");
+	$(this).children(".barrier").prepend("["+toLetter(parseInt($(this).attr('id'))).toLowerCase()+"]");
 });
 
-$( ".9step" ).each( function(){
-		$(this).prepend(toRoman(parseInt($(this).attr('id'))).toLowerCase()+")");
+$( ".9step").each( function(){
+		$(this).children(".barrier").prepend(toRoman(parseInt($(this).attr('id'))).toLowerCase()+")");
 	});
 
 $(".10step").each(function(){
-	$(this).prepend(parseInt($(this).attr('id'))+")");
+	$(this).children("barrier").prepend(parseInt($(this).attr('id'))+")");
 });
 
-$(".11step").each(function(){
-	$(this).prepend(toLetter(parseInt($(this).attr('id'))).toLowerCase()+")");
+$(".11step" >".barrier").each(function(){
+	$(this).children("barrier").prepend(toLetter(parseInt($(this).attr('id'))).toLowerCase()+")");
 });
 
-$( ".12step" ).each( function(){
-		$(this).prepend("("+toRoman(parseInt($(this).attr('id'))).toLowerCase()+")");
+$( ".12step" > ".barrier" ).each( function(){
+		$(this).children(".barrier").prepend("("+toRoman(parseInt($(this).attr('id'))).toLowerCase()+")");
 	});
-$(".barrier").each(function(){
+
+$(".nest").each(function(){
 	var number =parseInt($(this).attr('class'), 10);
 	var sizeincrease =(12-number)/20 +1;
 	$(this).css('font-size', sizeincrease+"em");
@@ -69,11 +70,12 @@ $(".barrier").each(function(){
 })
 
 $(".barrier").click(function(){
-	$(this).children('.barrierdefinition').toggle();
-})
+		$(this).children('.barrierdefinition').toggle();
+	
+});
 $(".emotionentry").click(function(){
 	$(this).children('.emotiondefinition').toggle();
-})
+});
 
 function toRoman(num) {  
   var result = '';

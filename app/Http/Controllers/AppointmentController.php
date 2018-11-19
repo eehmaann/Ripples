@@ -27,23 +27,16 @@ class AppointmentController extends Controller
     	]);
 
         $goal_id= $request->input('goal_id');
-        $priorAppointment=Appointment::where('goal_id', $goal_id)->latest()->first();
-        $problems =Problem::all();
-        $unsolvedProblems=$problems
-            ->where('appointment_id', $priorAppointment->id)
-            ->where('cleared', false);
+        $priorAppointment=Appointment::where('goal_id', $goal_id)->with('problems')->latest()->first();
+        $problemlist=$priorAppointment->problems()->where('cleared', false)->get();
 
-     
+
     	$appointment =new Appointment();
-    	$appointment->goal_id=$request->input('goal_id');
+    	$appointment->goal_id=$goal_id;
     	$appointment->save();
         
-            foreach($priorAppointment->problems as $problem) {
-                if($problem->cleared=false){
-                    $oldproblem=Problem::find($problem->id);
-                    $appointment->problem()->sync($oldproblem);
-                }
-            }
+        
+        $appointment->problems()->sync($problemlist);
 
     	return \Redirect::route('navigation.show', $appointment);
     }
@@ -111,35 +104,25 @@ class AppointmentController extends Controller
         return redirect('/sessionstart');
     }
 
-    public function showAppointment(Request $request, $id){
-           $user = $request->user();
+    public function showAppointment ($id){
         $appointment=Appointment::find($id);
 
-        $goals= Goal::where('user_id', '=', $user->id)->get();
-        
-        $appointments= [];
-        foreach($goals as $goal){
-            foreach($goal->appointments as $appointment){
-                $appointments[]= $appointment->all;
-            }
-        }
-
-       
-         
-
         $problems = [];
-        foreach($appointment->problems as $problem) {
-            $problems[] = $problem->all;
-        }
+        $problems[]=$appointment->problems;
+
 
         $solutions=[];
-        foreach($appointment->solution as $solution){
-            $solutions[]=$solution->all;
-        }
+        $solutions=$appointment->solution;
+    
          return view('reports')
             ->with(['problems'=>$problems,
                     'appointment'=>$appointment,
-                    'appointments'=>$appointments,
                     'solutions'=>$solutions]);
+    }
+
+    public function showLastAppointment(Request $request){
+        $user=$request->user();
+        $appointment= $user->appointment->latest()->first();
+        showAppointment($appointment->id);
     }
 }

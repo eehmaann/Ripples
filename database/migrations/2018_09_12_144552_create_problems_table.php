@@ -17,7 +17,7 @@ class CreateProblemsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('steps')->default(1);
-            $table->string('description');
+            $table->longText('description');
             $table->string('clearstatement')->default('cleared');
             $table->string('parentproblem_id')->default(0);
             $table->boolean('cleared')->default(false);

@@ -16,6 +16,7 @@ Route::get('/services', function () {return view('clients.services');});
 Route::get('/contact', ['as'=> 'contact.create', 'uses' => 'ContactController@create']);
 Route::post('/contact', ['as'=> 'contact.store', 'uses' =>'ContactController@store']);
 Route::get('/report/{id}', 'AppointmentController@showAppointment');
+Route::get('/firstreport', 'Appointment@showLastAppointment');
 
 //App Views
 Route::get('dropdown/Goals/{id}', 'UserController@getGoals');

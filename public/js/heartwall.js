@@ -6,7 +6,7 @@ $(document).ready(function()
 
     //Adjust base form
   $('#progressionQuestion').hide();
-  $('#newCauseClicker').text('Seatch Trapped Emotions');
+  $('#newCauseClicker').text('Search Trapped Emotions');
   $('#lastCauseClicker').hide();
 
   $('.error').hide();

@@ -47,47 +47,53 @@
 	@foreach($appointment->problems as $problem)
 		<div class="row">
 			@if($problem->steps == 1)<?php $firststep++; ?>
-				<div class="1step barrier" id="<?php echo $firststep ?>" >
+				<div class="1step nest" id="<?php echo $firststep ?>" ><div class="barrier">
 			@elseif($problem->steps == 2)<?php $secondstep++; ?>
-				<div class="2step barrier" id="<?php echo $secondstep ?>">
+				<div class="2step nest" id="<?php echo $secondstep ?>"><div class="barrier">
 			@elseif($problem->steps == 3)<?php $thirdstep++; ?>
-				<div class="3step barrier " id="<?php echo $thirdstep ?>">
+				<div class="3step nest" id="<?php echo $thirdstep ?>"><div class="barrier">
 			@elseif($problem->steps == 4)<?php $fourthstep++; ?>
-				<div class="4step barrier" id="<?php echo $fourthstep ?>">
+				<div class="4step nest" id="<?php echo $fourthstep ?>"><div class="barrier">
 			@elseif($problem->steps == 5)<?php $fifthstep++; ?>
-				<div class="5step barrier" id="<?php echo $fifthstep ?>">
+				<div class="5step nest" id="<?php echo $fifthstep ?>"><div class="barrier">
 			@elseif($problem->steps == 6)<?php $sixthstep++; ?>
-				<div class="6step barrier" id="<?php echo $sixthstep ?>">
+				<div class="6step nest" id="<?php echo $sixthstep ?>"><div class="barrier">
 			@elseif($problem->steps == 7)<?php $seventhstep++; ?>
-				<div class="7step barrier" id="<?php echo $seventhstep ?>">
+				<div class="7step nest" id="<?php echo $seventhstep ?>"><div class="barrier">
 			@elseif($problem->steps == 8)<?php $eighthstep++; ?>
-				<div class="8step barrier" id="<?php echo $eighthstep ?>">
+				<div class="8step nest" id="<?php echo $eighthstep ?>"><div class="barrier">
 			@elseif($problem->steps == 9)<?php $ninthstep++; ?>
-				<div class="9step barrier" id="<?php echo $ninthstep ?>">
+				<div class="9step nest" id="<?php echo $ninthstep ?>"><div class="barrier">
 			@elseif($problem->steps == 10)<?php $tenthstep++; ?>
-				<div class="10step barrier step" id="<?php echo $tenthstep ?>">
+				<div class="10step nest" id="<?php echo $tenthstep ?>"><div class="barrier">
 			@elseif($problem->steps == 11)<?php $eleventhstep++; ?>
-				<div class="11step barrier" id="<?php echo $eleventhstep ?>">
+				<div class="11step nest" id="><?php echo $eleventhstep ?>"><div class="barrier">
 			@elseif($problem->steps == 12)<?php $twelfthstep++; ?>
-				<div class="12step barrier" id="<?php echo $twlefthstep ?>">
-			@else<div >
+				<div class="12step nest" id="<div class="barrier"><?php echo $twlefthstep ?>"><div class="barrier">
+			@else<div ><div class="barrier">
 			@endif
 
-				{{$problem->description}}
+				{!!$problem->description!!}
 				@if($problem->cleared ==true)cleared
 				@endif
-				@if(strlen($problem->diagnosis->definition))			
-					<div class="barrierdefinition">&bull; {{$problem->diagnosis->definition}}</div>
+				@if(strlen($problem->diagnosis->definition)>3)			
+						<div class="barrierdefinition" style="color:blue;">&bull;
+							{{$problem->diagnosis->definition}}</div>
 				@endif
+				</div>
+
 				@if($problem->heartwall)
 					Heartwall made of {{$problem->heartwall->material}} extending {{$problem->heartwall->starting_distance}} miles </br> 
 				@endif
+				@if(count ($problem->emotions)>0)
+					{{$problem->diagnosis->name}}s 1 -{{count($problem->emotions)}}
 				<ol>
-				@foreach ($problem->emotions as $emotion)
-					<li><span class="emotionentry">$emotion->name 
-						<br><span class="emotiondefinition">$emotion->definition</span></span></li>
-				@endforeach
+					@foreach ($problem->emotions as $emotion)
+						<li><span class="emotionentry">{{$emotion->name}} 
+							<br><span class="emotiondefinition" style="color: lightblue;">{{$emotion->definition}}</span></span></li>
+					@endforeach
 				</ol>
+				@endif
 			</div>
 		</div>
 	@endforeach
