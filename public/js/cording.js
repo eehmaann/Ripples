@@ -1,17 +1,24 @@
 $(document).ready(function()
 {
+
 	var cordTypesCount=0;
 	var arbody = new Array("Brain", "Heart", "Gut", "Privates");
-	var destination = '../../../../problemsc/'+ $('#appointmentnumber').text();	
 	$('.cord').keydown(function(){
 		forceLength($(this));
-		insertDecimal($(this));
+		if($(this).val().length>1){
+			insertDecimal($(this));
+		}
 
 	});
-	$('#barrierform').attr('action', destination);
+
+	$(".cordtexts").hide();
+
+	//Adjust base form
+	$('#progressionQuestion').hide();
+	$('#newCauseClicker').hide();
+	$('#lastCauseClicker').text('Clear Cording');
 
 	$('.cordmultiple, .cord').change(function(){
-		var count =0;
 		var client;
 		for (client = 0; client < arbody.length; ++client) {
 			var cord;
@@ -20,18 +27,16 @@ $(document).ready(function()
 				$("#"+arbody[client]+"to"+arbody[cord]+"multiplier"))){
 					//if begins
 					$('#'+arbody[client]+'to'+arbody[cord]+'text').val(writeTextAreas(arbody[client], arbody[cord]));
-					count++;
 				}
 			}
 		}
-		cordTypesCount=count;
 	});
 
 
 		function writeTextAreas(part1, part2){
 			return ($("#"+part1+"to"+part2+"number").val()+ " " +part1 + " to " 
-			+ part2 + " X 10 ^ "+ $("#"+part1+"to"+part2+"multiplier").val() + 
-			" cords");  
+			+ part2 + " X 10 <sup> "+ $("#"+part1+"to"+part2+"multiplier").val() + 
+			"</sup> cords");  
 		}
 
 
@@ -45,20 +50,8 @@ $(document).ready(function()
 	});
 
 	$(".pathClicker").click(function(){
-		var isValid;
-
-		$( "fieldset" ).each(function() {
-			var data=$(this).children('input').val();
-				isValid= testValid(data);
-		});
-		if(isValid && cordTypesCount>0){
-			constructDescription();
-		}
+		constructDescription();
 	});
-
-	function constructDescription(){
-		$("#description").val("Unhealthy cording to " + $('#corded').val());
-	}
 
 
 
@@ -71,16 +64,31 @@ $(document).ready(function()
 		}
 	}
 
-	function testValid(text){
-		return(text.length>2);
+	function constructDescription(){
+		var cordtypecount =0
+		var statement ='<ul class="cordDetail">'
+			$('.cordtexts').each(function(){
+				if($(this).val().length>0){
+					statement+="<li>"+$(this).val()+"</li>";
+					cordtypecount++;
+				}
+			})
+		if(cordtypecount>0){
+			$("#description").val("Unhealthy cording to " + $('#corded').val()+
+				statement + "</ul");
+		}
+		else
+		$("#description").val("");
 	}
+
 });
+
 
 function forceLength(input){
 	var text = (input).val();
     var maxlength = 4;
 
-    if(maxlength > 0){
+    if(text>maxlength){
         (input).val(text.substr(0, maxlength)); 
     }
 }

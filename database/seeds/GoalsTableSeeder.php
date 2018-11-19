@@ -14,7 +14,7 @@ class GoalsTableSeeder extends Seeder
     {
     	$goals=[
     	 	['My knee hurts','I want a stronger knee', '1'],
-    	 	["I am out of work and can/'t get a job", 'I seek abundance', '1'],
+    	 	['I am out of work and can\'t get a job', 'I seek abundance', '1'],
     	 	['I am having problems with my wife', 'I want a healthy relationship with my wife', '2'],
         ];
 

@@ -40,23 +40,27 @@ class DiagnosesController extends Controller
     public function createAllergy($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);
         $appointment=Appointment::find($appointment_id);
+        $emotions=Emotion::all();
         return View('diagnosis.allergy')
     		->with(['diagnosis'=>$diagnosis,
-                    'appointment'=>$appointment]);}
+                    'appointment'=>$appointment,
+                    'emotions'=>$emotions]);}
 
     public function createBroadcast($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);
         $appointment=Appointment::find($appointment_id);
-        return View('diagnosis.braodcast')
+        return View('diagnosis.broadcast')
             ->with(['diagnosis'=>$diagnosis,
                     'appointment'=>$appointment]);}
 
     public function createCircuits($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);
         $appointment=Appointment::find($appointment_id);
+        $emotions = Emotion::where('row_name', $diagnosis->trapped_emotions)->get();
         return View('diagnosis.circuits')
             ->with(['diagnosis'=>$diagnosis,
-                    'appointment'=>$appointment]);}
+                    'appointment'=>$appointment,
+                    'emotions'=>$emotions]);}
 
 
        public function createCording($id, $appointment_id){
@@ -84,14 +88,14 @@ class DiagnosesController extends Controller
                     'appointment'=>$appointment,
                     'drugs'=>$drugs]);}
 
-    public function createEmotionalResonance($id, $appointment_id){
-        $diagnosis= Diagnosis::find($id);
+    public function createEmotionalResonance($appointment_id){
+        $diagnosis= Diagnosis::find(7);
         $appointment=Appointment::find($appointment_id);
         $emotions=Emotion::all();
         return view('diagnosis.emotionalresonance')
             ->with(['diagnosis'=>$diagnosis,
                     'emotions'=>$emotions,
-                    'appointment'=>$appoinment]);}
+                    'appointment'=>$appointment]);}
 
     public function createEntities($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);
@@ -109,8 +113,8 @@ class DiagnosesController extends Controller
                     'appointment'=>$appointment]);}
 
 
-    public function createHeartWall($id, $appointment_id){
-        $diagnosis= Diagnosis::find($id);
+    public function createHeartWall($appointment_id){
+        $diagnosis= Diagnosis::find(6);
         $appointment=Appointment::find($appointment_id);
         return view('diagnosis.heartwall')
             ->with(['diagnosis'=>$diagnosis,
@@ -197,10 +201,14 @@ class DiagnosesController extends Controller
 
     public function createSaboteur($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);
+        $diagnoses=Diagnosis::all();
+        $locators=Locator::all();
         $appointment=Appointment::find($appointment_id);
         return view('diagnosis.saboteur')
             ->with(['diagnosis'=>$diagnosis,
-                    'appointment'=>$appointment]);}
+                    'appointment'=>$appointment,
+                     'diagnoses'=>$diagnoses,
+                    'locators'=>$locators]);}
 
     public function createT3($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);
@@ -216,8 +224,8 @@ class DiagnosesController extends Controller
            ->with(['diagnosis'=>$diagnosis,
                     'appointment'=>$appointment]);}
 
-    public function createTrappedEmotion($id, $appointment_id){
-        $diagnosis= Diagnosis::find($id);
+    public function createTrappedEmotion($appointment_id){
+        $diagnosis= Diagnosis::find(5);
         $appointment=Appointment::find($appointment_id);
         $emotions=Emotion::all();
         return view('diagnosis.trappedemotion')

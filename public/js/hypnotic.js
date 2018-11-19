@@ -1,48 +1,51 @@
 $(document).ready(function()
 {
-	navigation.hideErrorAndAdancement();
+    var id =$('#appointmentnumber').text();  
+	$('.error').hide();
+    $('#progressionQuestion').hide();
+    $("#lastCauseClicker").hide();
+    $("#newCauseClicker").text('Record' + $("#diagnosisname").text()); 
 
-    $('#messagetext').keyup(function(){
-        //Test whether length is correct if incorrect throw error
-        if($(this).val().length<3){
-            navigation.showError();
-        }
-        
-        //Test whether the new text is correct if just hide errormessage
-        else if ($('improvedtext').val().length<3){
-             navigation.hideErrorAndAdancement();
-        }
 
-        else{ 
-                
-            $('#description').val($("#diagnosisname").text()+ 
-            " "+ $('#messagetext').val());
-                if($('#themetext').val().length>3){
-                    $('#description').val($('#description').val()
-                        + "theme "+ $("#themetext").val());
-                }
-            $('#solution').val(" replaced with vision  " +('#improvedtext').val()+".");
-            navigation.showAdvancement();
-        }
+
+    $('#messagetext').change(function(){
+        testMessage();
         
     });
 
-    $('#improvedtext').keyup(function () {
-        if($('#messagetext').val().length<3 && $(this).val().length>=3){
-             $('#description').val($("#diagnosisname").text()+ 
-            " "+ $('#messagetext').val());
-            $('#solution').val(" Replace with positve message: " +('#improvedtext').val()+".");
-            navigation.showAdvancement();
-        }
+    $('#improvedtext').change(function (){
+        testImprovedText();
+    });
+          
+
+    $('#newCauseClicker').click(function(){
+        $('#description').val($("#diagnosisname").text()+ 
+        " "+ $('#messagetext').val());
+        
+        $('#solution').val(" Replace with positve message: <span class='solutionAppearance'>" 
+        +('#improvedtext').val()+".</span>");
     });
 
-     $('#improvedtext').blur(function(){
-        if($(this).val().length<3){
-            $('#errormessage2').show();
+    function testMessage(){
+        if ($('#messagetext').val().length<3){
+             $('#errormessage').show();
+             return false;
         }
         else{
-            $('#errormessage2').hide();
+             $('#errormessage').hide();
         }
-        
-    });
+        return true;
+    }
+
+    function testImprovedText(){
+        if ($('#improvedtext').val().length<3){
+            $('#errormessage2').show();
+            return false;
+        }
+        else{
+             $('#errormessage2').hide();
+        }
+        return true;
+    }
+
 });

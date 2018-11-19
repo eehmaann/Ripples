@@ -1,52 +1,77 @@
 $(document).ready(function()
 {
-	navigation.hideErrorAndAdancement();
+
+  var id =$('#appointmentnumber').text();
+  
+
+    //Adjust base form
+  $('#progressionQuestion').hide();
+  $('#newCauseClicker').text('Seatch Trapped Emotions');
+  $('#lastCauseClicker').hide();
+
+  $('.error').hide();
+
+  $(".pathClicker").click(function(){
+    if(checkDistance() && checkMaterial()){
+        $('#description').val($("#diagnosisname").text()+ 
+          " "+ $('#lengthinput').val() + " miles long made of "
+          + $('#material').val()+".");
+        setDestination();
+    }
+  });
+
+       function setDestination(){
+       var destination= "../../../../problemsh/"+id;
+        $('#barrierform').attr('action', destination);
+     }
 
     $('#lengthinput').blur(function(){
-        //Test whether length is correct if incorrect throw error
-        if((!$.isNumeric($(this).val()))||($(this).val()<10)){
-            navigation.showError();
-        }
-        
-        //Test whether material is correct if just hide errormessage
-        else if ($('#material').val().length<3){
-             navigation.hideErrorAndAdancement();
-        }
-
-        else{ 
-           
-            $('#description').val($("#diagnosisname").text()+ 
-            " "+ $('#lengthinput').val() + " miles long made of "
-            + $('#material').val()+".");
-            navigation.showAdvancement();
-        }
-        
+        checkDistance();      
     });
 
-    $('#material').keyup(function () {
-        if($('#lengthinput').val()>10 && $(this).val().length>=3){
-             $('#description').val($("#diagnosisname").text()+ 
-             " "+ $('#lengthinput').val() + " miles long made of "
-            + $('#material').val()+".");
-            navigation.showAdvancement();
-        }
-    });
+    function checkDistance(){
+      var lengthInput=$('#lengthinput').val();
+      var lengthValid=($.isNumeric(lengthInput)&&(lengthInput>=10))
+      if(lengthValid){
+        $('#errormessage').hide();
+      }
+      else {
+        $('#errormessage').show();
+      }
+      return lengthValid;
+    }
+
 
      $('#material').blur(function(){
-        if($(this).val().length<3){
-            $('#errormessage2').show();
-        }
-        else{
-            $('#errormessage2').hide();
-        }
+        checkMaterial();
         
     });
 
-//     $( "#test" ).autocomplete({
-  //    source: "heartwall/autocomplete",
-    // minLength: 2,
-      //select: function(event, ui) {
-        //$('#test').val(ui.item.value);
-     // }
-   // });
+     function checkMaterial(){
+      if($('#material').val().length<3){
+        $('#errormessage2').show();
+      }
+      else{
+          $('#errormessage2').hide();
+      }
+      return($('#material').val().length);
+     }
+
+
+   
+     $( "#material" ).autocomplete({
+        source: function(request, response) {
+          $.ajax({
+            url: '/searchajax',
+            dataType: "json",
+            data: {
+              term : request.term
+            },
+            success: function(data) {
+              response(data);     
+            }
+          });
+        },
+      minLength: 2,
+    });
 });

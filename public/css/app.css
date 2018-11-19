@@ -72,7 +72,7 @@ section {
 body {
   margin: 0;
   font-family: "Nunito", sans-serif;
-  font-size: 0.9rem;
+  font-size: 1.4rem;
   font-weight: 400;
   line-height: 1.6;
   color: #212529;
@@ -399,36 +399,36 @@ h6,
 
 h1,
 .h1 {
-  font-size: 2.25rem;
+  font-size: 2.75rem;
 }
 
 h2,
 .h2 {
-  font-size: 1.8rem;
+  font-size: 2.3rem;
 }
 
 h3,
 .h3 {
-  font-size: 1.575rem;
+  font-size: 1.975rem;
 }
 
 h4,
 .h4 {
-  font-size: 1.35rem;
+  font-size: 1.85rem;
 }
 
 h5,
 .h5 {
-  font-size: 1.125rem;
+  font-size: 1.7rem;
 }
 
 h6,
 .h6 {
-  font-size: 0.9rem;
+  font-size: 1.4rem;
 }
 
 .lead {
-  font-size: 1.125rem;
+  font-size: 1.625rem;
   font-weight: 300;
 }
 

@@ -1,25 +1,33 @@
 $(document).ready(function()
 {
-	navigation.hideErrorAndAdancement();
+    $('#progressionQuestion').hide();
+    $("#lastCauseClicker").text('Clear Memory');
+    $("#newCauseClicker").hide();    
+    $('#description').val($("#diagnosisname").text());
+
+    $("#lastCauseClicker").click(function(){
+        if(testMemory()){
+           $('#description').val($("#diagnosisname").text()+": "+$(this).val());          
+        }
+        if(testSolution()){
+            $('#solution'.val($('#memorysolutiontext').val());
+        }
+    });
 
 	$(".clickableSolutions").click(function () {
         $("#memorysolutiontext").val($(this).text());
-        $("#solution").val($(this).text());
     });
 
-    $("#memorysolutiontext").keyup(function () {
-	 	if($(this).val().length>=3){
-	 		$("#solution").val($(this).text());
-	 	}
-	 });
+    function testMemory(){
+        if($('#messagetext').val().length>=3){
+            $("#errormessage").hide();
+            return true;
+        }
+        $("#errormessage").show();
+            return false;
+    }
 
-	$("#messagetext").keyup(function () {
-	 	if($(this).val().length>=3){
-        	$('#description').val($("#diagnosisname").text()+": "+$(this).val());
-        	navigation.showAdvancement();
-        }
-        else{
-        	navigation.showError();
-        }
-    });
+    function testSolution(){
+        return ($('#memorysolutiontext').val().length>=3);
+    }
 });

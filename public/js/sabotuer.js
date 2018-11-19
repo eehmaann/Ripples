@@ -1,10 +1,20 @@
 $(document).ready(function()
 {
 	$(".error").hide();
+	$(".clickDiagnose > a").removeAttr("href");
+	$( ".clickLocate:nth-child(6)")[0].remove()
+	$('#Energy')[0].remove();
+	$('#Pathogen')[0].remove();
+	$('#Toxins')[0].remove();
+
+
+	$(".clickDiagnose").click(function(){
+		$('#bodyinput').val($(this).attr('id'));
+	});
+
 
 	$('fieldset').change(function(){
 		var data=$(this).children('input').val();
-		alert(testValid(data));
 		if(!($.isNumeric(data))){
 			showError(data.length <4, $(this));
 		}
@@ -39,7 +49,7 @@ $(document).ready(function()
 	});
 
 	function constructDescription(){
-		($"#description").val("Saboteur of " +$('#weaponinput').val()
+		$("#description").val("Saboteur of " +$('#weaponinput').val()
 		 	+" in " + $('#bodyinput').val()+ " [age " + 
 		 	$('#ageinput').val() +"] from " +$("#saboteurinput").val());	
 	}

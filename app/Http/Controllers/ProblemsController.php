@@ -27,6 +27,24 @@ class ProblemsController extends Controller
         $problem->save();
         $problem->appointments()->sync($appointments);
 
+        return \Redirect::route('navigation.show', $appointment_id);
+//
+    }
+
+      public function storeBasicClear(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+        ]);
+        
+        $appointments=Appointment::find($appointment_id);
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        $problem->cleared=true;
+        $problem->save();
+        $problem->appointments()->sync($appointments);
+
         return \Redirect::route('problems.show', $appointment_id);
 //
     }
@@ -35,7 +53,7 @@ class ProblemsController extends Controller
         $this->validate($request, [
             'description' => 'required|min:3',
             'diagnosis_id'=> 'required|numeric',
-            'BraintoBraintext' =>'min:10',
+            'BraintoBraintext' =>'required|min:10',
             'BraintoHearttext',
             'BraintoGuttext',
             'BraintoPrivatestext',
@@ -79,6 +97,7 @@ class ProblemsController extends Controller
         $problem = new Problem();
         $problem->description = $request->input('description'); 
         $problem->diagnosis_id = $request->input('diagnosis_id');
+        $problem->clear=true;
         $problem->describable_type='App\Cord';
         $problem->describable_id=$cord_match->id;
         if(Problem::where(['cleared' => 0])->count()>0){
@@ -90,10 +109,61 @@ class ProblemsController extends Controller
         $problem->save();
         $problem->appointments()->sync($appointments);
 
-        return \Redirect::route('problems.show', $appointment_id);
+        return \Redirect::route('navigation.show', $appointment_id);
     } 
 
-    public function storeEmotions(Request $request,$appointment_id){
+     public function storePastLife(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+        ]);
+
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        if(Problem::where(['cleared' => 0])->count()>0){
+            $parent_problem =Problem::where(['cleared' => 0])->latest()->first();
+            $problem->steps=$parent_problem->steps+1;
+            $problem->parentproblem_id=$parent_problem->id;
+        }  
+        $problem->save();
+
+        $emotions = ($request->emotions)?: [];
+        $problem->emotions()->sync($emotions);
+        $problem->cleared=true;
+        $problem->save();
+
+        $appointments=Appointment::find($appointment_id);
+        $problem->appointments()->sync($appointments);
+       return \Redirect::route('trappedemotion.create', $appointment_id);
+    }
+
+     public function storePastLifeCauses(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+        ]);
+
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        if(Problem::where(['cleared' => 0])->count()>0){
+            $parent_problem =Problem::where(['cleared' => 0])->latest()->first();
+            $problem->steps=$parent_problem->steps+1;
+            $problem->parentproblem_id=$parent_problem->id;
+        }  
+        $problem->save();
+
+        $emotions = ($request->emotions)?: [];
+        $problem->emotions()->sync($emotions);
+        $problem->save();
+
+        $appointments=Appointment::find($appointment_id);
+        $problem->appointments()->sync($appointments);
+        return \Redirect::route('problems.show', $appointment_id);
+    }
+
+    public function storeEmotions(Request $request, $appointment_id){
         $this->validate($request, [
             'description' => 'required|min:3',
             'diagnosis_id'=> 'required|numeric',
@@ -120,6 +190,60 @@ class ProblemsController extends Controller
         return \Redirect::route('problems.show', $appointment_id);
 
     }
+
+    public function storeTrapped(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+        ]);
+
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        $problem->cleared=true;
+        if(Problem::where(['cleared' => 0])->count()>0){
+            $parent_problem =Problem::where(['cleared' => 0])->latest()->first();
+            $problem->steps=$parent_problem->steps+1;
+            $problem->parentproblem_id=$parent_problem->id;
+        }  
+        $problem->save();
+
+        $emotions = ($request->emotions)?: [];
+        $problem->emotions()->sync($emotions);
+        $problem->save();
+
+        $appointments=Appointment::find($appointment_id);
+        $problem->appointments()->sync($appointments);
+        return \Redirect::route('trappedemotion.create', $appointment_id);
+    }
+
+    public function storeEmotionalResonance(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+        ]);
+
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        $problem->cleared=true;
+        if(Problem::where(['cleared' => 0])->count()>0){
+            $parent_problem =Problem::where(['cleared' => 0])->latest()->first();
+            $problem->steps=$parent_problem->steps+1;
+            $problem->parentproblem_id=$parent_problem->id;
+        }  
+        $problem->save();
+
+        $emotions = ($request->emotions)?: [];
+        $problem->emotions()->sync($emotions);
+        $problem->cleared=true;
+        $problem->save();
+
+        $appointments=Appointment::find($appointment_id);
+        $problem->appointments()->sync($appointments);
+        return \Redirect::route('emotionalResonance.create', $appointment_id);
+    }
+
     public function storeHeartwall(Request $request, $appointment_id){
         $this->validate($request, [
             'description' => 'required|min:3',
@@ -150,38 +274,57 @@ class ProblemsController extends Controller
         $problem->save();
         $appointments=Appointment::find($appointment_id);
         $problem->appointments()->sync($appointments);
-        return \Redirect::route('problems.show', $appointment_id);
 
-        return redirect('trappedemotion.create', $appointment_id);
+       return \Redirect::route('trappedemotion.create', $appointment_id);
     }
-         public function storePastLife(Request $request){
+        
+
+     public function storeJustSolution (Request $request, $appointment_id){
         $this->validate($request, [
             'description' => 'required|min:3',
             'diagnosis_id'=> 'required|numeric',
+            'solution' => 'required|min:3',
         ]);
 
+        $solution = new Solution();
+        $solution->material= $request->input('solution');
+        $solution->save();
+
+        $appointments=Appointment::find($appointment_id);
+        $solution->appointments()->sync($appointments);
+        return \Redirect::route('problems.show', $appointment_id);
+     }
+       
+    public function storeSolution(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+            'solution' => 'required|min:3',
+        ]);  
+      
+
+        $solution = new Solution();
+        $solution->material= $request->input('solution');
+        $solution->save();
+
+        $solution_match =Solution::latest()->first();
         $problem = new Problem();
         $problem->description = $request->input('description');
         $problem->diagnosis_id = $request->input('diagnosis_id');
+        $problem->describable_type='App\Solution';
+        $problem->describable_id=$solution_match->id;
         if(Problem::where(['cleared' => 0])->count()>0){
             $parent_problem =Problem::where(['cleared' => 0])->latest()->first();
             $problem->steps=$parent_problem->steps+1;
             $problem->parentproblem_id=$parent_problem->id;
         }  
         $problem->save();
-
-        $emotions = ($request->emotions)?: [];
-        $problem->emotions()->sync($emotions);
-        $problem->save();
-
         $appointments=Appointment::find($appointment_id);
         $problem->appointments()->sync($appointments);
         return \Redirect::route('problems.show', $appointment_id);
-
-        return redirect('trappedemotion.create', $appointment_id);
     }
 
-     public function storeSolution(Request $request, $appointment_id){
+     public function storeSolutionUnclear(Request $request, $appointment_id){
         $this->validate($request, [
             'description' => 'required|min:3',
             'diagnosis_id'=> 'required|numeric',
@@ -208,37 +351,11 @@ class ProblemsController extends Controller
         $problem->save();
         $appointments=Appointment::find($appointment_id);
         $problem->appointments()->sync($appointments);
-        return \Redirect::route('problems.show', $appointment_id);
+        return \Redirect::route('navigation.show', $appointment_id);
     }
 
 
-     public function storeTrapped(Request $request, $appointment_id){
-        $this->validate($request, [
-            'description' => 'required|min:3',
-            'diagnosis_id'=> 'required|numeric',
-        ]);
-
-        $problem = new Problem();
-        $problem->description = $request->input('description');
-        $problem->diagnosis_id = $request->input('diagnosis_id');
-        $problem->cleared=true;
-        if(Problem::where(['cleared' => 0])->count()>0){
-            $parent_problem =Problem::where(['cleared' => 0])->latest()->first();
-            $problem->steps=$parent_problem->steps+1;
-            $problem->parentproblem_id=$parent_problem->id;
-        }  
-        $problem->save();
-
-        $emotions = ($request->emotions)?: [];
-        $problem->emotions()->sync($emotions);
-        $problem->save();
-
-        $appointments=Appointment::find($appointment_id);
-        $problem->appointments()->sync($appointments);
-        return \Redirect::route('problems.show', $appointment_id);
-
-        return redirect('trappedemotion.create' $appointment_id);
-    }
+     
 
     public function showProblems($appointment_id){
         $appointments=Appointment::find($appointment_id);
@@ -253,9 +370,23 @@ class ProblemsController extends Controller
          $problem = Problem::find($id);
          $problem->cleared=true;
          $problem->save();
-    return \Redirect::route('problems.show', $appointment_id);
+        return \Redirect::route('problems.show', $appointment_id);
+    }
         
-
+    public function destroyProblem($id, $appointment_id){
+        $problem = Problem::find($id);
+        $problem->appointments(); {
+            $problem->appointments()->detach();
+        }
+        if($problem->emotions()) {
+            $problem->emotions()->detach();
+        }
+        $problem->delete();
+        return \Redirect::route('problems.show', $appointment_id);
     }
 
 }
+
+
+
+

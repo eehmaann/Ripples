@@ -26,16 +26,19 @@ class SessionController extends Controller
     	$session->goal_id=$request->input('goal_id');
     	$session->save();
     	
+        $goal = Goal::find('goal_id');
+        $problems_list = [];
+        foreach($goal->appointments->problems as $problem) {
+            $problems_list[] = $problem;
+        }
+        
+
     	$diagnosis= Diagnosis::all();
     	$locators=Locator::all();
     	return View('navigation.index')
     		->with(['diagnoses'=>$diagnosis,
     				'locators'=>$locators,
     				'session'=>$session]);
-    	//return Redirect::route('navigation',$session->id);
-    	//return redirect('/navigation'/$session->id);
-    		//  ->with(['diagnosis'=>$diagnosis,
-              //      'emotions'=>$emotions]);}
     }
 
     public function storeGoalSession(Request $request){
@@ -54,7 +57,13 @@ class SessionController extends Controller
     	$session =new Session();
     	$session->goal_id=$goal_match->id;
     	$session->save();
-    	return redirect('/navigation');
+    	
+       $diagnosis= Diagnosis::all();
+        $locators=Locator::all();
+        return View('navigation.index')
+            ->with(['diagnoses'=>$diagnosis,
+                    'locators'=>$locators,
+                    'session'=>$session]);
 
 
     }
@@ -85,6 +94,12 @@ class SessionController extends Controller
     	$session =new Session();
     	$session->goal_id=$goal_match->id;
     	$session->save();
-    	return redirect('/navigation');
+
+    	$diagnosis= Diagnosis::all();
+        $locators=Locator::all();
+        return View('navigation.index')
+            ->with(['diagnoses'=>$diagnosis,
+                    'locators'=>$locators,
+                    'session'=>$session]);
     }
 }

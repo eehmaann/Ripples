@@ -3,6 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
+use App\Appointment;
+use App\Problems;
 
 class Goal extends Model
 {
@@ -12,11 +15,11 @@ class Goal extends Model
   }
 
   public function appointment(){
-        return $this->hasMany('App\Appointment');
+        return $this->hasMany('App\Appointment', 'goal_id', 'id');
     }
 
  public function problems()
     {
-        return $this->hasManyThrough('App\Problem', 'App\Appointment');
+        return $this->hasManyDeep(Problem::class [Appointment::class]);
     }
 }

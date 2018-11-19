@@ -18,7 +18,7 @@ class ConnectDiagnosesAndProblems extends Migration{
     }
 
     public function down(){
-        Schema::table('books', function (Blueprint $table) {
+        Schema::table('problems', function (Blueprint $table) {
             $table->dropForeign('problems_diagnosis_id_foreign');
             $table->dropColumn('diagnosis_id');
         });

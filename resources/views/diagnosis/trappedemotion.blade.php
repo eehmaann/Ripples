@@ -5,15 +5,17 @@
 
 @section('diagnosis')
 @section('destination','../../../problemstrapped')
-<p>When did the trapped emotion occur?</p>
-<ul> 
-    <li id="self" class="timeselector">Current</li>
-    <li id="prenatal" class="timeselector">Prenatal</li>
-    <li id="pastlife" class="timeselector">Past life</li>
-    <li id="inherited" class="timeselector">Inherited</li>
-</ul>
-
+<div class="panel panel-default col-4">
+    <p>When did the trapped emotion occur?</p>
+    <ul class="list-unstyled"> 
+        <li id="self" class="timeselector">Current</li>
+        <li id="prenatal" class="timeselector">Prenatal</li>
+        <li id="pastlife" class="timeselector">Past life</li>
+        <li id="inherited" class="timeselector">Inherited</li>
+    </ul>
+</div>
 @include('layouts.currentTrappedEmotion')
+
 
 
     
@@ -25,7 +27,7 @@
             name='presource'
             value=''
             readonly>
-        <ul>
+        <ul class="list-unstyled">
             <li ><span class="prenatalclicker"> Mother </span></li>
             <li> <span class="prenatalclicker">Father</span></li>
             <li> <span class="prenatalclicker" id="otherprenatal">Other</span></li>

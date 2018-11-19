@@ -13,9 +13,9 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
     	 $users=[
-    	 	['Gail','gail@tester.com', 'Harvard'],
-    	 	['Bob', 'bob@tester.com', 'Harvard'],
-    	 	['Vera', 'vera@tester.com', 'Harvard'],
+    	 	['Gail','gail@tester.com', 'Harvard', 'client'],
+    	 	['Bob', 'bob@tester.com', 'Harvard', 'client'],
+    	 	['Vera', 'vera@tester.com', 'Harvard', 'practitioner'],
         ];
 
     	 $count = count($users);
@@ -28,6 +28,7 @@ class UsersTableSeeder extends Seeder
 	        $user->name = $userData[0];
 	        $user->email = $userData[1];
 	        $user->password = $userData[2];
+            $user->role=$userData[3];
 
 	        $user->save();
 	        $count--;

@@ -3,7 +3,6 @@
  <script src="/js/cording.js"></script>
  @endsection
 @section('diagnosis')
- @section('destination','../../../problemsc/')
 
 <fieldset>
 <label>Corded to who</label>
@@ -26,6 +25,8 @@
             class="cord"
             id={{$cordport[$client]}}to{{$cordport[$corded]}}number
             name={{$cordport[$client]}}to{{$cordport[$corded]}}number
+            step="0.01"
+            maxlength=4
             value=''>
 
                             
@@ -34,8 +35,8 @@
         <input
             type='number'
             class='cordmultiple'
-            step="0.01"
-            maxlength=3
+            min="1" 
+            step="1"
             id={{$cordport[$client]}}to{{$cordport[$corded]}}multiplier
             name={{$cordport[$client]}}to{{$cordport[$corded]}}multiplier
             value=''> <br>
@@ -43,7 +44,8 @@
         <input
             type='text' 
             readonly 
-            id={{$cordport[$client]}}to{{$cordport[$corded]}}text> 
+            id={{$cordport[$client]}}to{{$cordport[$corded]}}text
+            class="cordtexts"> 
         </input>
         <br>
 

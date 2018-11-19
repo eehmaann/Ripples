@@ -9,16 +9,23 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//Client pages
+Route::get('/testimonials', function () {return view('clients.testimonials');});
+Route::get('/services', function () {return view('clients.services');});
+Route::get('/contact', ['as'=> 'contact.create', 'uses' => 'ContactController@create']);
+Route::post('/contact', ['as'=> 'contact.store', 'uses' =>'ContactController@store']);
+Route::get('/report/{id}', 'AppointmentController@showAppointment');
+
+//App Views
 Route::get('dropdown/Goals/{id}', 'UserController@getGoals');
 Route::get('textbox/Goals/{id}', 'GoalController@getRelatedGoals');
+Route::get('listappointment/Goals/{id}', 'GoalController@getSavedAppointments');
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/emotion', 'EmotionController@index');
 
 Route::get('/sessionstart', 'SessionController@create');
-
-
 Route::get('/navigation/{appointment}', ['as'=>'navigation.show', 'uses' => 'LocatorsController@index']);
 
 Route::get('diagnosis/ahe/{id}/create/{appointment}', 'DiagnosesController@createAHE');
@@ -29,10 +36,11 @@ Route::get('diagnosis/circuits/{id}/create/{appointment}', 'DiagnosesController@
 Route::get('diagnosis/cording/{id}/create/{appointment}', 'DiagnosesController@createCording');
 Route::get('diagnosis/curse/{id}/create{appointment}', 'DiagnosesController@createCurse');
 Route::get('diagnosis/drugs/{id}/create{appointment}', 'DiagnosesController@createDrugs');
-Route::get('diagnosis/emotionalresonance/{id}/create/{appointment}', 'DiagnosesController@createEmotionalResonance');
+Route::get('diagnosis/emotionalresonance/7/create/{appointment}', 
+    ['as' => 'emotionalResonance.create', 'uses' => 'DiagnosesController@createEmotionalResonance']);
 Route::get('diagnosis/entities/{id}/create/{appointment}', 'DiagnosesController@createEntities');
 Route::get('diagnosis/excess/{id}/create/{appointment}', 'DiagnosesController@createExcess');
-Route::get('diagnosis/heartwall/{id}/create/{appointment}', 'DiagnosesController@createHeartWall');
+Route::get('diagnosis/heartwall/6/create/{appointment}', 'DiagnosesController@createHeartWall');
 Route::get('diagnosis/hypnotic/{id}/create/{appointment}', 'DiagnosesController@createHypnotic');
 Route::get('diagnosis/intolerance/{id}/create/{appointment}', 'DiagnosesController@createIntolerance');
 Route::get('diagnosis/inflammation/{id}/create/{appointment}', 'DiagnosesController@createInflammation');
@@ -47,18 +55,25 @@ Route::get('diagnosis/saboteur/{id}/create/{appointment}', 'DiagnosesController@
 Route::get('diagnosis/sleep/{id}/create/{appointment}', 'DiagnosesController@createSaboteur');
 Route::get('diagnosis/T3/{id}/create/{appointment}', 'DiagnosesController@createT3');
 Route::get('diagnosis/toxicity/{id}/create/{appointment}', 'DiagnosesController@createToxicity');
-Route::get('diagnosis/trappedemotion/{id}/create/{appointment}', 
+Route::get('diagnosis/trappedemotion/5/create/{appointment}', 
     ['as' => 'trappedemotion.create', 'uses' => 'DiagnosesController@createTrappedEmotion']);
 Route::get('diagnosis/trauma/{id}/create/{appointment}', 'DiagnosesController@createTrauma');
 Route::get('diagnosis/willtodie/{id}/create/{appointment}', 'DiagnosesController@createWillToDie'); 
 
-Route::post('/problemsb/{appointment}', 'ProblemsController@storebasic');
+Route::post('/problemsb/{appointment}', 'ProblemsController@storeBasic');
+Route::post('/problemsbclear/{appointment}', 'ProblemsController@storeBasicClear');
 Route::post('/problemsh/{appointment}', 'ProblemsController@storeHeartwall');
-Route::post('/problemsc/{appointment_id}', 'ProblemsController@storeCord');
+Route::post('/problemsc/{appointment}', 'ProblemsController@storeCord');
 Route::post('/problemstrapped/{appointment}', 'ProblemsController@storeTrapped');
+Route::post('/problemsemotionalres/{appointment}', 'ProblemsController@storeEmotionalResonance');
 Route::post('/problemsemotion/{appointment}', 'ProblemsController@storeEmotions');
-Route::post('/problemssolution/{appointment}', 'ProblemsController@storeSolution');
 Route::post('/problemspastlife/{appointment}', 'ProblemsController@storePastLife');
+Route::post('/problemspastlifecauses/{appointment}', 'ProblemsController@storePastLifeCauses');
+
+Route::post('/problemssolution/{appointment}', 'ProblemsController@storeSolution');
+Route::post('/problemsjs/{appointment}', 'ProblemsController@storeJustSolution');
+
+
 Route::get('/problems/show/{appointment}', ['as' =>'problems.show', 'uses' => 'ProblemsController@showProblems']);
 Route::get('/problems/{id}/clear/{appointment}',  'ProblemsController@updateClear');
 
@@ -66,7 +81,14 @@ Route::post('/appointment/storeall', 'AppointmentController@storeUserGoalAppoint
 Route::post('/appointment/storegoalsession', 'AppointmentController@storeGoalAppointment');
 Route::post('/appointment/storesession', 'AppointmentController@storeAppointment');
 
-Route::get('heartwall/autocomplete', 'HeartwallController@autocomplete');
+
+
+
+
+//Autocompletes
+Route::get('/searchajax',array('as'=>'searchajax','uses'=>'HeartwallController@autoComplete'));
+Route::get('/searchsubstance',array('as'=>'searchsubstance','uses'=>'IntoleranceController@substanceAutoComplete'));
+Route::get('/searchsymptom',array('as'=>'searchsymptom','uses'=>'IntoleranceController@symptomAutoComplete'));
 
 
 Route::get('/debug', function () {

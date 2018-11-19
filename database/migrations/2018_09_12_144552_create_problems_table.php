@@ -23,6 +23,7 @@ class CreateProblemsTable extends Migration
             $table->boolean('cleared')->default(false);
             $table->integer('describable_id')->nullable();
             $table->string('describable_type')->nullable();
+            $table->longText('notes')->nullable();
 
         });
     }

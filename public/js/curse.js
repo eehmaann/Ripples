@@ -5,7 +5,6 @@ $(document).ready(function()
 	$('fieldset').change(function(){
 		//checkFieldset($(this));
 		var data=$(this).children('input').val();
-		alert(testValid(data));
 		if(!($.isNumeric(data))){
 			showError(data.length <4, $(this));
 		}
@@ -44,21 +43,11 @@ $(document).ready(function()
 			+ $("#'inflicterinput'").val()) + " to " + $('#curseinput').val();
 	}
 
-	//function checkFieldset(fieldset){
-		//var text=$(this).children('input').text();
-		//if(!($.isNumeric(text))){
-		//	showError(text.length()<4, $(this));
-		//}
-		//else{
-		//	showError(text<0, $(this));
-		//}
-	//}
-
 
 
 	function showError(condition, fieldset){
 		if(condition){
-			$(fieldset).children('.error').show()
+			$(fieldset).children('.error').show();
 		}
 		else{
 			$(fieldset).children('.error').hide();

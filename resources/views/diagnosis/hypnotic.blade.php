@@ -22,7 +22,7 @@
     <input
         type='text'
         id='improvedtext'
-        name='improved'
+        name='improved'. 
         value=''>
     <p id="errormessage2" class="error">Need a new vision to replace</p>
 

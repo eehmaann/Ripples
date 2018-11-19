@@ -147,6 +147,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Spatie\GoogleCalendar\GoogleCalendarServiceProvider::class,
+        WordsApi\WordsApiServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -192,6 +194,7 @@ return [
         'File' => Illuminate\Support\Facades\File::class,
         'Form'=> 'Collective\Html\FormFacade',
         'Gate' => Illuminate\Support\Facades\Gate::class,
+        'GoogleCalendar' => Spatie\GoogleCalendar\GoogleCalendarFacade::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
         'HTML'=> 'Collective\Html\HtmlFacade',
         'Lang' => Illuminate\Support\Facades\Lang::class,
@@ -211,6 +214,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'WordsApi' => WordsApi\Facades\WordsApi::class,
 
     ],
 

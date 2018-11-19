@@ -1,4 +1,4 @@
 @extends('layouts.diagnosis')
  @section('pagejs')
- <script src="/js/ahe.js"></script>
+ <script src="/js/nowill.js"></script>
  @endsection

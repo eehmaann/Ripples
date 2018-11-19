@@ -1,7 +1,10 @@
 @extends('layouts.practitioner')
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+@yield('pagecss')
 @section('js')
-      <script   src="https://code.jquery.com/jquery-3.3.1.js"   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="   crossorigin="anonymous"></script>
+     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+      <script src="/js/generalsubmit.js"></script>
     @yield('pagejs')
     <script src="/js/navigation.js"></script>
 @endsection
@@ -11,7 +14,7 @@
 		<form id="barrierform" method='POST' action=@yield('destination','../../../problemsb') >
 			@yield('diagnosis')
              {{ csrf_field() }}
-            <div>
+            <div id="hiddenform">
                 <p id="diagnosisname">{{$diagnosis->name}}</p>
                 <p id="appointmentnumber">{{$appointment->id}}</p>
                 <label>Diagnosis ID</label>
@@ -36,12 +39,16 @@
                         readonly>
             </div>
             @yield('emotion')
-    		<div id="nextstep" style="width: 15%;">
-    			<p>Are there any underlying causes </p>
-    			<p id="lastcause" class="pathClicker alert alert-danger">No</p>
-    			<p id="newcause" class="pathClicker alert alert-success">Yes</p>
+        </form>
+    		<div id="nextstep" >
+    			<h3 id="progressionQuestion">Are there any underlying causes </h3>
+                <div style="width: 15%;">
+    			     <p id="lastCauseClicker" class="pathClicker alert alert-danger">No</p>
+    			     <p id="newCauseClicker" class="pathClicker alert alert-success">Yes</p>
+                     @yield('paths')
+                </div>
     	   </div> 
-		</form>
+
 	</div>
 
 @endsection

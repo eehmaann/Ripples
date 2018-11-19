@@ -1,44 +1,55 @@
 $(document).ready(function()
 {
-	 navigation.hideErrorAndAdancement();
 
-    $('#messagetext').keyup(function(){
+    var id =$('#appointmentnumber').text();    
+    $('.error').hide();
+    $('#progressionQuestion').hide();
+    $("#lastCauseClicker").hide();
+    $("#newCauseClicker").text('Record' + $("#diagnosisname").text()); 
+   
+
+
+    $('#messagetext').change(function(){
         //Test whether length is correct if incorrect throw error
-        if($(this).val().length<3){
-            navigation.showError();
-        }
-        
-        //Test whether material is correct if just hide errormessage
-        else if ($('improvedtext').val().length<3){
-             navigation.hideErrorAndAdancement();
-        }
-
-        else{ 
-           
-            $('#description').val($("#diagnosisname").text()+ 
-            " "+ $('#messagetext').val());
-            $('#solution').val(" New Message:  " +('#improvedtext').val()+".");
-            navigation.showAdvancement();
-        }
-        
+        testMessage();
     });
 
-    $('#improvedtext').keyup(function () {
-        if($('#messagetext').val().length<3 && $(this).val().length>=3){
+    $('improvedtext').change(function(){
+        testImprovedText();
+
+    });
+
+    $("#newCauseClicker").click(function(){
+        if(testMessage() && testImprovedText()){
              $('#description').val($("#diagnosisname").text()+ 
             " "+ $('#messagetext').val());
             $('#solution').val(" Replace with positve message: " +('#improvedtext').val()+".");
-            navigation.showAdvancement();
+            destination ="../../../../problemssolution/"+id;
+            $('#barrierform').attr('action', destination);
         }
     });
-
-     $('#improvedtext').blur(function(){
-        if($(this).val().length<3){
-            $('#errormessage2').show();
+    
+    function testMessage(){
+        if ($('#messagetext').val().length<3){
+             $('#errormessage').show();
+             return false;
         }
         else{
-            $('#errormessage2').hide();
+             $('#errormessage').hide();
         }
-        
-    });
+        return true;
+    }
+
+    function testImprovedText(){
+        if ($('#improvedtext').val().length<3){
+            $('#errormessage2').show();
+            return false;
+        }
+        else{
+             $('#errormessage2').hide();
+        }
+        return true;
+    }
+
+
 });

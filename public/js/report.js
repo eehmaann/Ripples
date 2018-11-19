@@ -71,6 +71,9 @@ $(".barrier").each(function(){
 $(".barrier").click(function(){
 	$(this).children('.barrierdefinition').toggle();
 })
+$(".emotionentry").click(function(){
+	$(this).children('.emotiondefinition').toggle();
+})
 
 function toRoman(num) {  
   var result = '';

@@ -5,6 +5,7 @@
 
 @section('diagnosis')
 
+    <div class="row">
     <fieldset>
         <label> Who is the saboteur?</label>
         <input
@@ -14,6 +15,8 @@
             value=''>
         <p id ="errormessage" class = "error"> Please state who the sabotuer is</p>
     </fieldset>
+</div>
+<div class="row">
     <fieldset>
         <label> What weapon was used?</label>
         <input
@@ -23,6 +26,8 @@
             value=''>
         <p id="weaponerror" class="error"> Please state the weapon that was used</p>
     </fieldset>
+</div>
+<div class="row">
     <fieldset>
         <label> Where is it?</label>
         <input
@@ -32,6 +37,10 @@
             value=''>
         <p id="bodyerror" class="error">Please state where the sabotuer is.</p>
     </fieldset>
+</div>
+    <p id="bodyPartsToggler">Search for where the {{$diagnosis->name}} may be located</p>
+    @include('layouts.locations')
+    <div class="row"
     <fieldset>
         <label> What age did this happen?</label>
         <input
@@ -41,5 +50,6 @@
             value=''>
         <p id="ageerror" class="error">Please state what age the sabotage occured</p>
     </fieldset>
+</div>
 
 @endsection

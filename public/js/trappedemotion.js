@@ -5,8 +5,40 @@ $(document).ready(function()
 	var timePrepared=false;
 	var currentPhrase=' ';
 	$(".error").hide();
-	
+	var destination;
+	var id =$('#appointmentnumber').text();
+
+	//Adjust base form
+	$('#progressionQuestion').text('Are there more trapped emotions?');
+
 	hideTrapTypes();
+
+	$('.pathClicker').click(function(){
+		if(emotiontrap=="pastlife"){
+			updatePastLifeStatement();
+		}
+		prepareForSubmission();
+	});
+
+	$("#lastCauseClicker").click(function(){
+		if(emotiontrap=="pastlife"){
+			destination ="../../../../problemspastlifecauses/"+id;
+		}
+		else{
+			destination ="../../../../problemsemotion/"+id;
+		}
+		$('#barrierform').attr('action', destination);
+	});
+
+	$("#newCauseClicker").click(function(){
+		if(emotiontrap=="pastlife"){
+			destination ="../../../../problemspastlife/"+id;
+		}
+		else{
+			destination ="../../../../problemstrapped/"+id;
+		}
+		$('#barrierform').attr('action', destination);
+	});
 	
 	 $(".emotion").click(function () {
         $('#selectedEmotion').val($(this).text());
@@ -77,22 +109,31 @@ $(document).ready(function()
 
 
 	// Past life funcions
+	
+	$('#relationshipstatus').hide();
+	$('#soldierquestion').hide();
+	$('#kidnappedquestion').hide();
+	$('#kidnappingage').hide();
+	
 	$('#pastage, #died').change(function(){
 		$('#birth').val(parseInt($('#died').val())-parseInt($('#pastage').val()));
-		makePastLife()
 	});
 
-
+	$('#birth, input[name=gender] ').change(function(){
+		if(testPastLifeBase()){
+			makePastLifeBase();
+		}
+	} )
 
 	$('#pastage').change(function(){
 		if (parseInt($('#pastage').val())>12){
 			$('#relationshipstatus').show();
 		}
+		else{
+			$('#relationshipstatus').hide();
+		}
 	})
 
-	$('input[name=gender]').change(function(){
-		makePastLife();
-	});
 
 	$('input[name=wasmarried]').change(function(){
 		var married = $('input[name=wasmarried]:checked').val();
@@ -159,10 +200,10 @@ $(document).ready(function()
 	$('input[name=kidnappedlife]').change(function(){
 		if ($('input[name=kidnappedlife]:checked').val()=="kidnapped"){
 			$('#kidnappinginput').val("You were kidnapped");
-			$('#kidnappedquestion').show();
+			$('#kidnappingage').show();
 		}
 		else{
-			$('#kidnappedquestion').hide();
+			$('#kidnappingage').hide();
 			$('#kidnappinginput').val('');
 		}
 		makePastLife();
@@ -170,13 +211,13 @@ $(document).ready(function()
 
 	$('#agekidnapped').change(function(){
 		var age =parseInt($('#agekidnapped').val());
-		if(age>4){
+		if(age>99){
 			$('#kidnappinginput').val("You were kidnapped at age" + age);
 			$('#kidnappingageerror').show();;
 		}
 		else{
 			$('#kidnappinginput').val("");
-			$('#kidnappingageerror').show();;
+			$('#kidnappingageerror').hide();;
 		}
 
 		makePastLife();
@@ -193,11 +234,21 @@ $(document).ready(function()
 		makePastLife();
 	});
 	// Create editable textarea for the content of past life.  
-	function makePastLife(){
-		if( checkPastLifeReady()){
-			val()?true:false.text($('input[name=gender]:checked').val()+ " Born: "+ $('#birth').val()
+
+	 function makePastLifeBase(){
+	 	if(testPastLifeBase()){
+	 		$('#life').text($('input[name=gender]:checked').val()+ " Born: "+ $('#birth').val()
 			+ " Died: "+ $('#died').val() + " at age " + $('#pastage').val());
-			//check and add married
+	 	}
+	 	else{
+	 		$('#life').text('');
+	 	}
+	 } 
+	function testPastLifeBase(){
+		return($('input[name=gender]:checked') && $('#birth').val()>0);
+	}
+	function makePastLife(){
+		if(testPastLifeBase()){
 			if ($('input[name=wasmarried]:checked').val() !='unknown'){
 				$('#life').append(". "+$('#marriedtext').val());
 			}
@@ -226,26 +277,24 @@ $(document).ready(function()
 			}
 		}
 	}
-
-	$('#life').change(function(){
+	
+			
+	function updatePastLifeStatement(){
 		if($('#life').val().length> 21){
 			preparePastLife();
-			$("#lifeerror")
+			$("#lifeerror").hide()
 		}
 		else{
 			currentPhrase="";
 			timePrepared=false();
 			$("#lifeerror").show();
 		}
-	})
+	}
+
 
 	function preparePastLife(){
 		currentPhrase=$('#life').text();
 		timePrepared=true; 
-	}
-
-	function checkPastLifeReady(){
-		return($('#birth').val().length>1 && $('input[name=gender]:checked').val()?true:false);
 	}
 
 	
