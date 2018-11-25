@@ -15,10 +15,54 @@ use DB;
 
 class AppointmentController extends Controller
 {
+    public function getSavedAppointments($id)
+    {
+        $appointments = Appointment::where([
+            ['goal_id', '=', $id],
+            ['showable', '=', false],
+        ])->get();
+
+        $options = array();
+
+        foreach ($appointments as $appointment) {
+            $options += array($appointment->id => $appointment->created_at);
+        }
+
+        return Response::json($options);
+    }
+
+    public function getPublishedAppointments($id)
+    {
+        $appointments = Appointment::where([
+            ['goal_id', '=', $id],
+            ['showable', '=', true],
+        ])->get();
+
+        $options = array();
+
+        foreach ($appointments as $appointment) {
+            $options += array($appointment->id => $appointment->created_at);
+        }
+
+        return Response::json($options);
+    }
     //
     public function create(){
+
     	return View('navigation.practitionerstart')
     		->with('users',User::orderBy('name')->get());
+    }
+
+    public function start(Request $request){
+         $user = $request->user();
+         $user_goals= Goal::where('user_id',$user->id);
+         $appointment=Appointment::where('showable',true)->latest()->first();
+
+         return View('navigation.practitionerstart')
+            ->with(['users',User::orderBy('name')->get(),
+                    'user'=>$user,
+                    'user_goals'=>$user_goals,
+                    'appointment'=>$appointment]);
     }
 
     public function storeAppointment(Request $request){

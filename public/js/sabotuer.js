@@ -6,6 +6,11 @@ $(document).ready(function()
 	$('#Energy')[0].remove();
 	$('#Pathogen')[0].remove();
 	$('#Toxins')[0].remove();
+	 $('#progressionQuestion').hide();
+	$("#lastCauseClicker").remove();
+	$("#newCauseClicker").text('Remove Sabotuer');	
+	var id =$('#appointmentnumber').text(); 
+
 
 
 	$(".clickDiagnose").click(function(){
@@ -16,7 +21,7 @@ $(document).ready(function()
 	$('fieldset').change(function(){
 		var data=$(this).children('input').val();
 		if(!($.isNumeric(data))){
-			showError(data.length <4, $(this));
+			showError(data.length <2, $(this));
 		}
 		else{
 			showError(data<0, $(this));
@@ -45,6 +50,8 @@ $(document).ready(function()
 		// If all fields are correct construct a description statement
 		if(isValid){
 			constructDescription();
+			destination ="../../../../problemsbclear/"+id;
+		$('#barrierform').attr('action', destination);
 		}
 	});
 

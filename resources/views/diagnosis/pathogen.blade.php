@@ -1,7 +1,29 @@
 @extends('layouts.diagnosis')
+@section('pagejs')
+ <script src="/js/suggestionList.js"></script>
+@endsection
 
 
 @section('diagnosis')
+<div class="row justify-content-center">
+    <div class="col-md-11">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="curesuggestions">
+                        <p> These are possible suggestions</p>
+                        <ul>
+                            @foreach($diagnosis->cures as $cure)
+                                <li class="suggestion">{{$cure->name}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
 <label for ="cureselection">Please select cure</label>
 <select id="cureselection" name="cureselection" style="width:50%;" tabindex="5">
         @foreach($diagnosis->cures as $cure)
@@ -43,5 +65,5 @@
         value='{{$diagnosis->name}}'
         readonly
     >
-
+-->
 @endsection

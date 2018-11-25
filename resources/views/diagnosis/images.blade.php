@@ -34,7 +34,7 @@
 						<td style="border: thin black solid">					
 		      				@foreach($emotions as $emotion)
 		      					@if($emotion->col_name==$column && $emotion->row_name==$row)
-		      						<span class="emotionClicker">
+		      						<span class="emotionClicker clicker">
 		                					{{ $emotion->name }}
 		                			</span>
 		   

@@ -7,9 +7,9 @@
 <div style="width:25%">
 	<p>What type of change to diet should be made</p>
 	<ul>
-		<li class="dietClicker" id="foodlist">Foods</li>
-		<li class="dietClicker" id="herblist">Herbs</li>
-		<li class="dietClicker" id="vitaminlist">Vitamins</li>
+		<li class="dietClicker clicker" id="foodlist">Foods</li>
+		<li class="dietClicker clicker" id="herblist">Herbs</li>
+		<li class="dietClicker clicker" id="vitaminlist">Vitamins</li>
 	</ul>
 </div>
 <div class="foodlist">
@@ -55,7 +55,7 @@
        		</tr>
        	@endfor
 </table>
-<p class="foodlist" id="foodlisthider">Hide Food</p>
+<p class="foodlist clicker" id="foodlisthider">Hide Food</p>
 </div>
 
 <div class="herblist">
@@ -100,7 +100,7 @@
        	</tr>
        	@endfor
 </table>
-<p class="herblist" id="herblisthider"> Hide Herbs</p> 
+<p class="herblist clicker" id="herblisthider"> Hide Herbs</p> 
 </div>
 <div class="vitaminlist">
 <p>Vitamins</p>
@@ -141,7 +141,7 @@
        	</tr>
     @endfor
 </table>
-<p class="vitamlist" id="vitaminlisthider"> Hide Vitamins</p>
+<p class="vitamlist clicker" id="vitaminlisthider"> Hide Vitamins</p>
 </div>
 <p id="errormessage" class="error"> At least one item in one of the list must be selected</p>
 @endsection

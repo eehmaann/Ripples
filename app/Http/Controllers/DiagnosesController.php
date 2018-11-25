@@ -12,6 +12,8 @@ use App\Food;
 use App\Herb;
 use App\Vitamin;
 use App\Appointment;
+use App\Problem;
+use App\Definer;
 use DB;
 
 class DiagnosesController extends Controller
@@ -23,6 +25,13 @@ class DiagnosesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+      public function createActivity($id, $appointment_id){
+        $appointment=Appointment::find($appointment_id);
+        $diagnosis= Diagnosis::find($id);
+        return view('diagnosis.activities')
+        ->with(['diagnosis'=>$diagnosis,
+                    'appointment'=>$appointment]);}
+
     public function createAHE($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);
         $appointment=Appointment::find($appointment_id);
@@ -71,12 +80,16 @@ class DiagnosesController extends Controller
                     'appointment'=>$appointment]);}
 
 
-    public function createCurse($id, $appointment_id){
+        public function createCurse($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);
+        $diagnoses=Diagnosis::all();
+        $locators=Locator::all();
         $appointment=Appointment::find($appointment_id);
         return view('diagnosis.curse')
             ->with(['diagnosis'=>$diagnosis,
-                    'appointment'=>$appointment]);}
+                    'appointment'=>$appointment,
+                    'diagnoses'=>$diagnoses,
+                    'locators'=>$locators]);}
 
 
     public function createDrugs($id, $appointment_id){
@@ -207,7 +220,7 @@ class DiagnosesController extends Controller
         return view('diagnosis.saboteur')
             ->with(['diagnosis'=>$diagnosis,
                     'appointment'=>$appointment,
-                     'diagnoses'=>$diagnoses,
+                    'diagnoses'=>$diagnoses,
                     'locators'=>$locators]);}
 
     public function createT3($id, $appointment_id){
@@ -227,11 +240,25 @@ class DiagnosesController extends Controller
     public function createTrappedEmotion($appointment_id){
         $diagnosis= Diagnosis::find(5);
         $appointment=Appointment::find($appointment_id);
+        $heartwalls_count=Problem::whereHas('appointments', function($subquery) use($appointment_id){
+                $subquery->where('appointment_id', '=', $appointment_id);
+            })
+          ->where('describable_type', 'App\Heartwall')
+          ->where ('cleared', false)
+          ->count();
+        $heartwall=Problem::whereHas('appointments', function($subquery) use($appointment_id){
+                $subquery->where('appointment_id', '=', $appointment_id);
+            })
+          ->where('describable_type', 'App\Heartwall')
+          ->where ('cleared', false)
+          ->latest()->first();
         $emotions=Emotion::all();
         return view('diagnosis.trappedemotion')
             ->with(['diagnosis'=>$diagnosis,
                     'appointment'=>$appointment,
-                    'emotions'=>$emotions]);}
+                    'emotions'=>$emotions,
+                    'heartwalls_count'=>$heartwalls_count,
+                    'heartwall'=>$heartwall]);}
 
     public function createTrauma($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);

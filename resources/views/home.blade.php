@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-     <h3> I want to add a picture here.</h3>
     <div class="row justify-content-center">
 
         <div class="col-md-8">
@@ -19,10 +18,11 @@
                     @endif
                     @if(Auth::user()->role=='client')
 
+
                         View reports
                     @endif
                     @if(Auth::user()->role=='practitioner')
-                        <a href="/sessionstart">Start Appointment</a>
+                        <a href="#">Start Appointment</a>
                     @endif
                   
                 </div>

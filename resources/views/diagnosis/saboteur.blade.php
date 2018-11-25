@@ -38,7 +38,7 @@
         <p id="bodyerror" class="error">Please state where the sabotuer is.</p>
     </fieldset>
 </div>
-    <p id="bodyPartsToggler">Search for where the {{$diagnosis->name}} may be located</p>
+    <p class="clicker" id="bodyPartsToggler">Search for where the {{$diagnosis->name}} may be located</p>
     @include('layouts.locations')
     <div class="row"
     <fieldset>

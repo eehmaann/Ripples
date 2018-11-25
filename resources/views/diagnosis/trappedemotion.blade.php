@@ -4,14 +4,26 @@
 @endsection
 
 @section('diagnosis')
-@section('destination','../../../problemstrapped')
+@if($heartwalls_count>0)
+    <p style="display:none;" id="heartwallid">{{$heartwall->describable->id}}</p>
+    <p>Heartwall made of {{$heartwall->describable->material}} extending <span id="currentDistance">{{$heartwall->describable->current_distance}}</span> miles</p>
+     <label>Update Distance</label>
+        <input
+            type='number'  
+            id='updatedistance'
+            name='updatedistance'
+            value=''>
+        <p id="distanceerror" class="error"> Update distance must be less than current distance</p>
+        <p id="heartwallClicker" class="clicker">Update Heartwall</p>
+        
+@endif
 <div class="panel panel-default col-4">
     <p>When did the trapped emotion occur?</p>
     <ul class="list-unstyled"> 
-        <li id="self" class="timeselector">Current</li>
-        <li id="prenatal" class="timeselector">Prenatal</li>
-        <li id="pastlife" class="timeselector">Past life</li>
-        <li id="inherited" class="timeselector">Inherited</li>
+        <li id="self" class="timeselector clicker">Current</li>
+        <li id="prenatal" class="timeselector clicker">Prenatal</li>
+        <li id="pastlife" class="timeselector clicker">Past life</li>
+        <li id="inherited" class="timeselector clicker">Inherited</li>
     </ul>
 </div>
 @include('layouts.currentTrappedEmotion')
@@ -28,9 +40,9 @@
             value=''
             readonly>
         <ul class="list-unstyled">
-            <li ><span class="prenatalclicker"> Mother </span></li>
-            <li> <span class="prenatalclicker">Father</span></li>
-            <li> <span class="prenatalclicker" id="otherprenatal">Other</span></li>
+            <li ><span class="prenatalclicker clicker"> Mother </span></li>
+            <li> <span class="prenatalclicker clicker">Father</span></li>
+            <li> <span class="prenatalclicker clicker" id="otherprenatal">Other</span></li>
         </ul>
         <div  id="relationInputBox">
             <label>Who?</label>
@@ -271,9 +283,9 @@
             readonly>
         <p>Clear all</p>
         <ul>
-            <li class="singleclicker">Mother</li>
-            <li class="singleclicker">Father</li>
-            <li class="singleclicker">Undo</li>
+            <li class="singleclicker clicker">Mother</li>
+            <li class="singleclicker clicker">Father</li>
+            <li class="singleclicker clicker">Undo</li>
         </ul>
 
         <label>Year</label>
@@ -295,9 +307,9 @@
             value=''
             readonly>
          <ul>
-            <li class="patternclicker">Mother</li>
-            <li class="patternclicker">Father</li>
-            <li class="patternclicker">Undo</li>
+            <li class="patternclicker clicker">Mother</li>
+            <li class="patternclicker clicker">Father</li>
+            <li class="patternclicker clicker">Undo</li>
         </ul>
         <p id="parentgenerror" class="error"> Please click a button to add to pattern build</p>
         <label>How many times does this pattern repeat?</label>
@@ -308,7 +320,7 @@
             pattern='[0-9]*'
             value=''>
         <p id="patternadderror" class="error"> Please enter a positive integer</p>
-        <p id="pattogenclicker"> Add pattern to Generation path</p>
+        <p id="pattogenclicker clicker"> Add pattern to Generation path</p>
     </div>
 
 @include('layouts.emotions')

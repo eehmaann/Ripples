@@ -16,4 +16,6 @@ class Heartwall extends Model
     {
         return $this->morphMany('App\Problem', 'describable');
     }
+
+    
 }

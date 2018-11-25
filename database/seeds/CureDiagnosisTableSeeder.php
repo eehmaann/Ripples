@@ -21,7 +21,14 @@ class CureDiagnosisTableSeeder extends Seeder
 				'Activated Sodium Chlorite'],               
 			'Viral'=>['Wild Oregano Oil or Leaf','Olive Leaf Extract','Colloidal Silver',
 				'Activated Sodium Chlorite'],
-			'Mold'=>['Activated Sodium Chlorite', 'Neem Leaf capsule','Coconut Oil']    
+			'Mold'=>['Activated Sodium Chlorite', 'Neem Leaf capsule','Coconut Oil'],
+            'Parasites toxicity'=>['VRM1', 'VRM2', 'VRM3', 'VRM4', 'Activated Sodium Chlorite'],
+            'Fungal toxicity'=>['Activated Sodium Chlorite', 'Neem Leaf capsule','Coconut Oil',
+                'Tai-Ra-Chi & T4 from Systemic Labs'],           
+            'Bacterial toxicity'=>['Wild Oregano Oil or Leaf','Olive Leaf Extract','Colloidal Silver',
+                'Activated Sodium Chlorite'],               
+            'Mold toxicity'=>['Activated Sodium Chlorite', 'Neem Leaf capsule','Coconut Oil']
+
         ];
         foreach ($diagnoses as $name => $cures){
         	$diagnosis=Diagnosis::where('name', 'like', $name)->first();

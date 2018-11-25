@@ -1,50 +1,83 @@
 $(document).ready(function()
 {
-    var currentPhrase='';
 
-     // Handles is current life trapped emotion
-    $("#ageinput").change(function(){
-        if(testAgeEntered()){
-            hideAgeError();
+    var isInherited;
+     
+     $(".error").hide();
+     $("#emotionList").hide();
+     $("#ownTrauma").hide();
+     $('#inheritedTrauma').hide();
+
+
+     $(".originClicker").click(function(){
+        $("#emotionList").show();
+        if($(this).text()=="Yes"){
+            $('#inheritedTrauma').show();
+            $('#ownTrauma').hide();
+            isInherited=true;
         }
         else{
-            showAgeError();
+             $('#inheritedTrauma').hide();
+            $('#ownTrauma').show();
+            isInherited=false;
+        }
+     });
+
+    $("#ageinput").change(function(){
+        testAgeEntered();
+    });
+
+
+
+    $("#lastCauseClicker").click(function(){
+        destination ="../../../../problemsemotion/"+id;
+        $('#barrierform').attr('action', destination);
+
+    $("#newCauseClicker").click(function(){
+            destination ="../../../../problemstrapped/"+id;
+        $('#barrierform').attr('action', destination);
+    });
+
+
+    $('.pathClicker').click(function(){
+        if(isInherited){
+            saveInheritedTrauma();
+        }
+        else{
+            saveOwnTraums();
         }
     });
 
     function testAgeEntered(){
-       return ($("#ageinput").val()>0);
-    }
-
-
-    function hideAgeError(){
-        currentPhrase=($("#diagnosisname").text()+" from age "+ $("#ageinput").val());
-        $("#ageerror").hide();
-    }
-
-    function showAgeError(){
-        $("#ageerror").show()
-        markUnready(); 
-    }
-
-    function markUnready(){
-        $("#description").val("");
-        currentPhrase=''; 
-    }
-
-    $('.emotionCheckBox').click(function(){
-
-    
-       if(!(testAgeEntered())){
-           showAgeError(); 
-           return;
+       if($("#ageinput").val()>0){
+         $("#ageError").hide();
+         return true;
         }
-        
-        if ($("input[name='emotions[]']:checked").length>0){
-            $("#description").val(currentPhrase);
+        $("#ageError").show();
+        return false;
+    }
+
+    function saveOwnTraums(){
+        if(testAgeEntered()){  
+            $("#description").val($("#diagnosisname").text()
+            +" from age "
+            + $("#ageinput").val());
         }
-       else{
-            $('#description').val('');
+        else{
+            $('#ageError').show();
         }
-    });
+    }
+
+    function saveInheritedTrauma(){
+        if($('#generationpath').val().length>5){
+            $('#description').val($("#diagnosisname").text() +":" 
+            + $('#generationpath').val() + "["
+            +$('#yeardisplay').val()+']');
+        }
+        else{
+            $('#patherror').show();
+        }  
+    }
+});
+
 });

@@ -30,8 +30,7 @@ class RegisterController extends Controller
 
 
      */
-      return view('clients.contact');
-    protected $redirectTo = '/welcome';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.

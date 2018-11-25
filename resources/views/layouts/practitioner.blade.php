@@ -21,10 +21,6 @@
 	<header>
 	<h1> Session</h1>
 	<nav>
-    <ul>
-            <li><a href='#'>Heart Wall</a></li>
-    </ul>
-</nav>
 	</header>
 	<section>
 		@yield('content')

@@ -13,10 +13,14 @@ use DB;
 
 class SessionController extends Controller
 {
-   public function create(){
+   public function create(Request $request){
+        $practitioner = $request->user();
+        $users=User::all(); 
     	return View('navigation.practitionerstart')
-    		->with('users',User::orderBy('name')->get());
+    		->with(['users'=>$users,
+                'practitioner'=>$practitioner]);
     }
+
 
     public function storeSession(Request $request){
     	$this->validate($request, [

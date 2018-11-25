@@ -17,47 +17,47 @@ $('#defitionsshower').click(function(){
 $( ".1step" ).each( function(){
 		$(this).children(".barrier").prepend(toRoman(parseInt($(this).attr('id')))+".");
 	});
-$(".2step").each(function(){
+$(".2step, .1step > div >.childstep, .1step > ul > li > .emotionentry>.childstep").each(function(){
 	$(this).children(".barrier").prepend(toLetter(parseInt($(this).attr('id')))+".");
 });
 
-$(".3step").each(function(){
+$(".3step, .2step > div>  .childstep, .2step > ul > li > .emotionentry>.childstep").each(function(){
 	$(this).children(".barrier").prepend(parseInt($(this).attr('id'))+".");
 });
 
-$(".4step").each(function(){
+$(".4step, .3step > div> .childstep, .3step > ul > li > .emotionentry>.childstep").each(function(){
 	$(this).children(".barrier").prepend(toLetter(parseInt($(this).attr('id'))).toLowerCase()+".");
 });
 
-$(".5step").each(function(){
+$(".5step, .4step > div> .childstep, .4step> ul > li > .emotionentry>.childstep").each(function(){
 	$(this).children(".barrier").prepend(parseInt($(this).attr('id'))+"]");
 });
 
-$(".6step").each(function(){
+$(".6step, .5step > div> .childstep, .5step > > ul > li > .emotionentry>.childstep").each(function(){
 	$(this).children(".barrier").prepend(toLetter(parseInt($(this).attr('id'))).toLowerCase()+"]");
 });
 
-$(".7step").each(function(){
+$(".7step, .6step > div > .childstep, .6step> > ul > li > .emotionentry>.childstep").each(function(){
 	$(this).children("barrier").prepend("["+parseInt($(this).attr('id'))+"]");
 });
 
-$(".8step").each(function(){
+$(".8step, .7step > div > .childstep, .7step > ul > li > .emotionentry>.childstep").each(function(){
 	$(this).children(".barrier").prepend("["+toLetter(parseInt($(this).attr('id'))).toLowerCase()+"]");
 });
 
-$( ".9step").each( function(){
+$( ".9step, .8step > div > .childstep, .8step > > ul > li > .emotionentry>.childstep").each( function(){
 		$(this).children(".barrier").prepend(toRoman(parseInt($(this).attr('id'))).toLowerCase()+")");
 	});
 
-$(".10step").each(function(){
+$(".10step, .9step > div > .childstep, .9step> ul > li > .emotionentry>.childstep").each(function(){
 	$(this).children("barrier").prepend(parseInt($(this).attr('id'))+")");
 });
 
-$(".11step" >".barrier").each(function(){
+$(".11step, .10step > div > .childstep, .10step > ul > li > .emotionentry>.childstep").each(function(){
 	$(this).children("barrier").prepend(toLetter(parseInt($(this).attr('id'))).toLowerCase()+")");
 });
 
-$( ".12step" > ".barrier" ).each( function(){
+$( ".12step, .11step > div >.childstep, .11step > ul > li > .emotionentry>.childstep").each( function(){
 		$(this).children(".barrier").prepend("("+toRoman(parseInt($(this).attr('id'))).toLowerCase()+")");
 	});
 
@@ -65,9 +65,17 @@ $(".nest").each(function(){
 	var number =parseInt($(this).attr('class'), 10);
 	var sizeincrease =(12-number)/20 +1;
 	$(this).css('font-size', sizeincrease+"em");
-	$(this).css('margin-left', (number)*2+"em")
+	$(this).css('margin-left', (number)*2+"em");
 
-})
+});
+
+$(".nest > ul > li > .emotionentry").each(function(){
+	$(this).css('padding-left', 2+"em");
+});
+
+$(".nest > ul > li > .emotionentry> .emotiondefinition").each(function(){
+	$(this).css('margin-left', 3+"em");
+});
 
 $(".barrier").click(function(){
 		$(this).children('.barrierdefinition').toggle();

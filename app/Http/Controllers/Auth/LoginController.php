@@ -4,8 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Session;
 use Auth;
 use App\User;
+
+
+
 
 
 class LoginController extends Controller
@@ -28,10 +33,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    $appointment = Auth::user()->appointment->get();
-    if($appointment){
-        protected $redirectTo = '/firstreport';
-    }
+            protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.

@@ -14,29 +14,34 @@
 Route::get('/testimonials', function () {return view('clients.testimonials');});
 Route::get('/services', function () {return view('clients.services');});
 Route::get('/contact', ['as'=> 'contact.create', 'uses' => 'ContactController@create']);
-Route::post('/contact', ['as'=> 'contact.store', 'uses' =>'ContactController@store']);
+Route::post('/contactstore', ['as'=> 'contact.store', 'uses' =>'ContactController@store']);
 Route::get('/report/{id}', 'AppointmentController@showAppointment');
 Route::get('/firstreport', 'Appointment@showLastAppointment');
 
 //App Views
 Route::get('dropdown/Goals/{id}', 'UserController@getGoals');
 Route::get('textbox/Goals/{id}', 'GoalController@getRelatedGoals');
-Route::get('listappointment/Goals/{id}', 'GoalController@getSavedAppointments');
+Route::get('listappointment/Goals/{id}', 'AppointmentController@getSavedAppointments');
+Route::get('listpublishedappointment/Goals/{id}', 'AppointmentController@getPublishedAppointments');
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/sessionstart', 'SessionController@create');
+//Navigation pages
+Route::get('/sessionstart', ['as'=> 'session.create', 'uses' => 'SessionController@create']);
 Route::get('/navigation/{appointment}', ['as'=>'navigation.show', 'uses' => 'LocatorsController@index']);
 
+// Diagnosis pages
+Route::get('diagnosis/activity/{id}/create/{appointment}', 'DiagnosesController@createActivity');
 Route::get('diagnosis/ahe/{id}/create/{appointment}', 'DiagnosesController@createAHE');
 Route::get('diagnosis/allergy/{id}/create/{appointment}', 'DiagnosesController@createAllergy');
 Route::get('diagnosis/anchor/{id}/create/{appointment}', 'DiagnosesController@createAnchor');
 Route::get('diagnosis/broadcast/{id}/create/{appointment}', 'DiagnosesController@createBroadcast');
 Route::get('diagnosis/circuits/{id}/create/{appointment}', 'DiagnosesController@createCircuits');
 Route::get('diagnosis/cording/{id}/create/{appointment}', 'DiagnosesController@createCording');
-Route::get('diagnosis/curse/{id}/create{appointment}', 'DiagnosesController@createCurse');
-Route::get('diagnosis/drugs/{id}/create{appointment}', 'DiagnosesController@createDrugs');
+Route::get('diagnosis/curse/{id}/create/{appointment}', 'DiagnosesController@createCurse');
+Route::get('diagnosis/drugs/{id}/create/{appointment}', 'DiagnosesController@createDrugs');
 Route::get('diagnosis/emotionalresonance/7/create/{appointment}', 
     ['as' => 'emotionalResonance.create', 'uses' => 'DiagnosesController@createEmotionalResonance']);
 Route::get('diagnosis/entities/{id}/create/{appointment}', 'DiagnosesController@createEntities');
@@ -61,6 +66,7 @@ Route::get('diagnosis/trappedemotion/5/create/{appointment}',
 Route::get('diagnosis/trauma/{id}/create/{appointment}', 'DiagnosesController@createTrauma');
 Route::get('diagnosis/willtodie/{id}/create/{appointment}', 'DiagnosesController@createWillToDie'); 
 
+//Problem storage
 Route::post('/problemsb/{appointment}', 'ProblemsController@storeBasic');
 Route::post('/problemsbclear/{appointment}', 'ProblemsController@storeBasicClear');
 Route::post('/problemsh/{appointment}', 'ProblemsController@storeHeartwall');
@@ -70,17 +76,22 @@ Route::post('/problemsemotionalres/{appointment}', 'ProblemsController@storeEmot
 Route::post('/problemsemotion/{appointment}', 'ProblemsController@storeEmotions');
 Route::post('/problemspastlife/{appointment}', 'ProblemsController@storePastLife');
 Route::post('/problemspastlifecauses/{appointment}', 'ProblemsController@storePastLifeCauses');
-
 Route::post('/problemssolution/{appointment}', 'ProblemsController@storeSolution');
 Route::post('/problemsjs/{appointment}', 'ProblemsController@storeJustSolution');
+Route::put('/heartwallUpdate/{heartwall}/update/{appointment}', 'HeartwallController@updateHeartwall');
 
 
 Route::get('/problems/show/{appointment}', ['as' =>'problems.show', 'uses' => 'ProblemsController@showProblems']);
 Route::get('/problems/{id}/clear/{appointment}',  'ProblemsController@updateClear');
 
+
+//Updates
+
+
 Route::post('/appointment/storeall', 'AppointmentController@storeUserGoalAppointment');
 Route::post('/appointment/storegoalsession', 'AppointmentController@storeGoalAppointment');
 Route::post('/appointment/storesession', 'AppointmentController@storeAppointment');
+Route::put('/appointment/{id}/update', 'AppointmentController@publishAppointment');
 
 
 

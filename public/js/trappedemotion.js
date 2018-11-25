@@ -7,9 +7,46 @@ $(document).ready(function()
 	$(".error").hide();
 	var destination;
 	var id =$('#appointmentnumber').text();
+	var heartwall ='';
 
 	//Adjust base form
 	$('#progressionQuestion').text('Are there more trapped emotions?');
+
+	
+	// Allow for Heartwall update
+	if($('#heartwall')){
+		$("#diagnosisname").text("Heartwall Emotions");
+		$("#barriername").text("Heartwall Emotions");
+		heartwall=$('#heartwallid').text();
+
+	}
+
+	function checkDistance(){
+		if($('#updatedistance').val()<(parseInt($('#currentDistance').text()))){
+			$('#distanceerror').hide();
+			return true;
+		}
+		else{
+			$('#distanceerror').show();
+			return false;	
+		}
+	}
+
+	$('#updatedistance').change(function(){
+		checkDistance();
+	});
+
+	$('#heartwallClicker').click(function(){
+		if(checkDistance()){
+		destination ="../../../../heartwallUpdate/"+heartwall+"/update/"+id;
+	$('#barrierform').attr('action', destination);
+	$('form').submit();
+		}
+	});
+
+
+	
+
 
 	hideTrapTypes();
 

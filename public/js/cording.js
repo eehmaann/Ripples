@@ -12,6 +12,16 @@ $(document).ready(function()
 	});
 
 	$(".cordtexts").hide();
+	$(".definition").css("color", "blue")
+	$(".definition").each(function(){
+		for (var client = 0; client < arbody.length; ++client) {
+			for (var cord =0; cord <arbody.length; ++cord){
+				$("#"+arbody[client]+"to"+arbody[cord]+"definition")
+				.text($("#"+arbody[client]+"to"+arbody[cord]+"Statement").text());
+			}
+		}
+		});
+	
 
 	//Adjust base form
 	$('#progressionQuestion').hide();
@@ -65,14 +75,20 @@ $(document).ready(function()
 	}
 
 	function constructDescription(){
-		var cordtypecount =0
-		var statement ='<ul class="cordDetail">'
-			$('.cordtexts').each(function(){
-				if($(this).val().length>0){
-					statement+="<li>"+$(this).val()+"</li>";
+		var cordtypecount =0;
+		var statement ='<ul class="cordDetail">';
+		for (var client = 0; client < arbody.length; ++client) {
+			for (var cord =0; cord <arbody.length; ++cord){
+				if($('#'+arbody[client]+'to'+arbody[cord]+'text').val().length>1){
+					statement+="<span class='foundcord'> <li>"
+					+$('#'+arbody[client]+'to'+arbody[cord]+'text').val()
+					+"<span class='corddefiner'>"+$('#'+arbody[client]+'to'+arbody[cord]+'Statement').text()
+					+"</span></li></span>";
 					cordtypecount++;
 				}
-			})
+					
+			}
+		}
 		if(cordtypecount>0){
 			$("#description").val("Unhealthy cording to " + $('#corded').val()+
 				statement + "</ul");

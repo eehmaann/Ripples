@@ -22,6 +22,7 @@ class CreateDiagnosesTable extends Migration
             $table->longText('picture')->nullable();
             $table->string('category_type')->default('circuits');
             $table->string('url')->nullable();
+            $table->string('clear_statement');
         });
     }
 

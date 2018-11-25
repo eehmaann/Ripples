@@ -20,8 +20,8 @@
     value=''>
 <p>Suggestions</p>
 <ul >
-    <li class = id="clickableSolutions">Move the field from front to back</li>
-    <li class = id="clickableSolutions">Release from field entirely</li>
+    <li class ="clicker" id="clickableSolutions">Move the field from front to back</li>
+    <li class ="clicker" id="clickableSolutions">Release from field entirely</li>
 </ul>
 
  

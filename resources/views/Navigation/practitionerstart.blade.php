@@ -18,9 +18,9 @@
         </ul>
     <div>
                 <h3>Is this an unregistered client?</h3>
-                <ul class= "clicker list-unstyled" id="clientbuild">
-	               <li class="userClicker">Yes</li>
-	               <li class="userClicker">No</li>
+                <ul class= "list-unstyled" id="clientbuild">
+	               <li class="userClicker clicker">Yes</li>
+	               <li class="userClicker clicker">No</li>
                 </ul>
 
 <!--Only shows if user exists-->

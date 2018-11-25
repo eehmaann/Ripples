@@ -24,6 +24,8 @@ $(document).ready(function()
         
         $('#solution').val(" Replace with positve message: <span class='solutionAppearance'>" 
         +('#improvedtext').val()+".</span>");
+        destination ="../../../../problemssolution/"+id;
+            $('#barrierform').attr('action', destination);
     });
 
     function testMessage(){

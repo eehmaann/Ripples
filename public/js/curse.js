@@ -1,12 +1,22 @@
 $(document).ready(function()
 {
 	$(".error").hide();
+	$(".clickDiagnose > a").removeAttr("href");
+	$( ".clickLocate:nth-child(6)")[0].remove()
+	$('#Energy')[0].remove();
+	$('#Pathogen')[0].remove();
+	$('#Toxins')[0].remove();
+	var id =$('#appointmentnumber').text(); 
+
+	$(".clickDiagnose").click(function(){
+		$('#bodyinput').val($(this).attr('id'));
+	});
+
 
 	$('fieldset').change(function(){
-		//checkFieldset($(this));
 		var data=$(this).children('input').val();
 		if(!($.isNumeric(data))){
-			showError(data.length <4, $(this));
+			showError(data.length <2, $(this));
 		}
 		else{
 			showError(data<0, $(this));
@@ -39,8 +49,9 @@ $(document).ready(function()
 	});
 
 	function constructDescription(){
-		($"#description").val("Curse [age  " + $('#ageinput').val() +"] from "
-			+ $("#'inflicterinput'").val()) + " to " + $('#curseinput').val();
+		$("#description").val("Curse [age  " + $('#ageinput').val() +"] from "
+			+ $("#'inflicterinput'").val()) + " to " + $('#curseinput').val() 
+		+ "located in " +$('#bodyinput').val();
 	}
 
 
