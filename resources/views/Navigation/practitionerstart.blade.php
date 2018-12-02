@@ -11,59 +11,71 @@
      <script src="/js/sessioncreation.js"></script>
 </head>
 <div class="container">
-       <ul class=''>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    <div>
-                <h3>Is this an unregistered client?</h3>
-                <ul class= "list-unstyled" id="clientbuild">
-	               <li class="userClicker clicker">Yes</li>
-	               <li class="userClicker clicker">No</li>
-                </ul>
-
-<!--Only shows if user exists-->
-    <div class="form-horizontal">
-        <div class="form-group" id="existingcustomer">
-	       <label> Existing Customer
-	       <select name="userSelector" id="userSelector" class="form-control input-sm">
-		      <option value></option>
-                @foreach($users as $user)
-                    <option value={{$user->id}}>
-        	       {{$user->name}}</option>
-                @endforeach
-            </select>
-	       </label>
-            <p class='error' id="usererror">*Please select a user</p>
-        </div>
-
-        <div id="newcustomer">
-        	<label> Customer full name</label>
-        	<input
-            type='text'
-            id='nametext'
-            name='nametext'
-            value=''>
-            <p class="error" id="nameerror">*Please enter the person's name</p>
-           <br/>
-            <label>Email Address</label>
-            <input
-            type='email'
-            id='emailtext'
-            name='emailtext'
-            value=''> 
-            <p class="error" id="emailerror">*Please enter the email address</p>
+    <div class="row">
+         <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <ul class=''>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <div>
+                        <h3>Is this an unregistered client?</h3>
+                            <div id="clientbuild">
+    	                   <p class="userClicker clicker">Yes</p>
+    	                   <p class="userClicker clicker">No</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+
+<!--Only shows if user exists-->
+<div class=row>
+<div class="col-md-8">
+    <div class="card">
+        <div class="card-body">
+            <div class="form-horizontal">
+                <div class="form-group" id="existingcustomer">
+	               <label> Existing Customer
+	               <select name="userSelector" id="userSelector" class="form-control input-sm">
+		              <option value></option>
+                        @foreach($users as $user)
+                            <option value={{$user->id}}>
+        	               {{$user->name}}</option>
+                        @endforeach
+                    </select>
+	               </label>
+                <p class='error' id="usererror">*Please select a user</p>
+            </div>
+
+            <div class="form-group" id="newcustomer">
+        	   <label> Customer full name</label>
+        	   <input
+                    type='text'
+                    id='nametext'
+                    name='nametext'
+                    value=''>
+                    <p class="error" id="nameerror">*Please enter the person's name</p>
+                    <br/>
+                <label>Email Address</label>
+                <input
+                    type='email'
+                    id='emailtext'
+                    name='emailtext'
+                    value=''> 
+                <p class="error" id="emailerror">*Please enter the email address</p>
+            </div>
+        </div>
+
 <!--This will only show if the customer already exists-->
     <div>
         <div id="optionCaseChoice">
         	<h3>Is this a new case?</h3>
-        	<ul class="list-unstyled">
-        		<li class="caseClicker">Yes</li>
-        		<li class="caseClicker">No</li>
+        		<p class="caseClicker clicker">Yes</p>
+        		<p class="caseClicker clicker">No</p>
         	</ul>
         </div>
         
@@ -86,7 +98,6 @@
             value=''> 
             <p class="error" id="reasonerror">*Please enter why the customer schedule appointment</p>
         </div>
-        <p id="reasonStater"></p>
         <div id="reasonBuilder">
             <label>What is the goal</label>
             <input
@@ -100,6 +111,7 @@
 </div>
 </div>
 <p id="sessionStarter">Begin New Session</p>
+<p class="error" id="starterror">Please ensure entry is complete</p>
 
 <div id="unfinsihedAppoints"> 
         <h2> Continue unfinished session</h2> 
@@ -160,3 +172,7 @@
 	</form>
 </div>
 </div>
+</div>
+</div>
+</div>
+</html>

@@ -5,7 +5,7 @@ $(document).ready(function()
     $("#effect").change(function () {
         if($(this).val().length>=3){
             if($('#description').val().length>11){
-                $('#description').val($("#diagnosisname").text()+" to "+$("#allergy").val()+ 
+                $('#description').val($("#diagnosisname").text()+" to "+$("#allergy").val()+  
                     " will cause " + $(this).val());
             }
         }
@@ -32,5 +32,37 @@ $(document).ready(function()
         else{
             $('.error').hide();
         }
+    });
+
+    $( "#allergy" ).autocomplete({
+        source: function(request, response) {
+          $.ajax({
+            url: '/searchsubstance',
+            dataType: "json",
+            data: {
+              term : request.term
+            },
+            success: function(data) {
+              response(data);     
+            }
+          });
+        },
+      minLength: 2,
+    });
+
+    $( "#effect" ).autocomplete({
+        source: function(request, response) {
+          $.ajax({
+            url: '/searchsymptom',
+            dataType: "json",
+            data: {
+              term : request.term
+            },
+            success: function(data) {
+              response(data);     
+            }
+          });
+        },
+      minLength: 2,
     });
 });

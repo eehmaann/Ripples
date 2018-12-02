@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CordTableSeeder extends Seeder
+class SaboteurTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

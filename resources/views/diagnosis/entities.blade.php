@@ -9,9 +9,9 @@
             <div class="card">
                 <div class="card-body">
 					
-					<p>Select type of entity?</p>
+					<h3>Select type of entity?</h3>
 					<p id="spiritsentence"> </p>
-					<ul id="spirittype" style="width: 30%;">
+					<ul id="spirittype" style="width: 30%;" class="list-unstyled">
     					<li class="spiritclicker clicker">Disembodied Spirits</li>
     					<li class="spiritclicker clicker">Evil Spirits</li>
 					</ul>

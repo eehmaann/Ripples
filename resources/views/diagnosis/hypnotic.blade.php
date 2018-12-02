@@ -4,20 +4,21 @@
  @endsection
 
 @section('diagnosis')
-<label> Is there a theme></label>
+<label> Is there a theme?</label>
     <input
         type='text'
         id='themetext'
         name='message'
         value=''>
-
-<label> What is the suggestion></label>
+<br>
+<label> What is the suggestion?</label>
     <input
         type='text'
         id='messagetext'
         name='message'
         value=''>
     <p id="errormessage" class="error">There needs to be a suggestion</p>
+    <br>
     <label> What is the new vision?</label>
     <input
         type='text'

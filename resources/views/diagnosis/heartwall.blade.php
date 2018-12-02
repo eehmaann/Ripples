@@ -14,6 +14,7 @@
             type='number'
             id='lengthinput'
             name='lengthinput'
+            min='1'
             value=''>
         <p id="errormessage" class="error">You must input a number greater than 10 miles</p>
     </div>

@@ -4,7 +4,7 @@ $(document).ready(function()
 	$('.error').hide();
     $('#progressionQuestion').hide();
     $("#lastCauseClicker").hide();
-    $("#newCauseClicker").text('Record' + $("#diagnosisname").text()); 
+    $("#newCauseClicker").text('Record ' + $("#diagnosisname").text()); 
 
 
 

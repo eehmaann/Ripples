@@ -1,4 +1,4 @@
- <label> How many times did the trapped emotion occur?</label>
+ <label> <strong>How many times did the trapped emotion occur?</strong></label>
     <input
         type='number'
         id='repititions'

@@ -17,4 +17,11 @@ class Appointment extends Model
     public function solution(){
     	return $this->belongsToMany('App\Solution');
     }
+
+
+    public function openProblems(){
+    return $this->belongsToMany('App\Problem')->whereHas('problem', function($query){
+        $query->where('cleared','=',false);
+        });
+    }
 }

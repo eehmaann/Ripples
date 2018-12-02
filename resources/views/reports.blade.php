@@ -15,6 +15,10 @@
 </head>
 <body>
 <div class="container">
+ <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
 
 	<div class="row">
 		<p id="reasonForAppointment"> Called for {{$appointment->goals->reason}}</p>
@@ -98,6 +102,9 @@ $count = [
 					Heartwall made of {{$problem->describable->material}} extending {{$problem->describable->starting_distance}} miles </br> 
 				@else {!!$problem->description!!}
 				@endif
+				@if(strlen($problem->diagnosis->picture)>4)
+                    <img src="{{$problem->diagnosis->picture}}" style="width:10rem;height:10rem;" alt="Picture of {{$problem->diagnosis->name}}">
+                  @endif
 				@if(strlen($problem->diagnosis->definition)>3)	  <div id="circle">
     <div id="text">i</div>
   </div>
@@ -152,5 +159,9 @@ $count = [
 	<p>Thank you for the honor of working with you.  Please feel free to call or email me.
 	Wishing you total unconditional acceptance,</p>
 <p>Vera </p>
-	
+</span>
+</div>
+</div>
+</div>
+</div>	
 </body>

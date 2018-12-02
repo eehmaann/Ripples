@@ -7,6 +7,8 @@ use App\Heartwall;
 use App\Cord;
 use App\Solution;
 use App\Appointment;
+use App\Disconnection;
+use App\Intolerance;
 use DB;
 use Redirect;
 
@@ -69,6 +71,82 @@ class ProblemsController extends Controller
         } 
         $problem->save();
         $problem->appointments()->sync($appointments);
+
+        return \Redirect::route('problems.show', $appointment_id);
+    }
+
+       public function storeColor(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+            'colortext' => 'required|min:3',
+            'solution' => 'required|min:3',
+        ]);
+        
+        $appointments=Appointment::find($appointment_id);
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        $problem->cleared=true;
+        if(Problem::where('cleared', false)
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })
+             ->count()>0){
+                $parent_problem =Problem::where('cleared', false)
+                ->whereHas('appointments', function($query) use($appointment_id){
+                    $query->where('appointment_id', '=', $appointment_id);
+                })->latest()->first();
+                $problem->steps=$parent_problem->steps+1;
+                $problem->parentproblem_id=$parent_problem->id;
+        } 
+        $problem->save();
+        $problem->appointments()->sync($appointments);
+        $solution= new Solution();
+        $solution->solution = $request->input('solution');
+        $solution->save();
+        $solution->appointments()->sync($appointments);
+        $color= new Color();
+        $color->color = $request->input('colortext');
+        $color->save();
+
+        return \Redirect::route('navigation.show', $appointment_id);
+    }
+
+    public function storeColorClear(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+            'colortext' => 'required|min:3',
+            'solution'=> 'require|min:3'
+        ]);
+        
+        $appointments=Appointment::find($appointment_id);
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        $problem->cleared=true;
+        if(Problem::where('cleared', false)
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })
+             ->count()>0){
+                $parent_problem =Problem::where('cleared', false)
+                ->whereHas('appointments', function($query) use($appointment_id){
+                    $query->where('appointment_id', '=', $appointment_id);
+                })->latest()->first();
+                $problem->steps=$parent_problem->steps+1;
+                $problem->parentproblem_id=$parent_problem->id;
+        } 
+        $problem->save();
+        $problem->appointments()->sync($appointments);
+        $solution= new Solution();
+        $solution->solution = $request->input('solution');
+        $solution->save();
+        $solution->appointments()->sync($appointments);
+        $color= new Color();
+        $color->color = $request->input('colortext');
+        $color->save();
 
         return \Redirect::route('problems.show', $appointment_id);
     }
@@ -282,7 +360,45 @@ class ProblemsController extends Controller
 
        return \Redirect::route('trappedemotion.create', $appointment_id);
     }
-        
+      
+    public function storeDisconnection(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+            'disconnectionPercentage'=> 'required|numeric'
+        ]);
+         
+      
+
+        $disconnection = new Disconnection();
+        $disconnection->starting_connection= $request->input('disconnectionPercentage');
+        $disconnection->current_connection= $request->input('disconnectionPercentage');
+        $disconnection->save();
+
+        $disconnection_match =Disconnection::latest()->first();
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        $problem->describable_type='App\Disconnection';
+        $problem->describable_id=$disconnection_match->id;
+         if(Problem::where('cleared', false)
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })
+            ->count()>0){
+                $parent_problem =Problem::where('cleared', false)
+                ->whereHas('appointments', function($query) use($appointment_id){
+                    $query->where('appointment_id', '=', $appointment_id);
+                })->latest()->first();
+                $problem->steps=$parent_problem->steps+1;
+                $problem->parentproblem_id=$parent_problem->id;
+        } 
+        $problem->save();
+        $appointments=Appointment::find($appointment_id);
+        $problem->appointments()->sync($appointments);
+
+       return \Redirect::route('problems.show', $appointment_id);
+    }    
 
      public function storeJustSolution (Request $request, $appointment_id){
         $this->validate($request, [
@@ -376,13 +492,15 @@ class ProblemsController extends Controller
 
     public function showProblems($appointment_id){
         $appointments=Appointment::find($appointment_id);
-        $problem=Problem::where(['cleared' => 0])
+         $problem=Problem::where(['cleared' => 0])
             ->whereHas('appointments', function($query) use($appointment_id){
                     $query->where('appointment_id', '=', $appointment_id);
                 })->get();
+        $lastProblem=$problem->last();
         return view('Navigation.clearproblems')
         ->with(['problems'=>$problem,
-                'appointments'=>$appointments]);
+                'appointments'=>$appointments,
+                'lastProblem' =>$lastProblem]);
 
     }
 

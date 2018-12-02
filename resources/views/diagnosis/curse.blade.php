@@ -22,7 +22,7 @@
                             <input
                                 type='text'
                                 id='curseinput'
-                                name='curse'
+                                name='curseinput'
                                 value=''>
                             <p id="curseerror" class="error"> Please write what the curse does</p>
 

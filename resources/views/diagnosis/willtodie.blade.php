@@ -10,6 +10,7 @@
             id='ageinput'
             name='ageinput'
             pattern='[0-9]*'
+            min='0'
             value=''>
         <p id="ageerror" class="error"> Please type an age </p>
 @endsection

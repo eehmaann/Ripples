@@ -11,45 +11,43 @@ class IntoleranceController extends Controller
     public function substanceAutoComplete(Request $request) {
         $query = $request->get('term','');
         
-        $substances= Intolerance::select('name', DB::raw('COUNT(name) as count'))
+        $substances= Intolerance::select('substance', DB::raw('COUNT(substance) as count'))
         	->where([
-    				['purpose', '=', 'Substance'],
-    				['name','LIKE','%'.$query.'%'],
+    				['substance','LIKE','%'.$query.'%'],
     			])
-        	->groupBy('name')
+        	->groupBy('substance')
         	->orderBy('count')
-        	->get(array('name'));
+        	->get(array('substance'));
         
         $data=array();
-        foreach ($subtances as $substance) {
-                $data[]=array('value'=>$substance->name);
+        foreach ($substances as $substance) {
+                $data[]=array('value'=>$substance->substance);
         }
         if(count($data))
              return $data;
         else
-            return ['value'=>'No Result Found'];
+            return ['value'=>'This is a new type'];
     }
 
     public function symptomAutoComplete(Request $request) {
         $query = $request->get('term','');
         
-        $symptoms= Intolerance::select('name', DB::raw('COUNT(name) as count'))
+        $symptoms= Intolerance::select('symptom', DB::raw('COUNT(symptom) as count'))
         	->where([
-    				['purpose', '=', 'Symptom'],
-    				['name','LIKE','%'.$query.'%'],
+    				['symptom','LIKE','%'.$query.'%'],
     			])
-        	->groupBy('name')
+        	->groupBy('symptom')
         	->orderBy('count')
-        	->get(array('name'));
+        	->get(array('symptom'));
         
         $data=array();
         foreach ($symptoms as $symptom) {
-                $data[]=array('value'=>$symptom->name);
+                $data[]=array('value'=>$symptom->symptom);
         }
         if(count($data))
              return $data;
         else
-            return ['value'=>'No Result Found'];
+            return ['value'=>'This is a new type'];
     }
 
 }

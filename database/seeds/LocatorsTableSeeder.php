@@ -28,6 +28,7 @@ class LocatorsTableSeeder extends Seeder
 	        
 	        ['Heavy Metals','', 'Toxins'],
         	['Excesses', '','Toxins'],
+        	['Six Pernicious Influences', '', 'Excesses'],
         	['EM Spectrum', '', 'Toxins'],
         	['Chemicals', '', 'Toxins'],
         	['Prions', '', 'Toxins'],
@@ -50,6 +51,7 @@ class LocatorsTableSeeder extends Seeder
         	['Chakras','','Circuits and Systems'],
            	['Systems','','Circuits and Systems'],
             ['Accupuncture System','','Circuits and Systems'],
+            ['Disconnections','','Circuits and Systems'],
             ['Circulatory System','','Systems'],
 			['Digestive System','','Systems'],                   	     	
 			['Endocrine System','','Systems'],
@@ -89,7 +91,6 @@ class LocatorsTableSeeder extends Seeder
 			['Lower Limb Muscles','','Muscular System'],
 			['Connective Tissue','','Skeleton System'],
 			['Skin','','Integumentary System'],
-			['Morning sickness','','Disconnections'],
 			['The Twelve Standard Meridians','','Accupuncture System'],
 			['The Eight Extraordinary Meridians','','Accupuncture System'],
 			['Connective Tissue','','Misalignment'],
@@ -127,6 +128,7 @@ class LocatorsTableSeeder extends Seeder
 			['Thoracic disks lower','','Disks'],
 			['Lumbar disks','','Disks'],
 			['Cervical disks','','Disks'],
+		
 
 	    ];
          $count = count($locators);

@@ -145,7 +145,13 @@ class DetailersTableSeeder extends Seeder
     		['Toning', 'Stress Management'],
     		['Psychotherapy', 'Stress Management'],
     		['Breath Work', 'Stress Management'],
-    		['stress Counseling', 'Stress Management'],
+    		['Stress Counseling', 'Stress Management'],
+
+            ['Sugar', 'Food Additives excess'],
+            ['Perservatives', 'Food Additives excess'],
+            ['Monosodium Glutamate', 'Food Additives excess'],
+            ['Humectants', 'Food Additives excess'],
+            ['Aspartame', 'Food Additives excess']
 
     	];
     	$count = count($detailers);

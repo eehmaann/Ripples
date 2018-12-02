@@ -251,7 +251,9 @@ $(document).ready(function(){
 		if(isPrepared){
 			$('#creationForm').attr('action', destination).submit();
 		}
-	})
+		else
+			$('#starterror').show();
+	});
 });
 
 

@@ -1,4 +1,4 @@
 $(document).ready(function()
 {
-    $('#description').val($("diagnosisname").val() + "is unhappy");
+    $('#description').val($("#diagnosisname").text() + " is unhappy");
 });

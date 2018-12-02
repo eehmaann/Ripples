@@ -4,7 +4,7 @@ $(document).ready(function()
 	$('#progressionQuestion').hide();
 	$("#lastCauseClicker").text(" Clear " + $("#diagnosisname").text());
 	$("#newCauseClicker").hide();	
- 
+  $('.error').hide();
 
     $('#solution').val("Cleared");  
 

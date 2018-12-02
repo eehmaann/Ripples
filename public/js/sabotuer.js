@@ -50,7 +50,7 @@ $(document).ready(function()
 		// If all fields are correct construct a description statement
 		if(isValid){
 			constructDescription();
-			destination ="../../../../problemsbclear/"+id;
+			var destination ="../../../../problemsbclear/"+id;
 		$('#barrierform').attr('action', destination);
 		}
 	});
@@ -82,6 +82,20 @@ $(document).ready(function()
 		}
 	}
 
-
+	   $( "#weaponinput" ).autocomplete({
+        source: function(request, response) {
+          $.ajax({
+            url: '/searchsabotuer',
+            dataType: "json",
+            data: {
+              term : request.term
+            },
+            success: function(data) {
+              response(data);     
+            }
+          });
+        },
+      minLength: 2,
+    });
 
 });

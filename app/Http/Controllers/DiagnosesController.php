@@ -25,7 +25,7 @@ class DiagnosesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-      public function createActivity($id, $appointment_id){
+    public function createActivity($id, $appointment_id){
         $appointment=Appointment::find($appointment_id);
         $diagnosis= Diagnosis::find($id);
         return view('diagnosis.activities')
@@ -62,6 +62,18 @@ class DiagnosesController extends Controller
             ->with(['diagnosis'=>$diagnosis,
                     'appointment'=>$appointment]);}
 
+     public function createColor($id, $appointment_id){
+        $diagnosis= Diagnosis::find($id);
+        $appointment=Appointment::find($appointment_id);
+        $colors=Color::select('color', DB::raw('COUNT(color) as count'))
+            ->groupBy('color')
+            ->orderBy('count')
+            ->get(array('color'));
+        return View('diagnosis.color')
+            ->with(['diagnosis'=>$diagnosis,
+                    'appointment'=>$appointment,
+                    'colors'=>$colors]);}
+
     public function createCircuits($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);
         $appointment=Appointment::find($appointment_id);
@@ -72,7 +84,7 @@ class DiagnosesController extends Controller
                     'emotions'=>$emotions]);}
 
 
-       public function createCording($id, $appointment_id){
+    public function createCording($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);
         $appointment=Appointment::find($appointment_id);
         return View('diagnosis.cording')
@@ -80,7 +92,7 @@ class DiagnosesController extends Controller
                     'appointment'=>$appointment]);}
 
 
-        public function createCurse($id, $appointment_id){
+    public function createCurse($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);
         $diagnoses=Diagnosis::all();
         $locators=Locator::all();
@@ -90,6 +102,44 @@ class DiagnosesController extends Controller
                     'appointment'=>$appointment,
                     'diagnoses'=>$diagnoses,
                     'locators'=>$locators]);}
+
+    public function createDisconnectionBodies($id, $appointment_id){
+        $diagnosis= Diagnosis::find($id);
+        $diagnoses=Diagnosis::all();
+        $locators=Locator::all();
+        $appointment=Appointment::find($appointment_id);
+        return view('diagnosis.bodybody')
+            ->with(['diagnosis'=>$diagnosis, 
+                    'appointment'=>$appointment,
+                    'diagnoses'=>$diagnoses,
+                    'locators'=>$locators]);}
+
+    public function createDisconnectionSickness($id, $appointment_id){
+        $diagnosis= Diagnosis::find($id);
+        $appointment=Appointment::find($appointment_id);
+        return view('diagnosis.spirittospirit')
+            ->with(['diagnosis'=>$diagnosis,
+                    'appointment'=>$appointment]);}
+
+    public function createDisconnectionSpiritBody($id, $appointment_id){
+        $diagnosis= Diagnosis::find($id);
+        $diagnoses=Diagnosis::all();
+        $locators=Locator::all();
+        $appointment=Appointment::find($appointment_id);
+        return view('diagnosis.spirittobody')
+            ->with(['diagnosis'=>$diagnosis,
+                    'appointment'=>$appointment,
+                    'diagnoses'=>$diagnoses,
+                    'locators'=>$locators]);}
+
+    public function createDisconnectionSpirits($id, $appointment_id){
+        $diagnosis= Diagnosis::find($id);
+        $appointment=Appointment::find($appointment_id);
+        return view('diagnosis.spirittospirit')
+            ->with(['diagnosis'=>$diagnosis,
+                    'appointment'=>$appointment]);}
+
+
 
 
     public function createDrugs($id, $appointment_id){
@@ -118,12 +168,21 @@ class DiagnosesController extends Controller
                     'appointment'=>$appointment]);}
 
 
-     public function createExcess($id, $appointment_id){
+    public function createExcess($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);
         $appointment=Appointment::find($appointment_id);
         return view('diagnosis.excess')
             ->with(['diagnosis'=>$diagnosis,
                     'appointment'=>$appointment]);}
+
+    public function createFood($id, $appointment_id){
+         $diagnosis= Diagnosis::find($id);
+         $appointment=Appointment::find($appointment_id);
+         $foods=Food::all();
+        return View('diagnosis.food')
+            ->with(['diagnosis'=>$diagnosis,
+                    'appointment'=>$appointment,
+                    'foods'=>$foods]);}
 
 
     public function createHeartWall($appointment_id){
@@ -132,6 +191,15 @@ class DiagnosesController extends Controller
         return view('diagnosis.heartwall')
             ->with(['diagnosis'=>$diagnosis,
                     'appointment'=>$appointment]);}
+
+    public function createHerb($id, $appointment_id){
+         $diagnosis= Diagnosis::find($id);
+         $appointment=Appointment::find($appointment_id);
+         $herb=Herb::all();
+        return View('diagnosis.herb')
+            ->with(['diagnosis'=>$diagnosis,
+                    'appointment'=>$appointment,
+                    'herbs'=>$herb]);}
 
     public function createHypnotic($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);
@@ -166,7 +234,7 @@ class DiagnosesController extends Controller
          $appointment=Appointment::find($appointment_id);
          $foods=Food::all();
          $herb=Herb::all();
-         $vitamins=Vitamins::all();
+         $vitamins=Vitamin::all();
         return View('diagnosis.malnutrition')
             ->with(['diagnosis'=>$diagnosis,
                     'appointment'=>$appointment,
@@ -223,6 +291,13 @@ class DiagnosesController extends Controller
                     'diagnoses'=>$diagnoses,
                     'locators'=>$locators]);}
 
+    public function createSleep($id, $appointment_id){
+        $diagnosis= Diagnosis::find($id);
+        $appointment=Appointment::find($appointment_id);
+        return view('diagnosis.sleep')
+            ->with(['diagnosis'=>$diagnosis,
+                    'appointment'=>$appointment]);}
+
     public function createT3($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);
         $appointment=Appointment::find($appointment_id);
@@ -240,24 +315,13 @@ class DiagnosesController extends Controller
     public function createTrappedEmotion($appointment_id){
         $diagnosis= Diagnosis::find(5);
         $appointment=Appointment::find($appointment_id);
-        $heartwalls_count=Problem::whereHas('appointments', function($subquery) use($appointment_id){
-                $subquery->where('appointment_id', '=', $appointment_id);
-            })
-          ->where('describable_type', 'App\Heartwall')
-          ->where ('cleared', false)
-          ->count();
-        $heartwall=Problem::whereHas('appointments', function($subquery) use($appointment_id){
-                $subquery->where('appointment_id', '=', $appointment_id);
-            })
-          ->where('describable_type', 'App\Heartwall')
-          ->where ('cleared', false)
-          ->latest()->first();
+       $problem = Problem::find($appointment_id);
+        $heartwall=$problem->heartwall();
         $emotions=Emotion::all();
         return view('diagnosis.trappedemotion')
             ->with(['diagnosis'=>$diagnosis,
                     'appointment'=>$appointment,
                     'emotions'=>$emotions,
-                    'heartwalls_count'=>$heartwalls_count,
                     'heartwall'=>$heartwall]);}
 
     public function createTrauma($id, $appointment_id){
@@ -267,6 +331,14 @@ class DiagnosesController extends Controller
            ->with(['diagnosis'=>$diagnosis,
                     'appointment'=>$appointment]);}
 
+    public function createVitamin($id, $appointment_id){
+         $diagnosis= Diagnosis::find($id);
+         $appointment=Appointment::find($appointment_id);
+         $vitamins=Vitamin::all();
+        return View('diagnosis.vitamin')
+            ->with(['diagnosis'=>$diagnosis,
+                    'appointment'=>$appointment,
+                    'vitamins'=>$vitamins]);}
 
     public function createWillToDie($id, $appointment_id){
         $diagnosis= Diagnosis::find($id);

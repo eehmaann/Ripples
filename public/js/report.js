@@ -2,6 +2,9 @@
 $(document).ready(function(){
 
 $(".barrierdefinition").hide();
+$(".corddefiner").hide();
+
+
 $('#defitionsshower').click(function(){
 	if ($(this).text()=="Click to show definitions"){
 		$(this).text("Click to hide defintions");
@@ -85,6 +88,12 @@ $(".emotionentry").click(function(){
 	$(this).children('.emotiondefinition').toggle();
 });
 
+$(".foundcord").click(function(){
+	$(this).find('.corddefiner').toggle();
+})
+
+
+//This method was found at https://stackoverflow.com/questions/9083037/convert-a-number-into-a-roman-numeral-in-javascript
 function toRoman(num) {  
   var result = '';
   var decimal = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];

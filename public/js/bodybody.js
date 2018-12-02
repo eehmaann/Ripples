@@ -1,0 +1,102 @@
+$(document).ready(function()
+{
+
+$(".error").hide();
+	$(".clickDiagnose > a").removeAttr("href");
+	$( ".clickLocate:nth-child(6)")[0].remove()
+	$('#Energy')[0].remove();
+	$('#Pathogen')[0].remove();
+	$('#Toxins')[0].remove();
+	 $('#progressionQuestion').hide();
+	$("#lastCauseClicker").remove();
+	$("#newCauseClicker").text('Remove Sabotuer');	
+	var id =$('#appointmentnumber').text(); 
+
+	var bodyChoice="first part";
+
+	$('#firstPart').click(function(){
+		bodyChoice="first part";
+		$('#fieldStater').text('first');
+	});
+
+	$('#secondPart').click(function(){
+		bodyChoice="second part";
+		$('#fieldStater').text('second');
+	});
+
+
+
+	$(".clickDiagnose").click(function(){
+		if(bodyChoice=="firstPart"){
+			$('#aDisconnection').val($(this).attr('id'));
+		}
+		else{
+			$('#bDisconnection').val($(this).attr('id'));
+		}
+	});
+
+
+	$('fieldset').change(function(){
+		var data=$(this).children('input').val();
+		if(!($.isNumeric(data))){
+			showError(data.length <2, $(this));
+		}
+		else{
+			showError(data<0, $(this));
+		}
+	});
+
+	$(".pathClicker").click(function(){
+		var isValid;
+
+		$( "fieldset" ).each(function() {
+			var data=$(this).children('input').val();
+			// test to see if there is first invalid entry
+			if(isValid){
+				isValid= testValid($(this));
+			}
+			// test from time error invalid is found whether an error must show
+			if(!(isValid)){
+				if(!($.isNumeric(data))){
+					showError(data.length <0 || >100, $(this));
+				}
+				else{
+				showError(data<0, $(this));
+				}
+			}
+		});
+		// If all fields are correct construct a description statement
+		if(isValid){
+			constructDescription();
+			var destination ="../../../../problemsdisconnection/"+id;
+			$('#barrierform').attr('action', destination);
+		}
+	});
+
+	function constructDescription(){
+		$("#description").val(($("#diagnosisname")+": Spirit disconnect from " +$('#bDisconnection').val());	
+	}
+
+
+
+	function showError(condition, fieldset){
+		if(condition){
+			$(fieldset).children('.error').show()
+		}
+		else{
+			$(fieldset).children('.error').hide();
+		}
+	}
+
+	function testValid(text){
+		//var data=$(this).children('input').val();
+		if(!($.isNumeric(text))){
+			return(text.length>4);
+		}
+		else{
+			return(text>0);
+		}
+	}
+
+
+});

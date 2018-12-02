@@ -82,8 +82,8 @@ $(document).ready(function()
 				if($('#'+arbody[client]+'to'+arbody[cord]+'text').val().length>1){
 					statement+="<span class='foundcord'> <li>"
 					+$('#'+arbody[client]+'to'+arbody[cord]+'text').val()
-					+"<span class='corddefiner'>"+$('#'+arbody[client]+'to'+arbody[cord]+'Statement').text()
-					+"</span></li></span>";
+					+"<br><span class='corddefiner'>"+$('#'+arbody[client]+'to'+arbody[cord]+'Statement').text()
+					+"<div class='circle'> <div id='text'>i</div></div></span></li></span>";
 					cordtypecount++;
 				}
 					

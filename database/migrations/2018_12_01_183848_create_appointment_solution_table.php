@@ -20,7 +20,7 @@ class CreateAppointmentSolutionTable extends Migration
             $table->integer('solution_id')->unsigned();
 
             $table->foreign('appointment_id')->references('id')->on('appointments');
-            $table->foreign('solution_id')->references('id')->on('solution');
+            $table->foreign('solution_id')->references('id')->on('solutions');
         });
     }
 
@@ -34,3 +34,5 @@ class CreateAppointmentSolutionTable extends Migration
         Schema::dropIfExists('appointment_solution');
     }
 }
+
+

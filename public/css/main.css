@@ -1,16 +1,11 @@
+body {
+    background-image: url("../images/peacefulness.jpg");
+    background-size:cover;
+}
+
 .error{
 	color:red;
 	font-size: .9rem;
-}
-
- .userClicker, .caseClicker{
-    border-radius: 2rem;
-    border: .2rem solid #73AD21;
-    padding: 1.4rem;
-    padding-bottom: 2.5rem;
-    margin-top: 1rem; 
-    width: 7rem;
-    height: 1rem; 
 }
 
 #sessionStarter{
@@ -25,15 +20,7 @@
     height: 1rem; 
 }
 
-.timeselector, #emotionClicker{
-    border-radius: 2rem;
-    border: .2rem solid #73AD21;
-    padding: 1.4rem;
-    padding-bottom: 2.5rem;
-    margin-top: 1rem; 
-    width: 20rem;
-    height: 1rem; 
-}
+
 
 .pathClicker{
     border-radius: 2rem;
@@ -43,7 +30,14 @@
 .clicker{
      border-radius: 2rem;
      border: .2rem solid #73AD21;
+     text-align: center;
+     box-shadow: .3rem .3rem black;
+     margin: 1rem;
+     padding:1rem;
+     line-height:2em;
 }
+
+
 
 .hasDefinition{
     cursor: help;
@@ -69,4 +63,31 @@ body {
   transform: translate(-50%, -50%);
   color: #fff;
   font-size:.8em
+}
+
+.circle {
+    display:inline-block;
+  position: relative;
+  background-color: #09f;
+  margin: .2em auto;
+  width: .9em;
+  height: .9em;
+  border-radius: 0.45em;
+}
+.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size:.8em
+}
+
+.colorsplatch{
+   display:inline-block;
+  position: relative;
+  margin: .2em auto;
+  width: .9em;
+  height: .9em;
+  border-radius: 0.45em;
 }

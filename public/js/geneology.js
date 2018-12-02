@@ -7,21 +7,13 @@ $(document).ready(function(){
 	var date=today.getFullYear();
 	var gen=22;
 	var GenList=[];
-
-	function GenEntry(strlength, gens) {
-    	this.strlength=strlength;
-    	this.gens=gens;
-   }
-
+ 
 	$(".error").hide();
 
 	$('.singleclicker').click(function(){
 		if($(this).text()!="Undo"){
 			$('#generationpath').val($('#generationpath').val()+($(this).text() + " "));
-			var gen = new GenEntry($(this).text().length +1, 1);
-			GenList.push(gen);
-			countadd++
-			setInheritedDate();
+			GenList.push($(this).text().length +1);
 			$('#patherror').hide();
 		}
 		else{
@@ -33,36 +25,30 @@ $(document).ready(function(){
 	$('#clearer').click(function(){
 		$('#generationpath').val("");
 		countadd=0;
+		$('#genrepeatsinput').val('');
 		setInheritedDate();
 	});
 
 
 	$('#genrepeatsinput').change(function(){
-		if($('genrepeatsinput').val()){
-			$('#patternadderror').show();	
-		}
+		countadd=$(this).val();
+		setInheritedDate();
 	});
 
 	$('.patternclicker').click(function(){
 		if($(this).text()!="Undo"){
 			$('#patternstring').val($('#patternstring').val()+($(this).text() + " "));
-			patternadd++;
 			$('#parentgenerror').hide();
 
 		}
 		else{
 			undoPatternExtension();
-			if(patternadd>=1){
-				patternadd--;
-			}
 		}
 
 	});
 
 	$('#pattogenclicker').click(function(){
 		addPattern();
-		setInheritedDate();
-		$('#genrepeatsinput').val(0);
 		$('#patternstring').val('');
 
 	});
@@ -87,15 +73,10 @@ $(document).ready(function(){
 	}
 
 	function prepareAddPattern(){
-		var repeats = parseInt($('#genrepeatsinput').val());
-		if(repeats>=1){
-			$('#generationpath').val($('#generationpath').val() 
-				+"("+$('#patternstring').val()+')[repeated for' 
-				+$('#genrepeatsinput').val() + " generations] ");
-			countadd +=( patternadd *= repeats);
-			var gen = new GenEntry($('#genrepeatsinput').val(),length+1, patternadd*repeats);
-			GenList.push(gen);
-			patternadd=0;
+		if($('#patternstring').val().length>6){
+		$('#generationpath').val($('#generationpath').val() 
+			+"("+$('#patternstring').val()+')';
+			GenList.push($('#genrepeatsinput').val(),length+1);
 			$('#patherror').hide();			
 		} 
 		else{
@@ -104,7 +85,6 @@ $(document).ready(function(){
 	}
 
 	function resetPatternDisplays(){
-		$('#genrepeatsinput').val(0);
 		$('#patternstring').val('');
 	}
 
@@ -126,10 +106,8 @@ $(document).ready(function(){
 		var genlength=genstring.length;
 		if(genstring.length>6){
 			var discardGen = GenList.pop();
-			countadd-= discardGen.gens;
-			genstring=genstring.substring(0, (genlength-discardGen.strlength))
+			genstring=genstring.substring(0, (genlength-discardGen))
 			$('#generationpath').val(genstring);
-			setInheritedDate();
 		}		
 	}
 });

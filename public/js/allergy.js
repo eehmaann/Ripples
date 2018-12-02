@@ -25,31 +25,19 @@ $(document).ready(function()
    
     }
 
-    if($('#emotionList')){
-        $('#emotionList').hide();
-    }
-    $('#emotionClicker').click(function(){
-        $('#emotionList').toggle();
+        $( "#allergy" ).autocomplete({
+        source: function(request, response) {
+          $.ajax({
+            url: '/searchsubstance',
+            dataType: "json",
+            data: {
+              term : request.term
+            },
+            success: function(data) {
+              response(data);     
+            }
+          });
+        },
+      minLength: 2,
     });
-
-
-    //$('.emotionClicker'.click(function(){
-      //  var word=$(this).text();
-        //$.ajax({
-          //  url : 'https://www.collinsdictionary.com/dictionary/english-thesaurus/' +word,
-            //type : 'GET',
-            //context: 
-            //data : {
-              //  'numberOfWords' : 10
-            //},
-            //dataType:'json',
-            //success : function(data) {              
-              //  alert('Data: '+data);
-            //},
-            //error : function(request,error)
-            //{
-              //  alert("Request: "+JSON.stringify(request));
-            //}
-    //});
-
 });

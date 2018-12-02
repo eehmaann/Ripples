@@ -11,7 +11,7 @@
 @section('content')
 <div id="diagnosisform" class="container">
     <div class="row justify-content-center">
-        <div class="col-md-11">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <h1 id="barriername">{{$diagnosis->name}}</h1>

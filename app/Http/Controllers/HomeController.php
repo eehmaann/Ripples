@@ -21,8 +21,21 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        if($request->user->role==' practitioner'){
+            return route('/sessionstart');
+        }
+
+        else{
+            $published=$reuest->user->lastPublished();
+            if(empty($published)){
+                return route('/contact');
+            }
+            else{
+                 return view('home');
+            }
+        }
+       
     }
 }

@@ -53,13 +53,12 @@ class Problem extends Model
     return $problem;
   }
 
-  public function count_heartwalls($appointment_id){
-     $count = Problem::whereHas('appointments', function($subquery) use($appointment_id){
-                $subquery->where('appointment_id', '=', $appointment_id);
-            })
-          ->where('describable_type', 'App\Heartwall')
-          ->where ('cleared', false)
-          ->count();
-      return $count;
+  public function heartwall(){
+      $heartwall = $this->whereHas('appointments')
+            ->where('describable_type', 'App\Heartwall')
+            ->where('cleared', false)
+            ->latest()->first();
+
+        return $heartwall;
   }     
 }

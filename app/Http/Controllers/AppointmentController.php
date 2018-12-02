@@ -71,17 +71,17 @@ class AppointmentController extends Controller
     	]);
 
         $goal_id= $request->input('goal_id');
-        $priorAppointment=Appointment::where('goal_id', $goal_id)->with('problems')->latest()->first();
-        $problemlist=$priorAppointment->problems()->where('cleared', false)->get();
-
-
     	$appointment =new Appointment();
     	$appointment->goal_id=$goal_id;
     	$appointment->save();
-        
-        
-        $appointment->problems()->sync($problemlist);
-
+           
+        $priorAppointment=Appointment::where('goal_id', $goal_id)->latest()->first();
+        if(!empty($priorAppointment)){
+            $problemlist=$priorAppointment->problems()->where('cleared', false)->get();
+            if(!empty($problemlist)){
+              $appointment->problems()->sync($problemlist);  
+            }
+        }
     	return \Redirect::route('navigation.show', $appointment);
     }
 
@@ -168,5 +168,23 @@ class AppointmentController extends Controller
         $user=$request->user();
         $appointment= $user->appointment->latest()->first();
         showAppointment($appointment->id);
+    }
+
+    public function appointmentStart(Request $request){
+        $user=$request->user();
+        $users=User::all();
+        $appointments = Appointment::where('showable', true);
+        $appointment= $user->appointment->latest()->first();
+        $problems = [];
+        $problems[]=$appointment->problems;
+        $solutions=[];
+        $solutions=$appointment->solution;
+        return view('Navigation.home')
+            ->with(['user'=>$user,
+                    'users'=>$users,
+                    'appointment'=>$appointment,
+                    'problems'=>$problems,
+                    'solutions'=>$solutions,
+                    'appointments'=>$appointments]);
     }
 }

@@ -4,6 +4,18 @@
 @endsection
 
 @section('diagnosis')
+<div class="row">
+    <fieldset>
+        <label> What age did this happen?</label>
+        <input
+            type='number'
+            id='ageinput'
+            name='age'
+            min="0"
+            value=''>
+        <p id="ageerror" class="error">Please state what age the sabotage occured</p>
+    </fieldset>
+</div>
 
     <div class="row">
     <fieldset>
@@ -38,18 +50,9 @@
         <p id="bodyerror" class="error">Please state where the sabotuer is.</p>
     </fieldset>
 </div>
-    <p class="clicker" id="bodyPartsToggler">Search for where the {{$diagnosis->name}} may be located</p>
+<div style="border: black solid; padding:1em;">
+    <h3 id="bodyPartsToggler">Search for where the {{$diagnosis->name}} may be located</h3>
     @include('layouts.locations')
-    <div class="row"
-    <fieldset>
-        <label> What age did this happen?</label>
-        <input
-            type='number'
-            id='ageinput'
-            name='age'
-            value=''>
-        <p id="ageerror" class="error">Please state what age the sabotage occured</p>
-    </fieldset>
 </div>
 
 @endsection

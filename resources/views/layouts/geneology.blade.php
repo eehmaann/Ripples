@@ -43,7 +43,7 @@
                     </ul>
                 </div>
                 <p id="parentgenerror" class="error"> Please click a button to add to pattern build</p>
-                <label>How many times does this pattern repeat?</label>
+                <label>How many generations does this go back?</label>
                 <input
                     type='number'
                     id='genrepeatsinput'

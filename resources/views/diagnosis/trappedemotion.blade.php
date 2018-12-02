@@ -4,7 +4,7 @@
 @endsection
 
 @section('diagnosis')
-@if($heartwalls_count>0)
+@if(!empty($heartwall))
     <p style="display:none;" id="heartwallid">{{$heartwall->describable->id}}</p>
     <p>Heartwall made of {{$heartwall->describable->material}} extending <span id="currentDistance">{{$heartwall->describable->current_distance}}</span> miles</p>
      <label>Update Distance</label>
@@ -17,44 +17,57 @@
         <p id="heartwallClicker" class="clicker">Update Heartwall</p>
         
 @endif
-<div class="panel panel-default col-4">
-    <p>When did the trapped emotion occur?</p>
-    <ul class="list-unstyled"> 
-        <li id="self" class="timeselector clicker">Current</li>
-        <li id="prenatal" class="timeselector clicker">Prenatal</li>
-        <li id="pastlife" class="timeselector clicker">Past life</li>
-        <li id="inherited" class="timeselector clicker">Inherited</li>
-    </ul>
-</div>
+<br>
+<br>
 @include('layouts.currentTrappedEmotion')
-
-
-
-    
-    <div class='prenatal'>
-       <label>Who did it come from?</label>
-        <input
-            type='text'
-            id='presource'
-            name='presource'
-            value=''
-            readonly>
-        <ul class="list-unstyled">
-            <li ><span class="prenatalclicker clicker"> Mother </span></li>
-            <li> <span class="prenatalclicker clicker">Father</span></li>
-            <li> <span class="prenatalclicker clicker" id="otherprenatal">Other</span></li>
-        </ul>
-        <div  id="relationInputBox">
-            <label>Who?</label>
-                <input
-                type='text'
-                name='relationshipinput'
-                id='relationshipinput'
-                value=''>
-                <p id="prenatalerror" class="error"> Please type the relationship</p>
+ <div class="container" style="margin:3rem">
+     <div class="col-6" >
+        <div class="card">
+            <div class="card-body">
+                <p>When did the trapped emotion occur?</p>
+                <p id="self" class="timeselector clicker">Current</p>
+                <p id="prenatal" class="timeselector clicker">Prenatal</p>
+                <p id="pastlife" class="timeselector clicker">Past life</p>
+                <p id="inherited" class="timeselector clicker">Inherited</p>
+            </div>
         </div>
     </div>
-    
+</div>
+
+ <div class='prenatal'>
+     <div class="container">
+         <div class="col-4" >
+            <div class="card">
+                <div class="card-body">
+                
+                   <label>Who did it come from?</label>
+                    <input
+                        type='text'
+                        id='presource'
+                        name='presource'
+                        value=''
+                        readonly>
+               
+                            <ul class="list-unstyled">
+                                <li class="prenatalclicker clicker"> Mother</li>
+                                <li class="prenatalclicker clicker">Father</li>
+                                <li class="prenatalclicker clicker" id="otherprenatal">Other</li>
+                            </ul>
+
+                    <div  id="relationInputBox">
+                        <label>Who?</label>
+                            <input
+                            type='text'
+                            name='relationshipinput'
+                            id='relationshipinput'
+                            value=''>
+                            <p id="prenatalerror" class="error"> Please type the relationship</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <div class="pastlife">
             <label>Year of Birth?</label>
             <input

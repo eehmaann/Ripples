@@ -16,8 +16,8 @@ class CreateIntolerancesTable extends Migration
         Schema::create('intolerances', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('name');
-            $table->string('purpose');
+            $table->string('substance');
+            $table->string('symptom')->nullable();
         });
     }
 

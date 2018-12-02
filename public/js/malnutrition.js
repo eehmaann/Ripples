@@ -2,6 +2,9 @@ $(document).ready(function()
 {	
 	hideDietTypes();
 
+	$('.error').hide();
+	var id =$('#appointmentnumber').text();  
+  
 	 $(".dietClicker").click(function () {
         hideDietTypes();
         $('.'+$(this).attr('id')).show();
@@ -13,7 +16,7 @@ $(document).ready(function()
 
 	 $(".pathClicker").click(function(){
 	 	var emptycounter=0;
-	 	$('#desciption').val("Change diet ");
+	 	$('#description').val("Change diet ");
 		if ($("input[name='foods[]']:checked").length>0){
 			appendList("'foods[]'", "eat" );
 		}
@@ -51,7 +54,12 @@ $(document).ready(function()
             emptycounter++;
         }
        	if(emptycounter==6){
-       		$('errormessage').show();
+       		$('.error').show();
+       	}
+       	else{
+       		 	$('#solution').val($('#description').val());
+       		 destination ="../../../../problemsjs/"+id;
+            $('#barrierform').attr('action', destination);
        	}
 	});
 
@@ -62,7 +70,7 @@ $(document).ready(function()
 		});
 		var selection;
 		selection = listarray.join(', ') ;
-		$('#description').append(verb +drugarray);
+		$('#description').append(verb +listarray);
 	}	
 
 

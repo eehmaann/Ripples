@@ -27,10 +27,10 @@ class HeartwallController extends Controller
         if(count($data))
              return $data;
         else
-            return ['value'=>'No Result Found'];
+            return ['value'=>'This is a new material'];
     }
 
-     public function updateHeartwall(REquest $request, $heartwall, $appointment){
+     public function updateHeartwall(Rquest $request, $heartwall, $appointment){
         $this->validate($request, [
             'updatedistance'=> 'required|numeric',
         ]);
@@ -40,4 +40,12 @@ class HeartwallController extends Controller
         return \Redirect::route('trappedemotion.create', $appointment);
     }
 
+    public function clearHeartwall($heartwall, $appointment){
+        $heartwall = Heartwall::find($heartwall);
+         $heartwall->current_distance=0;
+         $problem=$heartwall->problem()->cleared=true;
+         $heartwall->save();
+        return \Redirect::route('trappedemotion.create', $appointment);
+
+    }
 }

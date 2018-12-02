@@ -6,11 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Heartwall extends Model
 {
-    //
-//	public function problem(){
-  //      return $this->belongsTo('App\Problem');
-   // }
-
 
     public function problem()
     {

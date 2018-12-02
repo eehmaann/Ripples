@@ -13,19 +13,13 @@ class IntolerancesTableSeeder extends Seeder
     public function run()
     {
     	 $intolerances=[
-    	 	['Lactose','Substance'],
-    	 	['Gluten', 'Substance'],
-    	 	['Nuts', 'Substance'],
-    	 	['Meat', 'Substance'],
-    	 	['Mushrooms', 'Substance'],
-    	 	['Nightshae plants (tomato, potato, eggplant, pepper', 'Substance'],
-    	 	['Chemicals and toxins', 'Substance'],
-    	 	['Fatigue', 'Symptom'],
-    	 	['Headache', 'Symptom'],
-    	 	['Gas', 'Symptom'],
-    	 	['Diarrhea', 'Symptom'],
-    	 	['Stomach pain', 'Symptom'],
-    	 	['Burping or acid reflux', 'Symptom'],    	 	
+    	 	['Lactose','Fatigue'],
+    	 	['Gluten', 'Headache'],
+    	 	['Nuts', 'Gas'],
+    	 	['Meat', 'Diarrhea'],
+    	 	['Mushrooms', 'Stomach pain'],
+    	 	['Nightshae plants (tomato, potato, eggplant, pepper', 'Burping or acid reflux'],
+    	 	['Chemicals and toxins', 'Diarrhea'],  	 	
     	 ];
 
     	 $count = count($intolerances);
@@ -35,8 +29,8 @@ class IntolerancesTableSeeder extends Seeder
 
 	        $intolerance->created_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
 	        $intolerance->updated_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
-	        $intolerance->name = $intoleranceData[0];
-	        $intolerance->purpose = $intoleranceData[1];
+	        $intolerance->substance = $intoleranceData[0];
+	        $intolerance->symptom = $intoleranceData[1];
 
 	        $intolerance->save();
 	        $count--;

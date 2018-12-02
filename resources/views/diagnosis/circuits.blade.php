@@ -26,5 +26,11 @@
     </div>
   </div>
 @endif
+
+ @if(strlen($diagnosis->picture)>4)
+    <div class="row">
+        <img src="{{$diagnosis->picture}}" style="width:30rem;height:30rem;" alt="Picture of {{$diagnosis->name}}">
+    </div>
+@endif
 @endsection
                 

@@ -78,7 +78,7 @@ function showNavigation(choice){
 	if(diagnosisShown==0){
 		$('#diagnoses').hide();
 	}
-	$('#diagnosehader').text("Selectable causes within " +disp);
+	$('#diagnosehader').text("Select which " +disp);
 	return;
 
 }
