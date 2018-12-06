@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\User;
+use Redirect;
 class HomeController extends Controller
 {
     /**
@@ -23,12 +24,12 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->user->role==' practitioner'){
-            return route('/sessionstart');
+        if($request->user()->role=='practitioner'){
+            return \Redirect::route('session.create');
         }
 
         else{
-            $published=$reuest->user->lastPublished();
+            $published=$request->user()->lastPublished();
             if(empty($published)){
                 return route('/contact');
             }

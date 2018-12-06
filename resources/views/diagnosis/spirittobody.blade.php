@@ -4,16 +4,16 @@
 
  @endsection
 @section('diagnosis')
-@include(components.percentagebox)
-@endsection
+@include('components.percentagebox')
+
 <fieldset>
-  	<label> What body part is disconnected?</label>
+  	<label> What body part is disconnected?</label> 
     	<input
         type='text'
-        id='bDisconnection'
-        name='bDisconnection'
+        id='bodyInput'
+        name='bodyInput'
         value=''>
-    	<p id="berror" class="error">Please include second disconection</p>
+    	<p id="bodyerror" class="error">Please include second disconection</p>
  </fieldset>
 
  <div class="row">
@@ -21,3 +21,4 @@
  	 	@include('layouts.locations')
  	</div>
 </div>
+@endsection

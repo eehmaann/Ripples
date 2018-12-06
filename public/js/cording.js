@@ -3,13 +3,6 @@ $(document).ready(function()
 
 	var cordTypesCount=0;
 	var arbody = new Array("Brain", "Heart", "Gut", "Privates");
-	$('.cord').keydown(function(){
-		forceLength($(this));
-		if($(this).val().length>1){
-			insertDecimal($(this));
-		}
-
-	});
 
 	$(".cordtexts").hide();
 	$(".definition").css("color", "blue")
@@ -20,13 +13,38 @@ $(document).ready(function()
 				.text($("#"+arbody[client]+"to"+arbody[cord]+"Statement").text());
 			}
 		}
-		});
+	});
 	
 
 	//Adjust base form
 	$('#progressionQuestion').hide();
 	$('#newCauseClicker').hide();
 	$('#lastCauseClicker').text('Clear Cording');
+
+	$('.cordmultiple').change(function(){
+		var text=$(this).attr('id');
+		text=text.substring(0, text.length-10);
+
+		if ($("#"+text+"number").val()>0) {
+			$(this).val(parseInt($(this).val())+addExponent($("#"+text+"number")));
+			$("#"+text+"error").hide();
+		}
+		else{
+			$("#"+text+"error").show();
+		}
+	});
+
+	$('.cord').change(function(){
+		var text=$(this).attr('id');
+		text=text.substring(0, text.length-6);
+		if ($("#"+text+"multiplier").val()>0) {
+			$("#"+text+"error").hide();
+		}
+		else{
+			$("#"+text+"error").show();
+		}
+	});
+
 
 	$('.cordmultiple, .cord').change(function(){
 		var client;
@@ -100,23 +118,33 @@ $(document).ready(function()
 });
 
 
-function forceLength(input){
-	var text = (input).val();
-    var maxlength = 4;
-
-    if(text>maxlength){
-        (input).val(text.substr(0, maxlength)); 
-    }
-}
-
-function insertDecimal(input){
-	var text = (input).val();
-	var patt = new RegExp("[0-9]{2}");
-	var matches = patt.test(text);
-	if(matches){
-		input.val(insert(text, 1, '.'));
+function addExponent(input){
+	var text=input.val();
+	var space =text.indexOf(".");
+	text=text.trim().replace('.', '');
+	input.val(replaceNumber(text));
+	
+	if(space==1||text.length==1){
+		return 0;
+	}
+	else if(space==2 ||text.length==2){
+		return 1;
+	}
+	else{
+		return 2;
 	}
 
+}
+
+
+function replaceNumber(text){
+	var num = parseFloat(text,10);
+	num=num.toPrecision(3);
+	num=(num.toString().substring(0,4));
+	num=num.trim().replace('.', '');
+	num=insert(num, 1, '.');
+	num=parseFloat(num).toPrecision(3);
+	return(num);	
 }
 
 function insert(str, index, value) {

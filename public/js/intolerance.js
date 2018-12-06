@@ -1,35 +1,47 @@
 $(document).ready(function()
 {
 	$('.error').hide();
+  var id =$('#appointmentnumber').text(); 
 
-    $("#effect").change(function () {
-        if($(this).val().length>=3){
-            if($('#description').val().length>11){
-                $('#description').val($("#diagnosisname").text()+" to "+$("#allergy").val()+  
-                    " will cause " + $(this).val());
-            }
-        }
+    $("#lastCauseClicker").click(function(){          
+            destination ="../../../../problemsintoleranceclear/"+id;
+            $('#barrierform').attr('action', destination);
     });
+
+    $("#newCauseClicker").click(function(){          
+            destination ="../../../../problemsintolerance/"+id;
+            $('#barrierform').attr('action', destination);
+    });
+
 
 	 $("#allergy").change(function () {
 	 	if($(this).val().length>=3){
-        	$('#description').val($("#diagnosisname").text()+" to "+$(this).val());
-            if($('#effect').val().length>3){
-                $('#description').val($('#description').val()+ " will cause " + $('#effect').val());
-            } 
             $('.error').hide();
         }
-        else{
-            $('#description').val('');
+        else{;
             $('.error').show();
         }
     });
 
+     function testEffect(){
+        if($('#effect').val().length>2){
+            if($('#description').val().length>3){
+               $('#description').val($('#description').val()+ " will cause " + $('#effect').val()); 
+            }
+        }
+     }
+
+
      $('.pathClicker').click(function(){
-        if($('#description').val().length<11){
+         $('#description').val($("#diagnosisname").text()+" to "+$("#allergy").val());
+        if($('#description').val().length<17){
+           
+          $('#description').val("");
            $('.error').show(); 
         }
         else{
+              testEffect()
+            
             $('.error').hide();
         }
     });

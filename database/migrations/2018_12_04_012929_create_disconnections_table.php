@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateColorsTable extends Migration
+class CreateDisconnectionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateColorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('colors', function (Blueprint $table) {
+        Schema::create('disconnections', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('color');
+            $table->integer('starting_connection');
+            $table->integer('current_connection');
+            $table->string('units')->default('%');
         });
     }
 
@@ -27,6 +29,6 @@ class CreateColorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('colors');
+        Schema::dropIfExists('disconnections');
     }
 }

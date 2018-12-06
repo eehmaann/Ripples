@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 use App\Problem;
-use App\Diagnosis;
-use App\Heartwall;
-use App\Cord;
-use App\Solution;
 use App\Appointment;
+use App\Cord;
+use App\Color;
+use App\Curse;
+use App\Diagnosis;
 use App\Disconnection;
+use App\Heartwall;
 use App\Intolerance;
+use App\Saboteur;
+use App\Solution;
 use DB;
 use Redirect;
 
@@ -22,6 +25,7 @@ class ProblemsController extends Controller
             'diagnosis_id'=> 'required|numeric',
         ]);
         
+
         $appointments=Appointment::find($appointment_id);
         $problem = new Problem();
         $problem->description = $request->input('description');
@@ -53,10 +57,12 @@ class ProblemsController extends Controller
         ]);
         
         $appointments=Appointment::find($appointment_id);
+         $diagnosis=Diagnosis::find($request->input('diagnosis_id'));
         $problem = new Problem();
         $problem->description = $request->input('description');
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->cleared=true;
+        $problem->notes=$diagnosis->name.' '.$diagnosis->clear_statement;
         if(Problem::where('cleared', false)
             ->whereHas('appointments', function($query) use($appointment_id){
                 $query->where('appointment_id', '=', $appointment_id);
@@ -71,6 +77,76 @@ class ProblemsController extends Controller
         } 
         $problem->save();
         $problem->appointments()->sync($appointments);
+
+        return \Redirect::route('problems.show', $appointment_id);
+    }
+
+     public function storeAllergy(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+            'allergy' => 'required|min:3',
+        ]);
+        
+        $appointments=Appointment::find($appointment_id);
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        if(Problem::where('cleared', false)
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })
+            ->count()>0){
+            
+                $parent_problem =Problem::where('cleared', false)
+                ->whereHas('appointments', function($query) use($appointment_id){
+                    $query->where('appointment_id', '=', $appointment_id);
+                })
+                ->latest()->first();
+                $problem->steps=$parent_problem->steps+1;
+                $problem->parentproblem_id=$parent_problem->id;
+        } 
+        $problem->save();
+        $problem->appointments()->sync($appointments);
+        $allergy = new Intolerance();
+        $allergy->substance = $request->input('allergy');
+        $allergy->save();
+
+        return \Redirect::route('navigation.show', $appointment_id);
+    }
+
+      public function storeAllergyClear(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+            'allergy' =>'required|min:3',
+        ]);
+        
+        $appointments=Appointment::find($appointment_id);
+         $diagnosis=Diagnosis::find($request->input('diagnosis_id'));
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        $problem->cleared=true;
+        $problem->notes=$diagnosis->name.' '.$diagnosis->clear_statement;
+        if(Problem::where('cleared', false)
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })
+             ->count()>0){
+                $parent_problem =Problem::where('cleared', false)
+                ->whereHas('appointments', function($query) use($appointment_id){
+                    $query->where('appointment_id', '=', $appointment_id);
+                })->latest()->first();
+                $problem->steps=$parent_problem->steps+1;
+                $problem->parentproblem_id=$parent_problem->id;
+        } 
+        $problem->save();
+        $problem->appointments()->sync($appointments);
+
+        $allergy = new Intolerance();
+        $allergy->substance = $request->input('allergy');
+        $allergy->save();
 
         return \Redirect::route('problems.show', $appointment_id);
     }
@@ -118,14 +194,16 @@ class ProblemsController extends Controller
             'description' => 'required|min:3',
             'diagnosis_id'=> 'required|numeric',
             'colortext' => 'required|min:3',
-            'solution'=> 'require|min:3'
+            'solution'=> 'required|min:3'
         ]);
         
         $appointments=Appointment::find($appointment_id);
+         $diagnosis=Diagnosis::find($request->input('diagnosis_id'));
         $problem = new Problem();
         $problem->description = $request->input('description');
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->cleared=true;
+        $problem->notes=$diagnosis->name.' '.$diagnosis->clear_statement;
         if(Problem::where('cleared', false)
             ->whereHas('appointments', function($query) use($appointment_id){
                 $query->where('appointment_id', '=', $appointment_id);
@@ -150,6 +228,77 @@ class ProblemsController extends Controller
 
         return \Redirect::route('problems.show', $appointment_id);
     }
+
+    public function storeCurseCord(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+            'curseinput' => 'required|min:3',
+        ]);
+        
+        $appointments=Appointment::find($appointment_id);
+        $problem = new Problem();
+        $problem->cleared=true;
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        if(Problem::where('cleared', false)
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })
+            ->count()>0){
+            
+                $parent_problem =Problem::where('cleared', false)
+                ->whereHas('appointments', function($query) use($appointment_id){
+                    $query->where('appointment_id', '=', $appointment_id);
+                })
+                ->latest()->first();
+                $problem->steps=$parent_problem->steps+1;
+                $problem->parentproblem_id=$parent_problem->id;
+        } 
+        $problem->save();
+        $problem->appointments()->sync($appointments);
+        $curse = new Curse();
+        $curse->curse = $request->input('curseinput');
+        $curse->save();
+
+        return \Redirect::route('cording.create', [15,  $appointment_id]);
+    }
+ 
+      public function storeCurseClear(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+            'curseinput' =>'required|min:3',
+        ]);
+        
+        $appointments=Appointment::find($appointment_id);
+        $diagnosis=Diagnosis::find($request->input('diagnosis_id'));
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        $problem->cleared=true;
+        $problem->notes=$diagnosis->name.' '.$diagnosis->clear_statement;
+        if(Problem::where('cleared', false)
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })
+             ->count()>0){
+                $parent_problem =Problem::where('cleared', false)
+                ->whereHas('appointments', function($query) use($appointment_id){
+                    $query->where('appointment_id', '=', $appointment_id);
+                })->latest()->first();
+                $problem->steps=$parent_problem->steps+1;
+                $problem->parentproblem_id=$parent_problem->id;
+        } 
+        $problem->save();
+        $problem->appointments()->sync($appointments);
+
+        $curse = new Curse();
+        $curse->curse = $request->input('curseinput');
+        $curse->save();
+
+        return \Redirect::route('problems.show', $appointment_id);
+    }
  
 
      public function storePastLife(Request $request, $appointment_id){
@@ -158,7 +307,9 @@ class ProblemsController extends Controller
             'diagnosis_id'=> 'required|numeric',
         ]);
 
+        $diagnosis=Diagnosis::find($request->input('diagnosis_id'));
         $problem = new Problem();
+
         $problem->description = $request->input('description');
         $problem->diagnosis_id = $request->input('diagnosis_id');
         if(Problem::where('cleared', false)
@@ -179,6 +330,7 @@ class ProblemsController extends Controller
         $emotions = ($request->emotions)?: [];
         $problem->emotions()->sync($emotions);
         $problem->cleared=true;
+        $problem->notes=$diagnosis->name.' '.$diagnosis->clear_statement;
         $problem->save();
 
         $appointments=Appointment::find($appointment_id);
@@ -225,9 +377,12 @@ class ProblemsController extends Controller
         ]);
 
         $problem = new Problem();
+
         $problem->description = $request->input('description');
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->cleared=true;
+          $diagnosis=Diagnosis::find($request->input('diagnosis_id'));
+        $problem->notes=$diagnosis->name.' '.$diagnosis->clear_statement;
          if(Problem::where('cleared', false)
             ->whereHas('appointments', function($query) use($appointment_id){
                 $query->where('appointment_id', '=', $appointment_id);
@@ -263,6 +418,8 @@ class ProblemsController extends Controller
         $problem->description = $request->input('description');
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->cleared=true;
+         $diagnosis=Diagnosis::find($request->input('diagnosis_id'));
+          $problem->notes=$diagnosis->name.' '.$diagnosis->clear_statement;
          if(Problem::where('cleared', false)
             ->whereHas('appointments', function($query) use($appointment_id){
                 $query->where('appointment_id', '=', $appointment_id);
@@ -296,6 +453,8 @@ class ProblemsController extends Controller
         $problem->description = $request->input('description');
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->cleared=true;
+        $diagnosis=Diagnosis::find($request->input('diagnosis_id'));
+        $problem->notes=$diagnosis->name.' '.$diagnosis->clear_statement;
         if(Problem::where('cleared', false)
             ->whereHas('appointments', function($query) use($appointment_id){
                 $query->where('appointment_id', '=', $appointment_id);
@@ -313,6 +472,7 @@ class ProblemsController extends Controller
         $emotions = ($request->emotions)?: [];
         $problem->emotions()->sync($emotions);
         $problem->cleared=true;
+        $problem->notes=$diagnosis->name.' '.$diagnosis->clear_statement;
         $problem->save();
 
         $appointments=Appointment::find($appointment_id);
@@ -360,6 +520,78 @@ class ProblemsController extends Controller
 
        return \Redirect::route('trappedemotion.create', $appointment_id);
     }
+
+    public function storeIntolerance(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+            'allergy' => 'required|min:3',
+        ]);
+        
+        $appointments=Appointment::find($appointment_id);
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        if(Problem::where('cleared', false)
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })
+            ->count()>0){
+            
+                $parent_problem =Problem::where('cleared', false)
+                ->whereHas('appointments', function($query) use($appointment_id){
+                    $query->where('appointment_id', '=', $appointment_id);
+                })
+                ->latest()->first();
+                $problem->steps=$parent_problem->steps+1;
+                $problem->parentproblem_id=$parent_problem->id;
+        } 
+        $problem->save();
+        $problem->appointments()->sync($appointments);
+        $allergy = new Intolerance();
+        $allergy->substance = $request->input('allergy');
+        $allergy->symptom = $request->input('effect');
+        $allergy->save();
+
+        return \Redirect::route('navigation.show', $appointment_id);
+    }
+
+      public function storeIntoleranceClear(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+            'allergy' =>'required|min:3',
+        ]);
+        
+        $appointments=Appointment::find($appointment_id);
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        $problem->cleared=true;
+        $diagnosis=Diagnosis::find($request->input('diagnosis_id'));
+        $problem->notes=$diagnosis->name.' '.$diagnosis->clear_statement;
+        if(Problem::where('cleared', false)
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })
+             ->count()>0){
+                $parent_problem =Problem::where('cleared', false)
+                ->whereHas('appointments', function($query) use($appointment_id){
+                    $query->where('appointment_id', '=', $appointment_id);
+                })->latest()->first();
+                $problem->steps=$parent_problem->steps+1;
+                $problem->parentproblem_id=$parent_problem->id;
+        } 
+        $problem->save();
+        $problem->appointments()->sync($appointments);
+
+        $allergy = new Intolerance();
+        $allergy->substance = $request->input('allergy');
+        $allergy->symptom = $request->input('effect');
+        $allergy->save();
+
+        return \Redirect::route('problems.show', $appointment_id);
+    }
       
     public function storeDisconnection(Request $request, $appointment_id){
         $this->validate($request, [
@@ -400,6 +632,126 @@ class ProblemsController extends Controller
        return \Redirect::route('problems.show', $appointment_id);
     }    
 
+        public function storeSpirittoSpirit(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+            'tearInput'=> 'required|numeric'
+        ]);
+         
+      
+
+        $disconnection = new Disconnection();
+        $disconnection->starting_connection= $request->input('tearInput');
+        $disconnection->current_connection= $request->input('tearInput');
+        $disconnection->units="tears";
+        $disconnection->save();
+
+        $disconnection_match =Disconnection::latest()->first();
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        $problem->describable_type='App\Disconnection';
+        $problem->describable_id=$disconnection_match->id;
+         if(Problem::where('cleared', false)
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })
+            ->count()>0){
+                $parent_problem =Problem::where('cleared', false)
+                ->whereHas('appointments', function($query) use($appointment_id){
+                    $query->where('appointment_id', '=', $appointment_id);
+                })->latest()->first();
+                $problem->steps=$parent_problem->steps+1;
+                $problem->parentproblem_id=$parent_problem->id;
+        } 
+        $problem->save();
+        $appointments=Appointment::find($appointment_id);
+        $problem->appointments()->sync($appointments);
+
+       return \Redirect::route('problems.show', $appointment_id);
+    }  
+
+
+
+     public function storeSabotuerCord(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+            'weaponinput' => 'required|min:3',
+
+        ]);  
+      
+        $appointments=Appointment::find($appointment_id);
+
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        if(Problem::where('cleared', false)
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })
+            ->count()>0){
+            
+                $parent_problem =Problem::where('cleared', false)
+                ->whereHas('appointments', function($query) use($appointment_id){
+                    $query->where('appointment_id', '=', $appointment_id);
+                })
+                ->latest()->first();
+                $problem->steps=$parent_problem->steps+1;
+                $problem->parentproblem_id=$parent_problem->id;
+        } 
+        $problem->save();
+        $problem->appointments()->sync($appointments);
+        $weapon = new Saboteur();
+        $weapon->weapon = $request->input('weaponinput');
+        $weapon->save();
+
+         return \Redirect::route('cording.create', [15,  $appointment_id]);
+    }
+
+
+
+
+      public function storeSabotuerClear(Request $request, $appointment_id){
+        $this->validate($request, [
+            'description' => 'required|min:3',
+            'diagnosis_id'=> 'required|numeric',
+            'weaponinput' =>'required|min:3',
+
+        ]);  
+      
+        $appointments=Appointment::find($appointment_id);
+
+
+        $problem = new Problem();
+        $problem->description = $request->input('description');
+        $problem->diagnosis_id = $request->input('diagnosis_id');
+        $problem->cleared=true;
+        $diagnosis=Diagnosis::find($request->input('diagnosis_id'));
+        $problem->notes=$diagnosis->name.' '.$diagnosis->clear_statement;
+        if(Problem::where('cleared', false)
+            ->whereHas('appointments', function($query) use($appointment_id){
+                $query->where('appointment_id', '=', $appointment_id);
+            })
+             ->count()>0){
+                $parent_problem =Problem::where('cleared', false)
+                ->whereHas('appointments', function($query) use($appointment_id){
+                    $query->where('appointment_id', '=', $appointment_id);
+                })->latest()->first();
+                $problem->steps=$parent_problem->steps+1;
+                $problem->parentproblem_id=$parent_problem->id;
+        } 
+        $problem->save();
+        $problem->appointments()->sync($appointments);
+
+        $weapon = new Saboteur();
+        $weapon->weapon = $request->input('weaponinput');
+        $weapon->save();
+
+        return \Redirect::route('problems.show', $appointment_id);
+    }
+
      public function storeJustSolution (Request $request, $appointment_id){
         $this->validate($request, [
             'diagnosis_id'=> 'required|numeric',
@@ -407,7 +759,7 @@ class ProblemsController extends Controller
         ]);
 
         $solution = new Solution();
-        $solution->material= $request->input('solution');
+        $solution->solution= $request->input('solution');
         $solution->save();
 
         $appointments=Appointment::find($appointment_id);
@@ -424,7 +776,7 @@ class ProblemsController extends Controller
       
 
         $solution = new Solution();
-        $solution->material= $request->input('solution');
+        $solution->solution= $request->input('solution');
         $solution->save();
 
         $solution_match =Solution::latest()->first();
@@ -433,6 +785,7 @@ class ProblemsController extends Controller
         $problem->diagnosis_id = $request->input('diagnosis_id');
         $problem->describable_type='App\Solution';
         $problem->describable_id=$solution_match->id;
+        $problem->cleared=true;
          if(Problem::where('cleared', false)
             ->whereHas('appointments', function($query) use($appointment_id){
                 $query->where('appointment_id', '=', $appointment_id);
@@ -461,13 +814,14 @@ class ProblemsController extends Controller
       
 
         $solution = new Solution();
-        $solution->material= $request->input('solution');
+        $solution->solution= $request->input('solution');
         $solution->save();
 
         $solution_match =Solution::latest()->first();
         $problem = new Problem();
         $problem->description = $request->input('description');
         $problem->diagnosis_id = $request->input('diagnosis_id');
+        $problem->clear=false;
         $problem->describable_type='App\Solution';
          if(Problem::where('cleared', false)
             ->whereHas('appointments', function($query) use($appointment_id){
@@ -491,15 +845,16 @@ class ProblemsController extends Controller
      
 
     public function showProblems($appointment_id){
-        $appointments=Appointment::find($appointment_id);
-         $problem=Problem::where(['cleared' => 0])
+        $appointment=Appointment::find($appointment_id);
+        $problems=$appointment->openProblems()->get();
+         $problemList=Problem::where(['cleared' => false])
             ->whereHas('appointments', function($query) use($appointment_id){
                     $query->where('appointment_id', '=', $appointment_id);
                 })->get();
-        $lastProblem=$problem->last();
+        $lastProblem=$problems->last();
         return view('Navigation.clearproblems')
-        ->with(['problems'=>$problem,
-                'appointments'=>$appointments,
+        ->with(['problems'=>$problems,
+                'appointment'=>$appointment,
                 'lastProblem' =>$lastProblem]);
 
     }
@@ -508,6 +863,11 @@ class ProblemsController extends Controller
          $problem = Problem::find($id);
          $problem->cleared=true;
          $problem->save();
+         $clearer=Problem::whereHas('appointments', function($query) use($appointment_id){
+                    $query->where('appointment_id', '=', $appointment_id);
+                })->latest()->first();
+         $clearer->notes=$clearer->notes.' '.$problem->diagnosis->name.' '.$problem->diagnosis->clear_statement;
+        $clearer->save();
         return \Redirect::route('problems.show', $appointment_id);
     }
         

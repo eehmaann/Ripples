@@ -10,7 +10,9 @@ $(document).ready(function()
 	var heartwall ='';
 
 	//Adjust base form
-	$('#progressionQuestion').text('Are there more trapped emotions?');
+	$('#progressionQuestion').text('Are there more emotions?');
+	$('#lastCauseClicker').text("No. Clear these emotions.");
+	$('#newCauseClicker').text("Yes. Clear these emotions and find  more.");
 
 	
 	// Allow for Heartwall update
@@ -36,7 +38,7 @@ $(document).ready(function()
 		checkDistance();
 	});
 
-	$('#heartwallClicker').click(function(){
+	$('#heartwallUpdater').click(function(){
 		if(checkDistance()){
 		destination ="../../../../heartwallUpdate/"+heartwall+"/update/"+id;
 	$('#barrierform').attr('action', destination);
@@ -44,6 +46,11 @@ $(document).ready(function()
 		}
 	});
 
+	$('#heartwallClearer').click(function(){
+		destination ="../../../../heartwallClear/"+heartwall+"/update/"+id;
+		$('#barrierform').attr('action', destination);
+		$('form').submit();
+	});
 
 	
 
@@ -51,6 +58,7 @@ $(document).ready(function()
 	hideTrapTypes();
 
 	$('.pathClicker').click(function(){
+		
 		if(emotiontrap=="pastlife"){
 			updatePastLifeStatement();
 		}
@@ -58,6 +66,7 @@ $(document).ready(function()
 	});
 
 	$("#lastCauseClicker").click(function(){
+		
 		if(emotiontrap=="pastlife"){
 			destination ="../../../../problemspastlifecauses/"+id;
 		}
@@ -317,14 +326,16 @@ $(document).ready(function()
 	
 			
 	function updatePastLifeStatement(){
-		if($('#life').val().length> 21){
-			preparePastLife();
-			$("#lifeerror").hide()
-		}
-		else{
-			currentPhrase="";
-			timePrepared=false();
-			$("#lifeerror").show();
+		if($('input[name="emotions[]"]:checked').length>0){
+			if($('#life').val().length> 21){
+				preparePastLife();
+				$("#lifeerror").hide()
+			}
+			else{
+				currentPhrase="";
+				timePrepared=false();
+				$("#lifeerror").show();
+			}
 		}
 	}
 
@@ -342,52 +353,54 @@ $(document).ready(function()
 	var today = new Date();
 	var date=today.getFullYear();
 	var gen=22;
+	var GenList=[];
+
 
 	$('.singleclicker').click(function(){
 		if($(this).text()!="Undo"){
 			$('#generationpath').val($('#generationpath').val()+($(this).text() + " "));
-			lastentry="singleadd";
-			countadd++
-			setInheritedDate();
+			GenList.push($(this).text().length +1);
+			$('#patherror').hide();
 			timePrepared=true;
 		}
-	});
-
-	$('.singleclicker').click(function(){
-		if($(this).text()="Undo"){
+		else{
 			undoGenerationAdd();
-			if(countadd>0){
-				countadd--;
-				setInheritedDate();
+			if($('#generationpath').val().length<5){
+				timePrepared=false;
 			}
 		}
+
 	});
 
-	$('#genrepeatsinput').change(function(){
-		if($('genrepeatsinput').val()){
-			$('#patternadderror').show();	
-		}
+	$('#clearer').click(function(){
+		$('#generationpath').val("");
+		countadd=0;
+		$('#genrepeatsinput').val('');
+		setInheritedDate();
+		timePrepared=false;
+		GenList=[];
 	});
+	
+	$('#genrepeatsinput').change(function(){
+		countadd=$(this).val();
+		setInheritedDate();
+	});
+
 
 	$('.patternclicker').click(function(){
 		if($(this).text()!="Undo"){
 			$('#patternstring').val($('#patternstring').val()+($(this).text() + " "));
-			patternadd++;
 			$('#parentgenerror').hide();
+
 		}
-			else{
-				undoPatternExtension();
-				if(patternadd>=1){
-					patternadd--;
-				}
+		else{
+			undoPatternExtension();
 		}
 
 	});
 
 	$('#pattogenclicker').click(function(){
 		addPattern();
-		setInheritedDate();
-		$('#genrepeatsinput').val(0);
 		$('#patternstring').val('');
 
 	});
@@ -406,19 +419,18 @@ $(document).ready(function()
 			prepareAddPattern();
 			timePrepared=true;
 		}
+
 		else{
 			$('#parentgenerror').show();
 		}
 	}
 
 	function prepareAddPattern(){
-		var repeats = parseInt($('#genrepeatsinput').val());
-		if(repeats>=1){
-			$('#generationpath').val("("+$('#patternstring').val()+')[repeated for' +
-			$('#genrepeatsinput').val() + " generations] ");
-			lastentry ="pattern";
-			countadd +=( patternadd *= repeats);
-			patternadd=0;
+		if($('#patternstring').val().length>6){
+		$('#generationpath').val($('#generationpath').val() 
+			+"("+$('#patternstring').val()+')');
+			GenList.push($('#patternstring').val().length+3);
+			$('#patherror').hide();			
 		} 
 		else{
 			$('#patternadderror').show();
@@ -426,31 +438,29 @@ $(document).ready(function()
 	}
 
 	function resetPatternDisplays(){
-		$('#genrepeatsinput').val(0);
 		$('#patternstring').val('');
 	}
 
 	function setInheritedDate(){
-		$('#yeardisplay').val(date-(countadd*gen));
+		var newdate= date-(countadd*gen);
+		if (newdate<0){
+			newdate*=-1
+			$('#yeardisplay').val(newdate + "B.C.E");
+		}
+		else{
+			$('#yeardisplay').val(newdate + "CE");
+		}
+		
 	}
-
 
 	function undoGenerationAdd(){
 		var genstring =$('#generationpath').val();
 		var genlength=genstring.length;
 		if(genstring.length>6){
-			if(lastentry=="singleadd"){
-				genstring=genstring.substring(0, (genlength-7));		
-			}
-			if(lastentry="pattern"){
-				genstring=genstring.substring(0, lastIndexOf("("));
-			}
+			var discardGen = GenList.pop();
+			genstring=genstring.substring(0, (genlength-discardGen))
 			$('#generationpath').val(genstring);
-		}
-
-		else{
-			markUnready();
-		}
+		}		
 	}
 
 	// Functions that are used multiple timesource options
@@ -470,12 +480,20 @@ $(document).ready(function()
 
 	// Create description if Repitions are ready
 	function prepareForSubmission(){
-		if(checkRepitions()){
-			$("#errormessage").hide();
-			constructDescription();
-			return;
+		if($('input[name="emotions[]"]:checked').length>0){
+			if(checkRepitions()){
+				$("#errormessage").hide();
+				constructDescription();
+
+				return;
+
+			}
+			$("#errormessage").show();
+			$('#emptyStatementError').show();
+			return
 		}
-		$("#errormessage").show();
+		else
+			$('#emotionListError').show();
 	}
 
 	function checkRepitions(){

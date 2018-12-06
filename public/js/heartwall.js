@@ -6,7 +6,7 @@ $(document).ready(function()
 
     //Adjust base form
   $('#progressionQuestion').hide();
-  $('#newCauseClicker').text('Search Trapped Emotions');
+  $('#newCauseClicker').text('Search Heartwall Emotions');
   $('#lastCauseClicker').hide();
 
   $('.error').hide();
@@ -62,7 +62,7 @@ $(document).ready(function()
      $( "#material" ).autocomplete({
         source: function(request, response) {
           $.ajax({
-            url: '/searchajax',
+            url: '/searchheartwall',
             dataType: "json",
             data: {
               term : request.term

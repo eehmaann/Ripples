@@ -2,84 +2,64 @@ $(document).ready(function()
 {
 
 $(".error").hide();
+		$('#diagnoses > div > div >ul > a').each(function(){
+		$(this).removeAttr("href");
+	});
 	$(".clickDiagnose > a").removeAttr("href");
 	$( ".clickLocate:nth-child(6)")[0].remove()
 	$('#Energy')[0].remove();
 	$('#Pathogen')[0].remove();
 	$('#Toxins')[0].remove();
 	 $('#progressionQuestion').hide();
-	$("#lastCauseClicker").remove();
-	$("#newCauseClicker").text('Remove Sabotuer');	
+	$("#lastCauseClicker").remove();	
 	var id =$('#appointmentnumber').text(); 
 
-
-
 	$(".clickDiagnose").click(function(){
-		$('#bDisconnection').val($(this).attr('id'));
+		$('#bodyInput').val($(this).attr('id'));
 	});
 
+	$('#disconnectionPercentage').change(function(){
+		testConnection();
+	});
 
-	$('fieldset').change(function(){
-		var data=$(this).children('input').val();
-		if(!($.isNumeric(data))){
-			showError(data.length <2, $(this));
-		}
+	$('#bodyInput').change(function(){
+		testParts();
+	});
+
+	function testConnection(){
+		var connection =$('#disconnectionPercentage').val();
+		if(connection> 0 && connection <100){
+			$('#percenterror').hide() 
+			return true;
+			}
 		else{
-			showError(data<0, $(this));
+			$('#percenterror').show()
+			return false;
 		}
-	});
+	}
 
-	$(".pathClicker").click(function(){
-		var isValid;
 
-		$( "fieldset" ).each(function() {
-			var data=$(this).children('input').val();
-			// test to see if there is first invalid entry
-			if(isValid){
-				isValid= testValid($(this));
-			}
-			// test from time error invalid is found whether an error must show
-			if(!(isValid)){
-				if(!($.isNumeric(data))){
-					showError(data.length <0 || >100, $(this));
-				}
-				else{
-				showError(data<0, $(this));
-				}
-			}
-		});
-		// If all fields are correct construct a description statement
-		if(isValid){
+	function testParts(){
+		if($('#bodyInput').val().length>2){
+			$('#bodyerror').hide()
+			return true;
+		}
+		else
+			$('#bodyerror').show()
+			return false;
+	}
+
+	$("#newCauseClicker").click(function(){
+		if(testConnection() && testParts()){
 			constructDescription();
 			var destination ="../../../../problemsdisconnection/"+id;
 			$('#barrierform').attr('action', destination);
 		}
 	});
 
+
 	function constructDescription(){
-		$("#description").val(($("#diagnosisname")+": Spirit disconnect from " +$('#bDisconnection').val());	
+		$("#description").val($("#diagnosisname").text()+": Spirit disconnect from " +$('#bodyInput').val());	
 	}
-
-
-
-	function showError(condition, fieldset){
-		if(condition){
-			$(fieldset).children('.error').show()
-		}
-		else{
-			$(fieldset).children('.error').hide();
-		}
-	}
-
-	function testValid(text){
-		//var data=$(this).children('input').val();
-		if(!($.isNumeric(text))){
-			return(text.length>4);
-		}
-		else{
-			return(text>0);
-		}
-	}
-
 
 });

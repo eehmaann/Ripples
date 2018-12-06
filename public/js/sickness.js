@@ -3,6 +3,7 @@ $(document).ready(function()
 	var id =$('#appointmentnumber').text(); 
 	$('#progressionQuestion').hide();
 	$("#lastCauseClicker").remove();
+	$('.error').hide();
 
 
 	$("#newCauseClicker").click(function(){
@@ -22,12 +23,13 @@ $(document).ready(function()
 		}
 		if(isPrepared){
 			$("#description").val($("#diagnosisname").text() + " caused by "
-				+ $('#disconnectionDirection').val() " " + $('#motherDisconnection').val()
-				+ " not connected to " + $('#unbornDisconnection').val() " of " 
+				+ $('#disconnectionDirection').val() +" " + $('#motherDisconnection').val()
+				+ " not connected to " + $('#unbornDisconnection').val() +" of " 
 				+ $('#unbornformDisconnection').val());
 			var destination ="../../../../problemsdisconnection/"+id;
 			$('#barrierform').attr('action', destination);
 		}
+	});
 
 
 
@@ -45,7 +47,7 @@ $(document).ready(function()
 	}
 
 	function checkDirection(){
-		if($('#disconnectionDirection').val().length()<4){
+		if($('#disconnectionDirection').val().length<4){
 			$('#disconnectionerror').show();
 			return false;
 		}
@@ -56,7 +58,7 @@ $(document).ready(function()
 	}
 
 	function checkMother(){
-		if($('#motherDisconnection').val().length()<4){
+		if($('#motherDisconnection').val().length<4){
 			$('#mothererror').show();
 			return false;
 		}
@@ -67,7 +69,7 @@ $(document).ready(function()
 	}
 
 	function checkForm(){
-		if($('#unbornformDisconnection').val().length()<4){
+		if($('#unbornformDisconnection').val().length<4){
 			$('#unbornformerror').show();
 			return false;
 		}
@@ -78,7 +80,7 @@ $(document).ready(function()
 	}
 
 	function checkBaby(){
-		if($('#unbornDisconnection').val().length()<4){
+		if($('#unbornDisconnection').val().length<4){
 			$('#unbornerror').show();
 			return false;
 		}
@@ -103,8 +105,6 @@ $(document).ready(function()
 	$('.unbornPartClicker').click(function(){
 		$('#unbornDisconnection').val($(this).text());
 	});
-
-
 
 });
 

@@ -14,9 +14,9 @@ class AppointmentsTableSeeder extends Seeder
     {
         //
         $appointments=[
-    	 	[1],
-    	 	[2],
-    	 	[2],
+    	 	[1, 1],
+    	 	[2, 1],
+    	 	[2, 1],
     	 ];
 
     	 $count = count($appointments);
@@ -27,6 +27,7 @@ class AppointmentsTableSeeder extends Seeder
 	        $appointment->created_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
 	        $appointment->updated_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
 	        $appointment->goal_id = $appointmentData[0];
+            $appointment->user_id = $appointmentData[0];
 
 	        $appointment->save();
 	        $count--;

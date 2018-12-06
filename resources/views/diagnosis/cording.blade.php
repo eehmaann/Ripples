@@ -28,8 +28,8 @@
                                 class="cord"
                                 id={{$cordport[$client]}}to{{$cordport[$corded]}}number
                                 name={{$cordport[$client]}}to{{$cordport[$corded]}}number
+                                min=0
                                 step="0.01"
-                                maxlength=4
                                 value=''>
 
                                                 
@@ -38,7 +38,7 @@
                             <input
                                 type='number'
                                 class='cordmultiple'
-                                min="1" 
+                                min=1
                                 step="1"
                                 id={{$cordport[$client]}}to{{$cordport[$corded]}}multiplier
                                 name={{$cordport[$client]}}to{{$cordport[$corded]}}multiplier
@@ -51,6 +51,8 @@
                                 class="cordtexts"> 
                             </input>
                             <br>
+                            <p class="error" id=={{$cordport[$client]}}to{{$cordport[$corded]}}error>
+                                If there is {{$cordport[$client]}} to {{$cordport[$corded]}} cord please include both fields</p>
                             <p id={{$cordport[$client]}}to{{$cordport[$corded]}}definition class="definition"></p> 
                             @endfor
                         @endfor

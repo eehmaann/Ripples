@@ -2,6 +2,9 @@ $(document).ready(function()
 {
 
 $(".error").hide();
+	$('#diagnoses > div > div >ul > a').each(function(){
+		$(this).removeAttr("href");
+	});
 	$(".clickDiagnose > a").removeAttr("href");
 	$( ".clickLocate:nth-child(6)")[0].remove()
 	$('#Energy')[0].remove();
@@ -9,7 +12,6 @@ $(".error").hide();
 	$('#Toxins')[0].remove();
 	 $('#progressionQuestion').hide();
 	$("#lastCauseClicker").remove();
-	$("#newCauseClicker").text('Remove Sabotuer');	
 	var id =$('#appointmentnumber').text(); 
 
 	var bodyChoice="first part";
@@ -27,7 +29,7 @@ $(".error").hide();
 
 
 	$(".clickDiagnose").click(function(){
-		if(bodyChoice=="firstPart"){
+		if(bodyChoice=="first part"){
 			$('#aDisconnection').val($(this).attr('id'));
 		}
 		else{
@@ -35,36 +37,27 @@ $(".error").hide();
 		}
 	});
 
+	$('#disconnectionPercentage').change(function(){
+		testConnection();		
+	});
 
-	$('fieldset').change(function(){
-		var data=$(this).children('input').val();
-		if(!($.isNumeric(data))){
-			showError(data.length <2, $(this));
-		}
-		else{
-			showError(data<0, $(this));
-		}
+	$('#aDisconnection').change(function(){
+		testParts($("#aDisconnection"),$("#aerror"));
+	});
+
+		$('#bDisconnection').change(function(){
+		testParts($("#bDisconnection"),$("#berror"));
 	});
 
 	$(".pathClicker").click(function(){
-		var isValid;
-
-		$( "fieldset" ).each(function() {
-			var data=$(this).children('input').val();
-			// test to see if there is first invalid entry
-			if(isValid){
-				isValid= testValid($(this));
-			}
-			// test from time error invalid is found whether an error must show
-			if(!(isValid)){
-				if(!($.isNumeric(data))){
-					showError(data.length <0 || >100, $(this));
-				}
-				else{
-				showError(data<0, $(this));
-				}
-			}
-		});
+		var isValid = testConnection();
+		alert("number test");
+		if(isValid){
+			isValid=testParts($("#aDisconnection"),$("#aerror"));
+		}
+		if(isValid){
+			isValid= testParts($("#bDisconnection"),$("#berror"));
+		}
 		// If all fields are correct construct a description statement
 		if(isValid){
 			constructDescription();
@@ -73,30 +66,35 @@ $(".error").hide();
 		}
 	});
 
+
+	function testConnection(){
+		var connection =$('#disconnectionPercentage').val();
+		if(connection> 0 && connection <100){
+			$('#percenterror').hide() 
+			return true;
+			}
+		else{
+			$('#percenterror').show()
+			return false;
+		}
+	}
+
+
+	function testParts(answerField,error){
+		if(answerField.val().length>2){
+			$(error).hide();
+			return true;
+		}
+		//else
+			$(error).show();
+			return false;
+	}
+
 	function constructDescription(){
-		$("#description").val(($("#diagnosisname")+": Spirit disconnect from " +$('#bDisconnection').val());	
+		$("#description").val($("#diagnosisname").text()+": " +$("#aDisconnection").val()+
+			"disconnect from " +$('#bDisconnection').val());	
 	}
 
-
-
-	function showError(condition, fieldset){
-		if(condition){
-			$(fieldset).children('.error').show()
-		}
-		else{
-			$(fieldset).children('.error').hide();
-		}
-	}
-
-	function testValid(text){
-		//var data=$(this).children('input').val();
-		if(!($.isNumeric(text))){
-			return(text.length>4);
-		}
-		else{
-			return(text>0);
-		}
-	}
 
 
 });

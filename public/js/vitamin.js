@@ -1,6 +1,9 @@
 $(document).ready(function()
 {	
 	$('.error').hide();
+	$('#progressionQuestion').hide();
+    $("#lastCauseClicker").hide();
+    $("#newCauseClicker").text('Suggest change');
 	var id =$('#appointmentnumber').text();  
 
 	 $(".pathClicker").click(function(){

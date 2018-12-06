@@ -1,4 +1,7 @@
 @extends('layouts.diagnosis')
+@section('pagecss')
+<link rel="stylesheet" href='/css/autocomplete.css' type='text/css'>
+@endsection
 @section('pagejs')
  <script src="/js/sabotuer.js"></script>
 @endsection
@@ -23,7 +26,7 @@
         <input
             type='text'
             id='saboteurinput'
-            name='saboteur'
+            name='saboteurinput'
             value=''>
         <p id ="errormessage" class = "error"> Please state who the sabotuer is</p>
     </fieldset>
@@ -34,7 +37,7 @@
         <input
             type='text'
             id='weaponinput'
-            name='weapon'
+            name='weaponinput'
             value=''>
         <p id="weaponerror" class="error"> Please state the weapon that was used</p>
     </fieldset>
@@ -50,9 +53,23 @@
         <p id="bodyerror" class="error">Please state where the sabotuer is.</p>
     </fieldset>
 </div>
+<div class="row">
+    <fieldset>
+        <label> How many sabotuers?</label>
+        <input
+            type='number'
+            id='amountSaboteurs'
+            name='amountSaboteurs'
+            min=1
+            value='1'>
+        <p id="amounterror" class="error">please state the number of sabotuers</p>
+    </fieldset>
+</div>
 <div style="border: black solid; padding:1em;">
     <h3 id="bodyPartsToggler">Search for where the {{$diagnosis->name}} may be located</h3>
-    @include('layouts.locations')
+        <div id="LocationDisplay">
+            @include('layouts.locations')
+        </div> 
 </div>
 
 @endsection

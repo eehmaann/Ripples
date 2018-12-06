@@ -1,6 +1,10 @@
 $(document).ready(function()
 {
     var id =$('#appointmentnumber').text();
+
+    $("#lastCauseClicker").text('All Emotional Resonance removed');
+     $("#newCauseClicker").text('Find additioanl Emotional Resonance');
+
     $('#progressionQuestion').text('Are there more ' + $("#diagnosisname").text()+ '?');
 
 

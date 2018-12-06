@@ -4,10 +4,22 @@ $(document).ready(function()
     if($('#emotionList')){
         $('#emotionList').hide();
     }
+    var id =$('#appointmentnumber').text(); 
 
 	$("#allergy").change(function () {
         checkAllergy($('#allergy').val());
     });
+
+    $("#lastCauseClicker").click(function(){          
+            destination ="../../../../problemsallergyclear/"+id;
+            $('#barrierform').attr('action', destination);
+    });
+
+    $("#newCauseClicker").click(function(){          
+            destination ="../../../../problemsallergy/"+id;
+            $('#barrierform').attr('action', destination);
+    });
+
 
     $('.pathClicker').click(function(){
         checkAllergy($('#allergy').val());

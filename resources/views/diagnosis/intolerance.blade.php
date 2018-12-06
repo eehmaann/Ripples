@@ -1,4 +1,7 @@
 @extends('layouts.diagnosis')
+@section('pagecss')
+<link rel="stylesheet" href='/css/autocomplete.css' type='text/css'>
+@endsection
 @section('pagejs')
  <script src="/js/intolerance.js"></script>
 @endsection

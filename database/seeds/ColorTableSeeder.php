@@ -20,7 +20,7 @@ class ColorTableSeeder extends Seeder
         	['green'],
         	['blue'],
         	['indigo'],
-        	['violent'],
+        	['violet'],
         	['black'],
         	['white']
         ];

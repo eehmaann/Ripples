@@ -16,8 +16,7 @@ class CreateSaboteursTable extends Migration
         Schema::create('saboteurs', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('name');
-            $table->string('category');
+            $table->string('weapon');
         });
     }
 

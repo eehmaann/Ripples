@@ -1,19 +1,26 @@
 @extends('layouts.diagnosis')
  @section('pagejs')
-    <script src="/js/spiritbody.js"></script>
+    <script src="/js/spirits.js"></script>
 
  @endsection
 @section('diagnosis')
-@include(components.percentagebox)
-@endsection
 <fieldset>
-  	<label> What area is the disconnection coming from?  (Heart is most likely)</label>
+  <label> How many tears are there?</label>
+    <input
+        type='number'
+        id='tearInput'
+        name='tearInput'
+        min= "1"
+        value=''>
+    <p id="tearerror" class="error">Please include what number of tears between 0-100</p>
+ </fieldset>
+  	<label> What has been torn?  (Heart is most likely)</label>
     	<input
         type='text'
-        id='bDisconnection'
-        name='bDisconnection'
+        id='bodyInput'
+        name='bodyInput'
         value=''>
-    	<p id="berror" class="error">Please include second disconection</p>
+    	<p id="bodyerror" class="error">Please include area of tear</p>
  </fieldset>
 
  <div class="row">
@@ -21,3 +28,4 @@
  	 	@include('layouts.locations')
  	</div>
 </div>
+@endsection

@@ -33,8 +33,16 @@ class User extends Authenticatable
 
     public function appointment()
     {
-        return $this->hasManyThrough('App\Appointment', 'App\Goal');
+        return $this->hasMany('App\Appointment');
     }
+
+     public function lastPublished(){
+      $appointment = $this->appointment()
+            ->where('published', true)
+            ->latest()->first();
+
+        return $appointment;
+  } 
 }
 
 

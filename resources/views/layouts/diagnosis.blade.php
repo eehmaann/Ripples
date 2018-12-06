@@ -9,11 +9,16 @@
     <script src="/js/navigation.js"></script>
 @endsection
 @section('content')
+
 <div id="diagnosisform" class="container">
+
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
+                          @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
                     <h1 id="barriername">{{$diagnosis->name}}</h1>
                     <form id="barrierform" method='POST' action=@yield('destination','../../../problemsb') >
                     @yield('diagnosis')

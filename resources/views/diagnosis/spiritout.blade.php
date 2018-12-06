@@ -1,6 +1,8 @@
 @extends('layouts.diagnosis')
  @section('pagejs')
- <script src="/js/excess.js"></script>
+    <script src="/js/spiritout.js"></script>
+
  @endsection
 @section('diagnosis')
+@include('components.percentagebox')
 @endsection

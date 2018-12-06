@@ -14,7 +14,7 @@ class DiagnosesTableSeeder extends Seeder
 	public function run(){
 		$diagnoses=[            
 
-            
+             
 			['Addictive Heart Energy', 'An energy created out of the
 				heart’s desperation to feel love, joy, etc. Your heart is designed to
 				feel joy, love and other positive emotions, and is the core of your being. If
@@ -33,7 +33,7 @@ class DiagnosesTableSeeder extends Seeder
 				which will typically cause emotional reactions, and  avoidance or sabotage
 				behaviors. Allergies to ideas are often created during a difficult emotional
 				time where you had negative feelings about that particular', 'yes', '',
-				'Allergy/Intolerance','allergy', 'cleared'],
+				'Allergy/Intolerance','idea', 'cleared'],
 
 			['Physical Allergy', 'An energy that develops from changes in the way the energy 
 				field reacts to the energy of something (i.e. a particle food, hair, dust)', 
@@ -43,7 +43,7 @@ class DiagnosesTableSeeder extends Seeder
 				food or other elements.', 'no','', 
 				'Allergy/Intolerance','intolerance', 'cleared'],             
 
-			['Trapped Emotion', 'Harmful emotional energies from negative past events that are 
+			['Emotion', 'Trapped emotions/ heartwall emotions are armful emotional energies from negative past events that are 
 				stored in the body. They can cause depression, anxiety; they can block people 
 				from love and happiness and make them feel disconnected from others.', 
 				'yes','', 'Emotional','trappedemotion', 'cleared'],
@@ -277,7 +277,7 @@ class DiagnosesTableSeeder extends Seeder
 				malnutrition, only 15% of the people are spiritually well-nourished. Ways
 				to increase spiritual nutrition include: prayer, mediation, inspiration
 				readings, engaging in meaningful discussion, etc.','no','',
-				'Malnutrition','circuits', 'energetically removed'],
+				'Malnutrition','spiritmal', 'energetically removed'],
 					
 			['Foods','','no', '', 'Foods, Herbs & Nutrients','food', 'energetically removed'], 
 
@@ -897,46 +897,46 @@ class DiagnosesTableSeeder extends Seeder
 			['Ligaments','Ligaments connect bone to bone and are found throughout 
 				the body','no','/images/Ligaments.png', 'Connective Tissue','circuits','made happy'],             
 			['Fascia','Connective tissue that surrounds and protects all the 
-				other tissues of the body.','yes','', 
+				other tissues of the body.','yes','/images/TransverseFascia.png', 
 				'Connective Tissue','circuits','made happy'],
 
-			['T1-T2','','no','/images/ThoracicDisksUpper.png', 'Thoracic Disks Upper','circuits','made happy'],
-			['T2-T3','','no','/images/ThoracicDisksUpper.png','Thoracic Disks Upper','circuits','made happy'],
-			['T3-T4','','no','/images/ThoracicDisksUpper.png','Thoracic Disks Upper','circuits','made happy'],
-			['T4-T5','','no','/images/ThoracicDisksUpper.png','Thoracic Disks Upper','circuits','made happy'],
-			['T5-T6','','no','/images/ThoracicDisksUpper.png','Thoracic Disks Upper','circuits','made happy'],
-			['T6-T7','','no','/images/ThoracicDisksUpper.png','Thoracic Disks Upper','circuits','made happy'],
-			['T7-T8','','no','/images/ThoracicDisksLower.png','Thoracic Disks Lower','circuits','made happy'],
-			['T8-T9','','no','/images/ThoracicDisksLower.png','Thoracic Disks Lower','circuits','made happy'],
-			['T9-T10','','no','/images/ThoracicDisksLower.png','Thoracic Disks Lower','circuits','made happy'],
-			['T0-T11','','no','/images/ThoracicDisksLower.png','Thoracic Disks Lower','circuits','made happy'],
-			['T11-T12','','no','/images/ThoracicDisksLower.png','Thoracic Disks Lower','circuits','made happy'],
-			['T12-L1','','no','/images/ThoracicDisksLower.png','Thoracic Disks Lower','circuits','made happy'],
+			['T1-T2','','no','/images/ThoracicDisksUpper.png','Thoracic disks upper','circuits','made happy'],
+			['T2-T3','','no','/images/ThoracicDisksUpper.png','Thoracic disks upper','circuits','made happy'],
+			['T3-T4','','no','/images/ThoracicDisksUpper.png','Thoracic disks upper','circuits','made happy'],
+			['T4-T5','','no','/images/ThoracicDisksUpper.png','Thoracic disks upper','circuits','made happy'],
+			['T5-T6','','no','/images/ThoracicDisksUpper.png','Thoracic disks upper','circuits','made happy'],
+			['T6-T7','','no','/images/ThoracicDisksUpper.png','Thoracic disks upper','circuits','made happy'],
+			['T7-T8','','no','/images/ThoracicDisksLower.png','Thoracic disks lower','circuits','made happy'],
+			['T8-T9','','no','/images/ThoracicDisksLower.png','Thoracic disks lower','circuits','made happy'],
+			['T9-T10','','no','/images/ThoracicDisksLower.png','Thoracic disks lower','circuits','made happy'],
+			['T0-T11','','no','/images/ThoracicDisksLower.png','Thoracic disks lower','circuits','made happy'],
+			['T11-T12','','no','/images/ThoracicDisksLower.png','Thoracic disks lower','circuits','made happy'],
+			['T12-L1','','no','/images/ThoracicDisksLower.png','Thoracic disks lower','circuits','made happy'],
 			
-			['L1-L2','','no','/images/LumbarDisks.png','Lumbar Disks','circuits','made happy'], 
-			['L2-L3','','no','/images/LumbarDisks.png','Lumbar Disks','circuits','made happy'], 
-			['L3-L4','','no','/images/LumbarDisks.png','Lumbar Disks','circuits','made happy'],
-			['L4-L5','','no','/images/LumbarDisks.png','Lumbar Disks','circuits','made happy'], 
-			['L5-S1','','no','/images/LumbarDisks.png','Lumbar Disks','circuits','made happy'], 
+			['L1-L2','','no','/images/LumbarDisks.png','Lumbar disks','circuits','made happy'], 
+			['L2-L3','','no','/images/LumbarDisks.png','Lumbar disks','circuits','made happy'], 
+			['L3-L4','','no','/images/LumbarDisks.png','Lumbar disks','circuits','made happy'],
+			['L4-L5','','no','/images/LumbarDisks.png','Lumbar disks','circuits','made happy'], 
+			['L5-S1','','no','/images/LumbarDisks.png','Lumbar disks','circuits','made happy'], 
 
-			['C2-C3','','no','/images/CervicalDisks.png','Cervical Disks','circuits','made happy'],
-			['C3-C4','','no','/images/CervicalDisks.png','Cervical Disks','circuits','made happy'], 
-			['C4-C5','','no','/images/CervicalDisks.png','Cervical Disks','circuits','made happy'], 
-			['C5-C6','','no','/images/CervicalDisks.png','Cervical Disks','circuits','made happy'],
-			['C6-C7','','no','/images/CervicalDisks.png','Cervical Disks','circuits','made happy'], 
-			['C7-T1','','no','/images/CervicalDisks.png','Cervical Disks','circuits','made happy'],
+			['C2-C3','','no','/images/CervicalDisks.png','Cervical disks','circuits','made happy'],
+			['C3-C4','','no','/images/CervicalDisks.png','Cervical disks','circuits','made happy'], 
+			['C4-C5','','no','/images/CervicalDisks.png','Cervical disks','circuits','made happy'], 
+			['C5-C6','','no','/images/CervicalDisks.png','Cervical disks','circuits','made happy'],
+			['C6-C7','','no','/images/CervicalDisks.png','Cervical disks','circuits','made happy'], 
+			['C7-T1','','no','/images/CervicalDisks.png','Cervical disks','circuits','made happy'],
 
 			['Morning Sickness','','no','','Disconnections','sickness', 'made happy'],
-			['Spirit out of Body','','no','','Disconnections','spirit', 'reconnected'],
+			['Spirit out of Body','','no','','Disconnections','spiritout', 'reconnected'],
 			['Spirit to Physical Disconection', '','no', '','Disconnections', 
-				'body', 'reconnected'],
+				'spiritbody', 'reconnected'],
 			['Spirit to Spirit Disconection', 'One or more breaks or tears in the spirit or energy body. 
 				Usually it affects the heart but it can affect other body parts or even the whole 
 				spiritual body. A spirit/spirit disconnection of the heart would be considered 
 				a "broken heart".','no','','Disconnections', 
 				'spirit', 'reconnected'],
 			['Physical to Physical Disconection','', 'no', '','Disconnections', 
-				'spiritbody', 'reconnected'],
+				'body', 'reconnected'],
 
 
         ];           

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSaboteurTable extends Migration
+class CreateCursesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateSaboteurTable extends Migration
      */
     public function up()
     {
-        Schema::create('saboteur', function (Blueprint $table) {
+        Schema::create('curses', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('weapon');
+            $table->string('curse');
         });
     }
 
@@ -27,6 +27,6 @@ class CreateSaboteurTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('saboteur');
+        Schema::dropIfExists('curses');
     }
 }

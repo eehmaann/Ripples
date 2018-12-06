@@ -6,9 +6,7 @@ $(document).ready(function()
 	$("#newCauseClicker").hide();	
   $('.error').hide();
 
-    $('#solution').val("Cleared");  
-
-    $("#age").change(function () {
+    $("#ageinput").change(function () {
     	checkAge();         
 	});
     
@@ -16,7 +14,7 @@ $(document).ready(function()
 
     $('.pathClicker').click(function(){
        if(checkAge()){
-       		$('#description').val($("#description").val() + "age ["+$("#age").val()+"]");  
+       		$('#description').val($("#diagnosisname").text() + " [from age "+$("#ageinput").val()+"]");  
         }
         else{
             $("#description").val('');

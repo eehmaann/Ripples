@@ -23,7 +23,7 @@ $(document).ready(function()
         if(testMessage() && testImprovedText()){
              $('#description').val($("#diagnosisname").text()+ 
             " "+ $('#messagetext').val());
-            $('#solution').val(" Replace with positve message: " +('#improvedtext').val()+".");
+            $('#solution').val(" Healing tree message: " +$('#improvedtext').val()+".");
             destination ="../../../../problemssolution/"+id;
             $('#barrierform').attr('action', destination);
         }

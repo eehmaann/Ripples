@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Goal;
 use App\Appointment;
 use App\User;
@@ -68,23 +71,26 @@ class AppointmentController extends Controller
     public function storeAppointment(Request $request){
     	$this->validate($request, [
     		'goal_id'=> 'required|numeric',
+            'user_id'=> 'required|numeric',
     	]);
 
         $goal_id= $request->input('goal_id');
-    	$appointment =new Appointment();
-    	$appointment->goal_id=$goal_id;
-    	$appointment->save();
-           
         $priorAppointment=Appointment::where('goal_id', $goal_id)->latest()->first();
         if(!empty($priorAppointment)){
             $problemlist=$priorAppointment->problems()->where('cleared', false)->get();
-            if(!empty($problemlist)){
-              $appointment->problems()->sync($problemlist);  
-            }
         }
+
+    	$appointment =new Appointment();
+    	$appointment->goal_id=$goal_id;
+        $appointment->user_id=$request->input('user_id');
+    	$appointment->save();
+
+        if(!empty($priorAppointment)){
+            $appointment->problems()->sync($problemlist);
+        }
+
     	return \Redirect::route('navigation.show', $appointment);
     }
-
     public function storeGoalAppointment(Request $request){
     	$this->validate($request, [
     		'user_id'=> 'required|numeric',
@@ -100,6 +106,7 @@ class AppointmentController extends Controller
     	$goal_match =Goal::latest()->first();
     	$appointment =new Appointment();
     	$appointment->goal_id=$goal_match->id;
+        $appointment->user_id=$request->input('user_id');
     	$appointment->save();
     	return \Redirect::route('navigation.show', $appointment);
 
@@ -117,7 +124,7 @@ class AppointmentController extends Controller
     	$user= new User();
     	$user->name=$request->input('client_name');
     	$user->email=$request->input('client_email');
-    	$user->password='password';
+    	$user->password=Hash::make('password');
         auth()->login($user);
     	$user->save();
     
@@ -132,6 +139,7 @@ class AppointmentController extends Controller
     	$goal_match =Goal::latest()->first();
     	$appointment =new Appointment();
     	$appointment->goal_id=$goal_match->id;
+        $appointment->user_id=$user_id->id;
     	$appointment->save();
     	return \Redirect::route('navigation.show', $appointment);
     }

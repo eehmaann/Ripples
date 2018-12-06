@@ -23,4 +23,9 @@ class Emotion extends Model
     public function problems() {
         return $this->belongsToMany('App\Problem')->withTimestamps();
     }
+
+
+    public function circuitEmotions($therow){
+
+    }
 }

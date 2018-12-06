@@ -18,6 +18,7 @@ class CreateAppointmentsTable extends Migration
             $table->timestamps();
             $table->boolean('showable')->default(false);
             $table->integer('goal_id');
+            $table->integer('user_id');
         });
     }
 

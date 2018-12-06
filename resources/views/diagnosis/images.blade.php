@@ -13,12 +13,12 @@
 	        type='text'
 	        id='imageTextBox'
 	        name='imageTextBox'
-	        cols="50" 
-	        rows="10">
+	        cols="40" 
+	        rows="20">
 	    </textarea>
 	        <p id="errormessage" class="error">Please include an description for the image.</p>
 	</div>
-	<div class="col-7">
+	<div class="col-6">
 		<p> Is the image of a particular emotions?</p>
 		<p id="emotionClicker" class="clicker">Show/Hide Emotions</p>
 		<table id="emotionList">
@@ -34,11 +34,7 @@
 						<td style="border: thin black solid">					
 		      				@foreach($emotions as $emotion)
 		      					@if($emotion->col_name==$column && $emotion->row_name==$row)
-		      						<span class="emotionClicker clicker">
-		                					{{ $emotion->name }}
-		                			</span>
-		   
-										<br>
+		      						<div class="emotionClicker clicker" >{{ $emotion->name }} </div>
 		       					@endif
 		       				@endforeach
 		       			</td>

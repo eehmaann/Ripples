@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Appoinment;
 use App\Request;
 use App\Auth;
+use App\Problem;
 
 class Problem extends Model
 {
@@ -60,5 +61,25 @@ class Problem extends Model
             ->latest()->first();
 
         return $heartwall;
-  }     
+  }  
+
+  public function disconnection(){
+    $disconnection = $this->whereHas('appointments')
+          ->where('describable_type', 'App\Disconnection')
+          ->where('cleared', false)
+          ->latest()->first();
+
+    return $heartwall;
+  }  
+
+  public function unresolved($appointment_id){
+    $problemList =Problem::where(['cleared' => false])
+            ->whereHas('appointments', function($query) use($appointment_id){
+                    $query->where('appointment_id', '=', $appointment_id);
+                    })
+            ->get();
+            return $problemList;
+    }
+
+
 }

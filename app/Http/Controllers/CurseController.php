@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Curse;
+use DB;
 
 class CurseController extends Controller
 {
@@ -26,4 +28,5 @@ class CurseController extends Controller
             return ['value'=>'This is a new type'];
     }
 }
-}
+
+

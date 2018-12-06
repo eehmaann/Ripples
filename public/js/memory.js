@@ -3,15 +3,16 @@ $(document).ready(function()
     $('#progressionQuestion').hide();
     $("#lastCauseClicker").text('Clear Memory');
     $("#newCauseClicker").hide();    
-    $('#description').val($("#diagnosisname").text());
+    $('.error').hide();
 
     $("#lastCauseClicker").click(function(){
         if(testMemory()){
-           $('#description').val($("#diagnosisname").text()+": "+$(this).val());          
+           $('#description').val($("#diagnosisname").text()+": "+$(this).val());   
+            if(testSolution()){
+            $('#description').val( $('#description').val()+ " " + $('#memorysolutiontext').val());
+            }       
         }
-        if(testSolution()){
-            $('#solution'.val($('#memorysolutiontext').val());
-        }
+  
     });
 
 	$(".clickableSolutions").click(function () {

@@ -27,6 +27,7 @@ $(document).ready(function(){
 		countadd=0;
 		$('#genrepeatsinput').val('');
 		setInheritedDate();
+		GenList=[];
 	});
 
 
@@ -75,8 +76,8 @@ $(document).ready(function(){
 	function prepareAddPattern(){
 		if($('#patternstring').val().length>6){
 		$('#generationpath').val($('#generationpath').val() 
-			+"("+$('#patternstring').val()+')';
-			GenList.push($('#genrepeatsinput').val(),length+1);
+			+"("+$('#patternstring').val()+')');
+			GenList.push($('#patternstring').val().length+3);
 			$('#patherror').hide();			
 		} 
 		else{
@@ -100,7 +101,6 @@ $(document).ready(function(){
 		
 	}
 
-//This will not be enough create a 2d array for pattern and times then effect count add as well
 	function undoGenerationAdd(){
 		var genstring =$('#generationpath').val();
 		var genlength=genstring.length;

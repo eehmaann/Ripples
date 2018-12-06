@@ -1,5 +1,6 @@
 $(document).ready(function()
 {
+	var id =$('#appointmentnumber').text(); 
 	$(".error").hide();
 	$(".clickDiagnose > a").removeAttr("href");
 	$( ".clickLocate:nth-child(6)")[0].remove()
@@ -7,11 +8,28 @@ $(document).ready(function()
 	$('#Pathogen')[0].remove();
 	$('#Toxins')[0].remove();
 	 $('#progressionQuestion').hide();
-	$("#lastCauseClicker").remove();
-	$("#newCauseClicker").text('Remove Sabotuer');	
-	var id =$('#appointmentnumber').text(); 
+	$("#newCauseClicker").text('Check for cords');	
+	$('#LocationDisplay').hide();
+	
+		$('#bodyPartsToggler').click(function(){
+		$('#LocationDisplay').toggle();
+	});
+
+	$('#diagnoses > div > div >ul > a').each(function(){
+		$(this).removeAttr("href");
+	});
 
 
+
+	$("#lastCauseClicker").click(function(){          
+    	destination ="../../../../problemssabotuerclear/"+id;
+    	$('#barrierform').attr('action', destination);
+    });
+
+    $("#newCauseClicker").click(function(){          
+            destination ="../../../../problemssabotuer/"+id;
+            $('#barrierform').attr('action', destination);
+    });
 
 	$(".clickDiagnose").click(function(){
 		$('#bodyinput').val($(this).attr('id'));
@@ -29,18 +47,18 @@ $(document).ready(function()
 	});
 
 	$(".pathClicker").click(function(){
-		var isValid;
+		var isValid =true;
 
 		$( "fieldset" ).each(function() {
 			var data=$(this).children('input').val();
 			// test to see if there is first invalid entry
 			if(isValid){
-				isValid= testValid($(this));
+				isValid= testValid(data);
 			}
 			// test from time error invalid is found whether an error must show
 			if(!(isValid)){
 				if(!($.isNumeric(data))){
-					showError(data.length <4, $(this));
+					showError(data.length <3, $(this));
 				}
 				else{
 				showError(data<0, $(this));
@@ -50,14 +68,12 @@ $(document).ready(function()
 		// If all fields are correct construct a description statement
 		if(isValid){
 			constructDescription();
-			var destination ="../../../../problemsbclear/"+id;
-		$('#barrierform').attr('action', destination);
 		}
 	});
 
 	function constructDescription(){
-		$("#description").val("Saboteur of " +$('#weaponinput').val()
-		 	+" in " + $('#bodyinput').val()+ " [age " + 
+		$("#description").val("Saboteur of " + $('#amountSaboteurs').val() + " " +
+			$('#weaponinput').val()+" in " + $('#bodyinput').val()+ " [age " + 
 		 	$('#ageinput').val() +"] from " +$("#saboteurinput").val());	
 	}
 
@@ -75,7 +91,7 @@ $(document).ready(function()
 	function testValid(text){
 		//var data=$(this).children('input').val();
 		if(!($.isNumeric(text))){
-			return(text.length>4);
+			return(text.length>2);
 		}
 		else{
 			return(text>0);
@@ -85,7 +101,7 @@ $(document).ready(function()
 	   $( "#weaponinput" ).autocomplete({
         source: function(request, response) {
           $.ajax({
-            url: '/searchsabotuer',
+            url: '/searchsaboteur',
             dataType: "json",
             data: {
               term : request.term

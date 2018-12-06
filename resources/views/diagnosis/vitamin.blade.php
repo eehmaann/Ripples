@@ -6,3 +6,4 @@
 @section('diagnosis')
 <p>What foods should be added or subtracted?</p>
 @include('components.Vitaminlist')
+@endsection

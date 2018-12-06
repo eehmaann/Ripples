@@ -19,9 +19,9 @@
     name='memory'
     value=''>
 <p>Suggestions</p>
-<ul >
-    <li class ="clicker" id="clickableSolutions">Move the field from front to back</li>
-    <li class ="clicker" id="clickableSolutions">Release from field entirely</li>
+<ul style="width:30%">
+    <li class ="clicker clickableSolutions">Move the field from front to back</li>
+    <li class ="clicker clickableSolutions">Release from field entirely</li>
 </ul>
 
  

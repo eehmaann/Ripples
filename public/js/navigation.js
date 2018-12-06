@@ -2,6 +2,8 @@ var disp="Base";
 $(document).ready(function()
 {	
 	var breadcrumbs=[];
+
+	$('#Emotion').prepend("Trapped ");
 	//Page starts with show locators that are part of base
 	if ($(".clickLocator" )) {
 		showNavigation(disp);

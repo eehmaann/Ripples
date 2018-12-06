@@ -1,21 +1,11 @@
 @extends('layouts.diagnosis')
  @section('pagejs')
-    <script src="/js/activity.js"></script>
-  <script src="/js/suggestionList.js"></script>
+    <script src="/js/bodybody.js"></script>
 
  @endsection
 @section('diagnosis')
 
-<fieldset>
-  <label> What percent in still connected?</label>
-    <input
-        type='number'
-        id='disconnectionPercentage'
-        name='disconnectionPercentage'
-        readonly
-        value=''>
-    <p id="percenterror" class="error">Please include what percent between 0-100%</p>
- </fieldset>
+@include('components.percentagebox')
 
  <div class="row">
  	 <div class="col-md-5" id="firstPart">
@@ -52,6 +42,4 @@
  	 	<div id="bodyPartsSelector">
  	 		@include('layouts.locations')
  	 	</div>
-
-
-
+@endsection

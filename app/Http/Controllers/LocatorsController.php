@@ -19,4 +19,8 @@ class LocatorsController extends Controller
     			'diagnoses'=>$diagnosis,
             	'locators'=>$locators]);
     }
+
+   public function guest(){
+   	return View('home.guest');
+   }
 }

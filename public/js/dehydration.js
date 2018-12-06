@@ -1,39 +1,74 @@
 $(document).ready(function()
 {
-	$("#rightqualitydiv #righttypediv").hide();
-	$('input[name=enoughcheck]').change(function(){
-			var answer = $('input[name=enoughcheck]:checked').val();
+	$('.error').hide();
+	var id =$('#appointmentnumber').text(); 
+	$("#lastCauseClicker").show();
+    $("#newCauseClicker").hide();
+
+	$("#rightqualitydiv, #righttypediv").hide();
+	$('input[name=enoughwater]').change(function(){
+			var answer = $('input[name=enoughwater]:checked').val();
 			if (answer =='Yes'){
 				$('#rightqualitydiv').show();
-				$('#rightamountdiv').hide();
-				$('#description').val($("");
+			
 			}
 			else{
 				$('#rightqualitydiv').hide();
-				$('#rightamountdiv').show();
+				$("#lastCauseClicker").show();
+    			$("#newCauseClicker").hide();
+				$('#suggestion').val("Drink eight glasses of water a day");
 				
 			}	
-	});
-
-	$('#ouncesinput').change(function(){
-		$('#description').val($("#diagnosisname").text());
-		$('#solution').val("Drink " + $('#ouncesinput').val()+ "of water a day");
 	});
 
 	$('input[name=rightquality]').change(function(){
 			var answer = $('input[name=rightquality]:checked').val();
 			if (answer =='Yes'){
 				$('#righttypediv').show();
-				$('#description').val($("");
+				$("#lastCauseClicker").hide();
+    			$("#newCauseClicker").show();
+    			$('#suggestion').val("");
+
 			}
 			else{
 				$('#righttypediv').hide();
-				$('#description').val($("#diagnosisname").text());
-				$('#solution').val("Drink water that tastes good to your body");
+				$("#lastCauseClicker").show();
+    			$("#newCauseClicker").hide();
+				$('#suggestion').val("Drink water that tastes good to your body");
 			}	
-	});
 
-	$('input[name=absorbscheck]').change(function(){
-		$('#description').val($("#diagnosisname").text());
 	});
+	    
+	  $('#suggestion').change(function(){
+	  	testSuggestion();
+	  });
+
+      $(".pathClicker").click(function(){
+      	$('#description').val($("#diagnosisname").text());
+      });
+
+	
+	$("#lastCauseClicker").click(function(){
+		if(testSuggestion()){
+			$('#solution').val($('#suggestion').val());
+			
+		}
+		else{
+			$('#description').val('');
+			$('#solutionError').show();
+		}
+			destination ="../../../../problemssolution/"+id;
+		$('#barrierform').attr('action', destination);
+	});
+	
+	function testSuggestion(){
+		if($('#suggestion').val().length>0){
+			$('#solutionError').hide();
+			return true;
+		}
+		else{
+			$('#solutionError').show();
+			return false;
+		}
+	}
 });

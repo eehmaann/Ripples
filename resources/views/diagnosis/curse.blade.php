@@ -1,4 +1,7 @@
 @extends('layouts.diagnosis')
+@section('pagecss')
+<link rel="stylesheet" href='/css/autocomplete.css' type='text/css'>
+@endsection
 @section('pagejs')
  <script src="/js/curse.js"></script>
 @endsection
@@ -46,7 +49,9 @@
                         <p id="bodyerror" class="error">Please state where the sabotuer is.</p>
                     </fieldset>
                     <p id="bodyPartsToggler" class="clicker">Search for where the {{$diagnosis->name}} may be located</p>
-                    @include('layouts.locations')
+                    <div id="LocationDisplay">
+                        @include('layouts.locations')
+                    </div> 
                 </div>
             </div>
         </div>

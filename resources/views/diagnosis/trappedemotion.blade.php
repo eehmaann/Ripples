@@ -14,7 +14,14 @@
             name='updatedistance'
             value=''>
         <p id="distanceerror" class="error"> Update distance must be less than current distance</p>
-        <p id="heartwallClicker" class="clicker">Update Heartwall</p>
+        <div class="row">
+            <div class="col-2"> 
+                <p id="heartwallUpdater" class="clicker">Update Heartwall</p>
+            </div>
+            <div class="col-2"> 
+                <p id="heartwallClearer" class="clicker" style="background:pink;">Remove Heartwall</p>
+            </div>
+        </div>
         
 @endif
 <br>
@@ -286,57 +293,13 @@
     </div>    
 
     <div class="inherited">
-        <label>Generation path</label>
-            <input
-            type='text'
-            id='generationpath'
-            name='generationpath'
-             style="width: 50em;"
-            value=' '
-            readonly>
-        <p>Clear all</p>
-        <ul>
-            <li class="singleclicker clicker">Mother</li>
-            <li class="singleclicker clicker">Father</li>
-            <li class="singleclicker clicker">Undo</li>
-        </ul>
-
-        <label>Year</label>
-            <input
-            type='number'
-            id='yeardisplay'
-            name='yeardisplay'
-             style="width: 7em;"
-             pattern='[0-9]*'
-            value=''
-            readonly>
-            <br/>
-         <label>Pattern build</label>
-            <input
-            type='text'
-            style="width: 50em;"
-            id='patternstring'
-            name='patternstring'
-            value=''
-            readonly>
-         <ul>
-            <li class="patternclicker clicker">Mother</li>
-            <li class="patternclicker clicker">Father</li>
-            <li class="patternclicker clicker">Undo</li>
-        </ul>
-        <p id="parentgenerror" class="error"> Please click a button to add to pattern build</p>
-        <label>How many times does this pattern repeat?</label>
-        <input
-            type='number'
-            id='genrepeatsinput'
-            name='genrepeatsinput'
-            pattern='[0-9]*'
-            value=''>
-        <p id="patternadderror" class="error"> Please enter a positive integer</p>
-        <p id="pattogenclicker clicker"> Add pattern to Generation path</p>
+    @include('components.geneology')        
     </div>
 
+
 @include('layouts.emotions')
+<p class="error" id="emotionListError">Please select at least one emotion</p>
+<p class=error id="emptyStatementError">Please complete all question required questions</p>
 @endsection
 
 
