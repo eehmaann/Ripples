@@ -76,9 +76,6 @@ class AppointmentController extends Controller
 
         $goal_id= $request->input('goal_id');
         $priorAppointment=Appointment::where('goal_id', $goal_id)->latest()->first();
-        if(!empty($priorAppointment)){
-            $problemlist=$priorAppointment->problems()->where('cleared', false)->get();
-        }
 
     	$appointment =new Appointment();
     	$appointment->goal_id=$goal_id;
@@ -86,6 +83,7 @@ class AppointmentController extends Controller
     	$appointment->save();
 
         if(!empty($priorAppointment)){
+            $problemlist=$priorAppointment->problems()->where('cleared', false)->get();
             $appointment->problems()->sync($problemlist);
         }
 
@@ -156,13 +154,12 @@ class AppointmentController extends Controller
         return redirect('/sessionstart');
     }
 
+
+    //This will show any appointment
     public function showAppointment ($id){
         $appointment=Appointment::find($id);
-
         $problems = [];
         $problems[]=$appointment->problems;
-
-
         $solutions=[];
         $solutions=$appointment->solution;
     
@@ -172,10 +169,22 @@ class AppointmentController extends Controller
                     'solutions'=>$solutions]);
     }
 
+    
+    //This will show a clients latest appointment to the client
     public function showLastAppointment(Request $request){
         $user=$request->user();
-        $appointment= $user->appointment->latest()->first();
-        showAppointment($appointment->id);
+        $appointment=$user->publishedAppointments()->latest()->first();
+        $appointments=$user->publishedAppointments()->latest()->first();
+        $problems = [];
+        $problems[]=$appointment->problems;
+        $solutions=[];
+        $solutions=$appointment->solution;
+    
+         return view('clients.firstreport')
+            ->with(['problems'=>$problems,
+                    'appointment'=>$appointment,
+                    'appointments'=>$appointments,
+                    'solutions'=>$solutions]);
     }
 
     public function appointmentStart(Request $request){
@@ -195,4 +204,6 @@ class AppointmentController extends Controller
                     'solutions'=>$solutions,
                     'appointments'=>$appointments]);
     }
+
+
 }

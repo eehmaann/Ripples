@@ -18,7 +18,7 @@ Route::get('/contact', ['as'=> 'contact.create', 'uses' => 'ContactController@cr
 Route::post('/contactstore', ['as'=> 'contact.store', 'uses' =>'ContactController@store']);
 
 Route::get('/report/{id}', 'AppointmentController@showAppointment');
-Route::get('/firstreport', 'AppointmentController@showLastAppointment');
+Route::get('/firstreport', ['as'=>'clientreport.show', 'uses' =>'AppointmentController@showLastAppointment']);
 
 //App Views. 
 Route::get('dropdown/Goals/{id}', 'UserController@getGoals');
@@ -126,7 +126,7 @@ Route::get('/problems/{id}/clear/{appointment}',  'ProblemsController@updateClea
 Route::post('/appointment/storeall', 'AppointmentController@storeUserGoalAppointment');
 Route::post('/appointment/storegoalsession', 'AppointmentController@storeGoalAppointment');
 Route::post('/appointment/storesession', 'AppointmentController@storeAppointment');
-Route::put('/appointment/{appointment}/update', ['as' =>'appointment.publish', 'uses' 
+Route::post('/appointment/{appointment}/update', ['as' =>'appointment.publish', 'uses' 
     =>'AppointmentController@publishAppointment']);
 
 //Autocompletes

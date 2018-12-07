@@ -10,6 +10,8 @@
 @endsection
 @section('content')
 
+@include('components.breadcrumbs')
+
 <div id="diagnosisform" class="container">
 
     <div class="row justify-content-center">

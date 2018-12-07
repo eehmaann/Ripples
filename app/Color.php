@@ -9,11 +9,10 @@ class Color extends Model
 {
     //
      public static function rankedColors(){
-     $colors =Color::select('color', DB::raw('COUNT(color) as count'))
-             ->orderBy('count')
-            ->groupBy('color')
-            ->get(array('color'));
-        return $colors;
+     return Color::select('color', DB::raw('COUNT(color) as count'))
+             ->orderBy('count', 'DESC')
+            ->groupBy('color');
+       
     }
 }
 

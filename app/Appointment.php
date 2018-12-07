@@ -22,4 +22,14 @@ class Appointment extends Model
     public function openProblems(){
     return $this->problems()->where('cleared','=',false);
     }
+
+    public function lastProblem(){
+        return $this->problems()->where('cleared','=',true)->latest()->first();   
+    }
+
+    public function openDisconnections(){
+        return $this->openProblems()->where('describable_type','=','App\Solution');
+    }
+
+    
 }

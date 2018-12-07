@@ -75,7 +75,7 @@ class DiagnosesController extends Controller
         $diagnosis= Diagnosis::find($id);
         $appointment=Appointment::find($appointment_id);
         $problems=$appointment->openProblems()->get();
-        $choices=Color::rankedColors();
+        $choices=Color::rankedcolors()->get();
         return View('diagnosis.color')
             ->with(['diagnosis'=>$diagnosis,
                     'appointment'=>$appointment,

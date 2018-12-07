@@ -29,12 +29,12 @@ class HomeController extends Controller
         }
 
         else{
-            $published=$request->user()->lastPublished();
+            $published=$request->user()->publishedAppointments()->latest()->first();
             if(empty($published)){
-                return route('/contact');
+                return route('contact.create');
             }
             else{
-                 return view('home');
+                 return \Redirect::route('clientreport.show');
             }
         }
        

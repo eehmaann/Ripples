@@ -12,12 +12,14 @@ class LocatorsController extends Controller
 {
       public function index($appointment){
       	$appointment= Appointment::find($appointment);
+        $problems=$appointment->openProblems()->get();
       	$diagnosis= Diagnosis::all();
     	$locators=Locator::all();   	
     	return View('navigation.index')
     		->with(['appointment'=>$appointment,
-    			'diagnoses'=>$diagnosis,
-            	'locators'=>$locators]);
+                'problems'=>$problems,
+    			       'diagnoses'=>$diagnosis,
+            	   'locators'=>$locators]);
     }
 
    public function guest(){

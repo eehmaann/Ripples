@@ -7,7 +7,7 @@
 					<div class="row">
 						<div class="panel panel-default">
 							<h2>
-								<strong>Working towards {{$appointment->goals->reason}}</strong>
+								<strong>Working towards {{$appointment->goals->goal}}</strong>
 							</h2>
 						</div>
 					</div>

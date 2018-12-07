@@ -14,7 +14,6 @@ class GoalController extends Controller
 	{
 		$goals = Goal::where('id', '=', $id)->get();
 		$options = array();
-
 		foreach ($goals as $goal) {
 			$options += array($goal->id => $goal->goal);
 		}
@@ -30,7 +29,6 @@ class GoalController extends Controller
 		])->get();
 
 		$options = array();
-
 		foreach ($appointments as $appointment) {
 			$options += array($appointment->id => $appointment->created_at);
 		}

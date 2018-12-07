@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Appointment;
 use App\Heartwall;
 use App\Problem;
 use DB;
@@ -38,11 +39,11 @@ class HeartwallController extends Controller
          $heartwall = Heartwall::find($heartwall);
          $heartwall->current_distance=$request->input('updatedistance');
          $heartwall->save();
-        $clearer=Problem::whereHas('appointments', function($query) use($appointment){
-                    $query->where('appointment_id', '=', $appointment);
-                })->latest()->first();
-         $clearer->notes=$clearer->notes.' '.'Heartwall was reduced to '.$heartwall->current_distance;
-         $clearer->save();
+         $clearer=Appointment::find($appointment)->lastProblem();
+         if(!empty($clearer)){
+            $clearer->notes=$clearer->notes.' '.'Heartwall was reduced to '.$heartwall->current_distance;
+            $clearer->save();
+        }
         return \Redirect::route('trappedemotion.create', $appointment);
     }
 
@@ -54,11 +55,11 @@ class HeartwallController extends Controller
         $problem->cleared=true;
         $problem->save();
         
-        $clearer=Problem::whereHas('appointments', function($query) use($appointment){
-                    $query->where('appointment_id', '=', $appointment);
-                })->latest()->first();
-         $clearer->notes=$clearer->notes.' '.'Heartwall has been cleared';
-         $clearer->save();
+        $clearer=Appointment::find($appointment)->lastProblem();
+         if(!empty($clearer)){
+            $clearer->notes=$clearer->notes.' '.'Heartwall has been cleared';
+            $clearer->save();
+        }
          return \Redirect::route('problems.show', $appointment);
 
     }
