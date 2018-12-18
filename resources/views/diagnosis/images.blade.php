@@ -13,11 +13,12 @@
 	        type='text'
 	        id='imageTextBox'
 	        name='imageTextBox'
-	        cols="40" 
+	        cols="30" 
 	        rows="20">
 	    </textarea>
 	        <p id="errormessage" class="error">Please include an description for the image.</p>
 	</div>
+	<div class="col=1"></div>
 	<div class="col-6">
 		<p> Is the image of a particular emotions?</p>
 		<p id="emotionClicker" class="clicker">Show/Hide Emotions</p>

@@ -6,6 +6,7 @@
 @section('diagnosis')
 @if(!empty($heartwall))
     <p style="display:none;" id="heartwallid">{{$heartwall->describable->id}}</p>
+    @if(is_null($lastproblem->describable_type))
     <p>Heartwall made of {{$heartwall->describable->material}} extending <span id="currentDistance">{{$heartwall->describable->current_distance}}</span> miles</p>
      <label>Update Distance</label>
         <input
@@ -22,7 +23,7 @@
                 <p id="heartwallClearer" class="clicker" style="background:pink;">Remove Heartwall</p>
             </div>
         </div>
-        
+    @endif  
 @endif
 <br>
 <br>
@@ -82,6 +83,7 @@
                 id='birth'
                 name='birth'
                 pattern='[0-9]*'
+                readonly
                 value=''>
          <label> Age of Death?</label>
         <input
@@ -299,7 +301,8 @@
 
 @include('layouts.emotions')
 <p class="error" id="emotionListError">Please select at least one emotion</p>
-<p class=error id="emptyStatementError">Please complete all question required questions</p>
+<p class=error id="emptyStatementError">Please complete all required questions</p>
+<p class="error repitionerror">Please enter how many times this emotion occured</p>
 @endsection
 
 

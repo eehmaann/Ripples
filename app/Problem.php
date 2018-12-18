@@ -54,23 +54,6 @@ class Problem extends Model
     return $problem;
   }
 
-  public function heartwall(){
-      $heartwall = $this->whereHas('appointments')
-            ->where('describable_type', 'App\Heartwall')
-            ->where('cleared', false)
-            ->latest()->first();
-
-        return $heartwall;
-  }  
-
-  public function disconnection(){
-    $disconnection = $this->whereHas('appointments')
-          ->where('describable_type', 'App\Disconnection')
-          ->where('cleared', false)
-          ->latest()->first();
-
-    return $heartwall;
-  }  
 
   public function unresolved($appointment_id){
     $problemList =Problem::where(['cleared' => false])

@@ -73,8 +73,8 @@ $(document).ready(function()
 
 	function constructDescription(){
 		$("#description").val("Curse [age  " + $('#ageinput').val() +"] from "
-			+ $("#inflicterinput").val()) + " to " + $('#curseinput').val() 
-		+ "located in " +$('#bodyinput').val();
+			+ $("#inflicterinput").val() + " to " + $('#curseinput').val() 
+		+ "located in " +$('#bodyinput').val());
 	}
 
 

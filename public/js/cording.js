@@ -98,10 +98,10 @@ $(document).ready(function()
 		for (var client = 0; client < arbody.length; ++client) {
 			for (var cord =0; cord <arbody.length; ++cord){
 				if($('#'+arbody[client]+'to'+arbody[cord]+'text').val().length>1){
-					statement+="<span class='foundcord'> <li>"
-					+$('#'+arbody[client]+'to'+arbody[cord]+'text').val()
-					+"<br><span class='corddefiner'>"+$('#'+arbody[client]+'to'+arbody[cord]+'Statement').text()
-					+"<div class='circle'> <div id='text'>i</div></div></span></li></span>";
+					statement+="<span class='foundcord'> <li>"+$('#'+arbody[client]+'to'
+						+arbody[cord]+'text').val()+"<div class='circle'> <div id='text'>i</div></div>"
+						+"<br><span class='corddefiner'>"+$('#'+arbody[client]+'to'+arbody[cord]
+							+'Statement').text()+"</span></li></span>";
 					cordtypecount++;
 				}
 					
@@ -109,7 +109,7 @@ $(document).ready(function()
 		}
 		if(cordtypecount>0){
 			$("#description").val("Unhealthy cording to " + $('#corded').val()+
-				statement + "</ul");
+				statement + "</ul>");
 		}
 		else
 		$("#description").val("");

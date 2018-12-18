@@ -17,6 +17,7 @@ class CreateSolutionsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->text('solution');
+            $table->integer('appointment_id')->unsigned();
   
         });
     }

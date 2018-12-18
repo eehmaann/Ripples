@@ -24,13 +24,13 @@
 		<p id="reasonForAppointment"> Called for {{$appointment->goals->reason}}</p>
 	</div>
 	<div class="row">
-		<h3 id="appointmentgoal">Goal:  {{$appointment->goals->goal}}</h3>
+		<h3 id="appointmentgoal">Goal:  {{$appointment->goals->goal}}</h3>.  
 	</div>
 
 <div class="row">
   <ul>
  	@foreach($appointment->solution as $solution)
-        <li>{{ $solution->solution }}</li>
+        <li>{!!$solution->solution !!}</li>
     @endforeach
   </ul>
 </div>
@@ -56,10 +56,6 @@ $count = [
 <p id="defitionsshower" class="clicker". style="max-width: 20%">Click to show definitions</p>
 	
 	@foreach($appointment->problems as $problem)
-		
-
-
-			
 		<div class="row">
 			@if($problem->steps == 1)<?php $count[1]++; ?>
 				<div class="1step nest" id="<?php echo $count[1] ?>" ><div class="barrier">
@@ -88,30 +84,31 @@ $count = [
 			@else<div ><div class="barrier">
 			@endif
 
-			
-
-
-
 				
-				@if(strlen($problem->diagnosis->definition)>3)	
-					<span class="hasDefinition">
-				@else<span>
-				@endif
+			@if(strlen($problem->diagnosis->definition)>3)	
+				<span class="hasDefinition">
+			@else<span>
+			@endif
 
-				@if($problem->describable_type =='App\Heartwall')
-					Heartwall made of {{$problem->describable->material}} extending {{$problem->describable->starting_distance}} miles </br> 
-				@else {!!$problem->description!!}
-				@endif
-				@if(strlen($problem->diagnosis->picture)>4)
+			@if($problem->describable_type =='App\Heartwall')
+				Heartwall made of {{$problem->describable->material}} extending {{$problem->describable->starting_distance}} miles </br> 
+			@elseif(($problem->describable_type =='App\Disconnection'))
+					{!!$problem->description!!} {{$problem->describable->starting_connection}} {{$problem->describable->units}} </br> 
+			@else {!!$problem->description!!}
+			@endif
+
+			@if(strlen($problem->diagnosis->picture)>4)
                     <img src="{{$problem->diagnosis->picture}}" style="width:10rem;height:10rem;" alt="Picture of {{$problem->diagnosis->name}}">
-                  @endif
-				@if(strlen($problem->diagnosis->definition)>3)	  <div id="circle">
-    <div id="text">i</div>
-  </div>
-				@endif
-				</span>
+            @endif
+			@if(strlen($problem->diagnosis->definition)>3)	  
+				<div id="circle">
+					<div id="text">i</div>
+				</div>
+			@endif
+			</span>
 				
-				@if($problem->cleared ==true)cleared
+				@if($problem->cleared ==true)
+					$problem->notes
 				@endif
 				@if(strlen($problem->diagnosis->definition)>3)			
 						<div class="barrierdefinition" style="color:blue;">&bull;
@@ -163,5 +160,6 @@ $count = [
 </div>
 </div>
 </div>
+
 </div>	
 </body>

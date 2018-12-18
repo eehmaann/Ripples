@@ -42,6 +42,8 @@ class User extends Authenticatable
     public function publishedAppointments(){
       return $this->appointment()->where('showable','=',true);  
     }
+
+    
 }
 
 

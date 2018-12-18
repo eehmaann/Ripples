@@ -20,7 +20,7 @@
                     		type='checkbox'
                     		name='foods[]'
                     		class="foodCheckBox"
-                    		value='{{ $food->id }}'>
+                    		value='{{ $food->name }}'>
                 			Take <strong>{{ $food->name }}</strong>
             			</label>
                   <br>
@@ -30,7 +30,7 @@
                     		type='checkbox'
                     		name='avoidfoods[]'
                     		class="avoidfoodCheckBox"
-                    		value='{{ $food->id }}'>
+                    		value='{{ $food->name }}'>
             				</label>
 								<br>
        					@endif

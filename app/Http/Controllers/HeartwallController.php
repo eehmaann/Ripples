@@ -32,6 +32,7 @@ class HeartwallController extends Controller
             return ['value'=>'This is a new material'];
     }
 
+    // This updates a problem that has a heartwall
      public function updateHeartwall(Request $request, $heartwall, $appointment){
         $this->validate($request, [
             'updatedistance'=> 'required|numeric',
@@ -47,6 +48,7 @@ class HeartwallController extends Controller
         return \Redirect::route('trappedemotion.create', $appointment);
     }
 
+    // This will clear the heartwall
     public function clearHeartwall($heartwall, $appointment){
         $heartwall = Heartwall::find($heartwall);
          $heartwall->current_distance=0;

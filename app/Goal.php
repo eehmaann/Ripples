@@ -18,8 +18,15 @@ class Goal extends Model
         return $this->hasMany('App\Appointment', 'goal_id', 'id');
     }
 
- public function problems()
-    {
+ public function problems(){
         return $this->hasManyDeep(Problem::class [Appointment::class]);
-    }
+  }
+
+  public function activeAppointments(){
+    return $this->appointment()->where('showable','=',false);  
+  }
+  
+  public function goalpublishedAppointments(){
+      return $this->appointment()->where('showable','=',true); 
+  }
 }

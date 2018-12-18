@@ -1,7 +1,7 @@
 @extends('layouts.diagnosis')
  @section('pagejs')
     <script src="/js/activity.js"></script>
-  <script src="/js/suggestionList.js"></script>
+
 
  @endsection
 

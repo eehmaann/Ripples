@@ -9,7 +9,7 @@ $(document).ready(function()
 
 	$(".pathClicker").click(function(){
 		if($("#imageTextBox").text().length>4){
-			$('#description').val($("#diagnosisname").text()+":" +
+			$('#description').val($("#diagnosisname").text()+": " +
 			$('#imageTextBox').val());
 		}
 		else{

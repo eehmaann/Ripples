@@ -17,7 +17,7 @@
                    		type='checkbox'
                     	name='vitamins[]'
                     	class="vitaminCheckBox"
-                    	value='{{ $vitamin->id }}'>
+                    	value='{{ $vitamin->name }}'>
                 		Take <strong>{{$vitamin->vitamin}}</strong>
             		</label>
                 <br>
@@ -27,7 +27,7 @@
                     	type='checkbox'
                     	name='avoidvitamins[]'
                     	class="avoidvitaminCheckBox"
-                    	value='{{$vitamin->id }}'>
+                    	value='{{$vitamin->name }}'>
             		</label>
 					<br>
        				@endif

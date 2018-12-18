@@ -11,13 +11,13 @@ $(document).ready(function()
 	 	var emptycounter=0;
 	 	$('#description').val("Change diet ");
         if ($("input[name='herbs[]']:checked").length>0){
-			appendList("'herbs[]'", "eat" );
+			appendList($("input[name='herbs[]']:checked"), "eat" );
 		}
         else{
             emptycounter++;
         }
         if ($("input[name='avoidherbs[]']:checked").length>0){
-			appendList("'avoidherbs[]'", "avoid" );
+			appendList($("input[name='avoidherbs[]']:checked"), "avoid" );
 		}
         else{
             emptycounter++;
@@ -35,7 +35,7 @@ $(document).ready(function()
 
  	function appendList(checkbox, verb){
 		var listarray = [];
-		$('"input[name='+checkbox +']:checked"').each(function() {
+		checkbox.each(function() {
 			listarray.push($(this).val());
 		});
 		var selection;

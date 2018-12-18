@@ -71,7 +71,7 @@ class DiagnosesTableSeeder extends Seeder
 
 			['Despair Anchor', 'This was the energy of a thought that was stuck in your 
 				energy field. A negative statement perceived as true that prompting your 
-				subconscious mind to verify or fulfill the &quot;truth&quot; of that thought.', 
+				subconscious mind to verify or fulfill the " truth " of that thought.', 
 				'no','','Mental','anchor', 'cleared'],             
 
 			['Images', 'The trapped energy of a “picture in the mind”. The subconscious will 
@@ -113,7 +113,7 @@ class DiagnosesTableSeeder extends Seeder
 			['Entity', "Dark spirit(s) that exerts a negative influence on a person's  body
 				and energy field.", 'no','', 'Offensive','entities', 'cleared'],             
 			
-			['Curses', 'A very negative energy that has been deliberately placed into a person\’s 
+			['Curses', 'A very negative energy that has been deliberately placed into a person’s 
 				energy field by another person or entity with a more nefarious purpose than
 				merely causing pain.', 'no','', 'Offensive','curse', 'cleared'],             
 
@@ -439,13 +439,13 @@ class DiagnosesTableSeeder extends Seeder
 					
 			['External Jugular Vein','','no','/images/ExternalJugularVein.png','Face and Neck Vessels','circuits','made happy'],
 					
-			['Carotid Artery','','no','/images/CarotidArtery.png','Face and Neck Vessels','circuits','made happy'], 
+			['Carotid Artery','','no','/images/CarotidArtery.png','Face and Neck Vessels','circuits',
+			'made happy'], 
 
-			['Vertebral Artery','','no','/images/VertebralArtery.png','Face and Neck Vessels',
-				'circuits','made happy'],
+			['Vertebral Artery','','no','/images/VertebralArtery.png','Face and Neck Vessels','circuits','made happy'],
 
-			['Superior Sagittal Sinus','','no','/images/SuperiorSagittalSinus.png',
-				'Skull Interior Vessels','circuits','made happy'],
+			['Superior Sagittal Sinus','','no','/images/SuperiorSagittalSinus.png','Skull Interior Vessels','circuits','made happy'],
+			
 			
 			['Straight Sinus','','no','/images/StraightSinus.png','Skull Interior Vessels',
 				'circuits','made happy'], 

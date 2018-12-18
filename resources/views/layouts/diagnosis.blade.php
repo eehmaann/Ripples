@@ -9,7 +9,6 @@
     <script src="/js/navigation.js"></script>
 @endsection
 @section('content')
-
 @include('components.breadcrumbs')
 
 <div id="diagnosisform" class="container">
@@ -58,6 +57,8 @@
                                 {{$diagnosis->name}} {{$diagnosis->clear_statement}}</p>
                             <p id="newCauseClicker" class="pathClicker alert alert-success clicker">
                                 Find underlying cause</p>
+
+                            <div id="backClicker"><a href={{ route("navigation.show", [$appointment->id]) }}><p class='col-12 clicker' style="background: Blue; color:white;">Back </p></a></div>
                             @yield('paths')
                         </div>
                     </div> 
@@ -67,6 +68,6 @@
     </div>
 </div>
 
-
+@include('components.footer')
 @endsection
 

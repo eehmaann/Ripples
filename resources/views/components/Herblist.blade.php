@@ -20,7 +20,7 @@
                     		type='checkbox'
                     		name='herbs[]'
                     		class="herbCheckBox"
-                    		value='{{ $herb->id }}'>
+                    		value='{{ $herb->name }}'>
                 			Take <strong>{{ $herb->name }}</strong>
             			</label>
                   <br>
@@ -30,7 +30,7 @@
                     		type='checkbox'
                     		name='avoidherbs[]'
                     		class="avoidherbCheckBox"
-                    		value='{{ $herb->id }}'>
+                    		value='{{ $herb->name }}'>
             			</label>
 						<br>
        				@endif

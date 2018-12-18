@@ -19,7 +19,8 @@ $(document).ready(function()
 
 	$('.pathClicker').click(function(){
 		if($('#colortext').val().length>2){
-			$('#description').val($('#colortext').val() +" "+$("#diagnosisname").text());
+			$('#colortext').val($('#colortext').val().toLowerCase());
+			$('#description').val($('#colortext').val()+" "+$("#diagnosisname").text());
 			$('#solution').val("Incorporate more " + $('#colortext').val());
 		}
 	});

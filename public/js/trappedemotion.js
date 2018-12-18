@@ -9,20 +9,26 @@ $(document).ready(function()
 	var id =$('#appointmentnumber').text();
 	var heartwall ='';
 
-	//Adjust base form
-	$('#progressionQuestion').text('Are there more emotions?');
-	$('#lastCauseClicker').text("No. Clear these emotions.");
-	$('#newCauseClicker').text("Yes. Clear these emotions and find  more.");
 
 	
-	// Allow for Heartwall update
-	if($('#heartwall')){
+	// Adjust base form based on whether there is an open Heartwall.
+	if(parseInt($('#heartwallid').text())>0)  {
 		$("#diagnosisname").text("Heartwall Emotions");
 		$("#barriername").text("Heartwall Emotions");
 		heartwall=$('#heartwallid').text();
+		$('#lastCauseClicker, #progressionQuestion, #backClicker').remove();
+		$('#newCauseClicker').text("Clear these emotions.");
 
 	}
+	else{
+		$("#diagnosisname").text("Trapped Emotions");
+		$("#barriername").text("Trapped Emotions");
+		$('#progressionQuestion').text('Are there more emotions?');
+		$('#lastCauseClicker').text("No. Clear these emotions.");
+		$('#newCauseClicker').text("Yes. Clear these emotions and find  more.");
+	}
 
+	// test new heartwall distance is less than stored heartwall distance
 	function checkDistance(){
 		if($('#updatedistance').val()<(parseInt($('#currentDistance').text()))){
 			$('#distanceerror').hide();
@@ -38,6 +44,8 @@ $(document).ready(function()
 		checkDistance();
 	});
 
+	//Stores new value of heartwall
+
 	$('#heartwallUpdater').click(function(){
 		if(checkDistance()){
 		destination ="../../../../heartwallUpdate/"+heartwall+"/update/"+id;
@@ -46,6 +54,7 @@ $(document).ready(function()
 		}
 	});
 
+	//set new distance to 0 clearing heartwall
 	$('#heartwallClearer').click(function(){
 		destination ="../../../../heartwallClear/"+heartwall+"/update/"+id;
 		$('#barrierform').attr('action', destination);
@@ -86,21 +95,22 @@ $(document).ready(function()
 		$('#barrierform').attr('action', destination);
 	});
 	
-	 $(".emotion").click(function () {
+	 $(".emotion").click(function(){
         $('#selectedEmotion').val($(this).text());
     });
 
-	 $(".timeselector").click(function () {
+	 $(".timeselector").click(function(){
         hideTrapTypes();
         emotiontrap=$(this).attr('id');
         $('.'+emotiontrap).show();
     });
 
+	 // If there is a number of times emotion has been trapped it will prepare for submission
 	 $("#repititions").change(function(){
 		prepareForSubmission();
 	 });
 
-	 // Handles is current life trapped emotion
+	 // Handles  current life trapped emotion
 	$("#ageinput").change(function(){
 		if(!$(this).val()>0){
 			$("#ageerror").show();
@@ -149,7 +159,8 @@ $(document).ready(function()
 	});
 
 	function buildPrenatalPhrase(){
-		currentPhrase=("prenatal " + $("#diagnosisname").text()+" from "+ $("#presource").val());
+		currentPhrase=("prenatal " + $("#diagnosisname").text()
+			+" from "+ $("#presource").val());
 		timePrepared=true;
 	}
 
@@ -162,14 +173,21 @@ $(document).ready(function()
 	$('#kidnappingage').hide();
 	
 	$('#pastage, #died').change(function(){
-		$('#birth').val(parseInt($('#died').val())-parseInt($('#pastage').val()));
+		var birthdate= parseInt($('#died').val())-parseInt($('#pastage').val());
+		if (birthdate<0){
+			birthdate*=-1
+			$('#birth').val(birthdate + "B.C.E");
+		}
+		else{
+			$('#birth').val(birthdate + "CE");
+		}	
 	});
 
 	$('#birth, input[name=gender] ').change(function(){
 		if(testPastLifeBase()){
 			makePastLifeBase();
 		}
-	} )
+	} );
 
 	$('#pastage').change(function(){
 		if (parseInt($('#pastage').val())>12){
@@ -178,7 +196,7 @@ $(document).ready(function()
 		else{
 			$('#relationshipstatus').hide();
 		}
-	})
+	});
 
 
 	$('input[name=wasmarried]').change(function(){
@@ -257,7 +275,7 @@ $(document).ready(function()
 
 	$('#agekidnapped').change(function(){
 		var age =parseInt($('#agekidnapped').val());
-		if(age>99){
+		if(age<99){
 			$('#kidnappinginput').val("You were kidnapped at age" + age);
 			$('#kidnappingageerror').show();;
 		}
@@ -267,7 +285,7 @@ $(document).ready(function()
 		}
 
 		makePastLife();
-	})
+	});
 
 	$('input[name=demographic]').change(function(){
 		var demographic = $('input[name=demographic]:checked').val();
@@ -355,6 +373,21 @@ $(document).ready(function()
 	var gen=22;
 	var GenList=[];
 
+	$('.singleclicker, #pattogenclicker').click(function(){
+		if(testGeneologyReady()){
+			currentPhrase=($("#diagnosisname").text()+" inherited from "+ $("#genrepeatsinput").val()
+				+" generations of parents ~ " + $('#yeardisplay') + " [from "+ $('#generationpath').val());	
+
+		}
+	});
+
+	$('#genrepeatsinput').change(function(){
+		if(testGeneologyReady()){
+			currentPhrase=($("#diagnosisname").text()+" inherited from "+ $("#genrepeatsinput").val()
+				+" generations of parents ~ " + $('#yeardisplay') + " [from "+ $('#generationpath').val());	
+
+		}
+	});
 
 	$('.singleclicker').click(function(){
 		if($(this).text()!="Undo"){
@@ -449,8 +482,7 @@ $(document).ready(function()
 		}
 		else{
 			$('#yeardisplay').val(newdate + "CE");
-		}
-		
+		}	
 	}
 
 	function undoGenerationAdd(){
@@ -461,6 +493,10 @@ $(document).ready(function()
 			genstring=genstring.substring(0, (genlength-discardGen))
 			$('#generationpath').val(genstring);
 		}		
+	}
+
+	function testGeneologyReady(){
+		return ($('#generationpath').val().length>0 && $('#yeardisplay').val().length>0);
 	}
 
 	// Functions that are used multiple timesource options
@@ -482,13 +518,14 @@ $(document).ready(function()
 	function prepareForSubmission(){
 		if($('input[name="emotions[]"]:checked').length>0){
 			if(checkRepitions()){
-				$("#errormessage").hide();
+				$(".repitionerror").hide();
+
 				constructDescription();
 
 				return;
 
 			}
-			$("#errormessage").show();
+			$(".repitionerror").show();
 			$('#emptyStatementError').show();
 			return
 		}
@@ -505,7 +542,7 @@ $(document).ready(function()
 		timePrepared=false;
 		$("#description").val(""); 
 	}
-});
+
 
 function hideTrapTypes() {
   $('.self').hide();
@@ -532,4 +569,4 @@ navigation = {
 }
 
 
-
+});

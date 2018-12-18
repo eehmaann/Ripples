@@ -81,7 +81,7 @@ $(".nest > ul > li > .emotionentry> .emotiondefinition").each(function(){
 });
 
 $(".barrier").click(function(){
-		$(this).children('.barrierdefinition').toggle();
+		$(this).find('.barrierdefinition').toggle();
 	
 });
 $(".emotionentry").click(function(){

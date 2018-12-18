@@ -27,7 +27,7 @@ $(".error").hide();
 	});
 
 
-
+	// Use navigation to select body part
 	$(".clickDiagnose").click(function(){
 		if(bodyChoice=="first part"){
 			$('#aDisconnection').val($(this).attr('id'));
@@ -37,21 +37,24 @@ $(".error").hide();
 		}
 	});
 
+	// Test whether connection is a valid amount
 	$('#disconnectionPercentage').change(function(){
 		testConnection();		
 	});
 
+	// Test whether there is text in first body part
 	$('#aDisconnection').change(function(){
 		testParts($("#aDisconnection"),$("#aerror"));
 	});
 
-		$('#bDisconnection').change(function(){
+	// Test whether there is text in second body part	
+	$('#bDisconnection').change(function(){
 		testParts($("#bDisconnection"),$("#berror"));
 	});
 
+	// Checks validity of entries before submitting 
 	$(".pathClicker").click(function(){
 		var isValid = testConnection();
-		alert("number test");
 		if(isValid){
 			isValid=testParts($("#aDisconnection"),$("#aerror"));
 		}
@@ -66,7 +69,7 @@ $(".error").hide();
 		}
 	});
 
-
+	// Tests whether connection is a valid percent
 	function testConnection(){
 		var connection =$('#disconnectionPercentage').val();
 		if(connection> 0 && connection <100){
@@ -79,7 +82,7 @@ $(".error").hide();
 		}
 	}
 
-
+	//Tests whether there is text in given body part box
 	function testParts(answerField,error){
 		if(answerField.val().length>2){
 			$(error).hide();
@@ -90,6 +93,7 @@ $(".error").hide();
 			return false;
 	}
 
+	// Construct statement to submit underlying cause
 	function constructDescription(){
 		$("#description").val($("#diagnosisname").text()+": " +$("#aDisconnection").val()+
 			"disconnect from " +$('#bDisconnection').val());	

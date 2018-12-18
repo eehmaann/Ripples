@@ -3,12 +3,21 @@ body {
     background-size:cover;
 }
 
+.healingStatement{
+  color:violet;
+}
+
 .error{
 	color:red;
 	font-size: .9rem;
 }
 
-#sessionStarter{
+.warning{
+  color:gold;  
+  font-size: 1.2rem;
+}
+
+.goClicker{
     border-radius: 2rem;
     border: .2rem solid black;
     color:white;
@@ -18,6 +27,33 @@ body {
     margin-top: 1rem; 
     width: 20rem;
     height: 1rem; 
+    cursor: grab;
+}
+
+.destroyClicker{
+    border-radius: 2rem;
+    border: .2rem solid black;
+    color:white;
+    background:#FF1C1C;
+    padding: 1.4rem;
+    padding-bottom: 2.5rem;
+    margin-top: 1rem; 
+    width: 20rem;
+    height: 1rem; 
+    cursor: grab;
+}
+
+.toReportClicker{
+    border-radius: 2rem;
+    border: .2rem solid black;
+    color:white;
+    background:#73AD21;
+    padding: 1.4rem;
+    padding-bottom: 2.5rem;
+    margin-top: 1rem; 
+    width: 50rem;
+    height: 1rem; 
+    cursor: grab;
 }
 
 
@@ -35,12 +71,13 @@ body {
      margin: 1rem;
      padding:1rem;
      line-height:2em;
+     cursor: grab;
 }
 
 
 
 .hasDefinition{
-    cursor: help;
+    
 }
 
 

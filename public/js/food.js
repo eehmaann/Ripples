@@ -11,13 +11,14 @@ $(document).ready(function()
 	 	var emptycounter=0;
 	 	$('#description').val("Change diet ");
 		if ($("input[name='foods[]']:checked").length>0){
+			appendList($("input[name='foods[]']:checked"), "include" );
 		}
         
         else{
             emptycounter++;
         }
 		if ($("input[name='avoidfoods[]']:checked").length>0){
-			appendList("'avoidfoods[]'", "avoid" );
+			appendList($("input[name='avoidfoods[]']:checked"), "avoid" );
 		}
 		
 		else{
@@ -34,10 +35,11 @@ $(document).ready(function()
         }
 	});
 
- 	function appendList(checkbox, verb){
+ 	function appendList(list, verb){
 		var listarray = [];
-		$('"input[name='+checkbox +']:checked"').each(function() {
+		list.each(function() {
 			listarray.push($(this).val());
+			alert($(this).val());
 		});
 		var selection;
 		selection = listarray.join(', ') ;

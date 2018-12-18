@@ -18,44 +18,15 @@ use DB;
 
 class AppointmentController extends Controller
 {
-    public function getSavedAppointments($id)
-    {
-        $appointments = Appointment::where([
-            ['goal_id', '=', $id],
-            ['showable', '=', false],
-        ])->get();
 
-        $options = array();
-
-        foreach ($appointments as $appointment) {
-            $options += array($appointment->id => $appointment->created_at);
-        }
-
-        return Response::json($options);
-    }
-
-    public function getPublishedAppointments($id)
-    {
-        $appointments = Appointment::where([
-            ['goal_id', '=', $id],
-            ['showable', '=', true],
-        ])->get();
-
-        $options = array();
-
-        foreach ($appointments as $appointment) {
-            $options += array($appointment->id => $appointment->created_at);
-        }
-
-        return Response::json($options);
-    }
-    //
+    //Start a session for a practitioner.  Takes them to select a user to work for
     public function create(){
 
     	return View('navigation.practitionerstart')
     		->with('users',User::orderBy('name')->get());
     }
 
+    //A better versio of create.   
     public function start(Request $request){
          $user = $request->user();
          $user_goals= Goal::where('user_id',$user->id);
@@ -68,6 +39,7 @@ class AppointmentController extends Controller
                     'appointment'=>$appointment]);
     }
 
+    //This will create a new session where the only new thing is appointment
     public function storeAppointment(Request $request){
     	$this->validate($request, [
     		'goal_id'=> 'required|numeric',
@@ -89,6 +61,7 @@ class AppointmentController extends Controller
 
     	return \Redirect::route('navigation.show', $appointment);
     }
+    // Starts a new appointement with a new goal as well
     public function storeGoalAppointment(Request $request){
     	$this->validate($request, [
     		'user_id'=> 'required|numeric',
@@ -111,6 +84,7 @@ class AppointmentController extends Controller
 
     }
 
+    // Starts a new appointment for a new user
     public function storeUserGoalAppointment(Request $request){
     	$this->validate($request, [
     		'client_name'=> 'required|min:5',
@@ -142,26 +116,50 @@ class AppointmentController extends Controller
     	return \Redirect::route('navigation.show', $appointment);
     }
 
-    public function publishAppointment($id){
+    // Publishes the appointment that is currently be worked on, making it visible to client
+    public function publishAppointment($id){  
         $appointment = Appointment::find($id);
         $appointment->showable=true;
         $appointment->save();
 
-        return redirect('/sessionstart');
-    }
-
-    public function saveAppointment(){
-        return redirect('/sessionstart');
+        return redirect('/homesession');
     }
 
 
-    //This will show any appointment
-    public function showAppointment ($id){
+    public function destroyAppointment($id){
+        $appointment=Appointment::find($id);
+        $problems=$appointment->problems()->get(); 
+        if(!empty($problems)){
+            foreach($problems as $problem){
+                if($problem->appointments()->count()>0){
+                    $problem->cleared=false;
+
+                }
+                else{
+                    if($problem->emotions()) {
+                        $problem->emotions()->detach();
+                    }
+                    $problem->describable()->delete();
+                     $problem->delete();
+                }
+            } 
+        } 
+        $appointment->solution()->delete();
+        $appointment->problems()->detach();
+        $appointment->delete(); 
+
+        return redirect('/homesession');
+    }
+
+    //This will show the report with that id
+    public function showAppointment (Request $request, $id){
+        $user=$request->user();
         $appointment=Appointment::find($id);
         $problems = [];
         $problems[]=$appointment->problems;
         $solutions=[];
         $solutions=$appointment->solution;
+
     
          return view('reports')
             ->with(['problems'=>$problems,
@@ -174,7 +172,7 @@ class AppointmentController extends Controller
     public function showLastAppointment(Request $request){
         $user=$request->user();
         $appointment=$user->publishedAppointments()->latest()->first();
-        $appointments=$user->publishedAppointments()->latest()->first();
+        $appointments=$user->publishedAppointments()->get();
         $problems = [];
         $problems[]=$appointment->problems;
         $solutions=[];
@@ -187,22 +185,25 @@ class AppointmentController extends Controller
                     'solutions'=>$solutions]);
     }
 
-    public function appointmentStart(Request $request){
-        $user=$request->user();
-        $users=User::all();
+    // This is the opening page for the pracitioner, it will give the option to start session or view reports
+    public function appointmentStart(){
+        $users=User::orderBy('name')->get();
+        $clients=User::has('publishedAppointments')->get();
+        $goals=Goal::whereHas('goalpublishedAppointments')->get();
         $appointments = Appointment::where('showable', true);
-        $appointment= $user->appointment->latest()->first();
-        $problems = [];
-        $problems[]=$appointment->problems;
-        $solutions=[];
-        $solutions=$appointment->solution;
+        if(!empty($appointments)){
+            $appointment=$appointments->latest()->first();
+        }
+        else{
+            $appointment=null;
+        }
         return view('Navigation.home')
-            ->with(['user'=>$user,
-                    'users'=>$users,
+            ->with(['users'=>$users,
+                    'appointments'=>$appointments,
+                    'clients'=>$clients,
                     'appointment'=>$appointment,
-                    'problems'=>$problems,
-                    'solutions'=>$solutions,
-                    'appointments'=>$appointments]);
+                    'goals'=>$goals
+                ]);
     }
 
 

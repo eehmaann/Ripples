@@ -8,10 +8,11 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/ 
+*/  
 
 //Client pages
 Route::get('/guests', ['as'=>'welcome.guests', 'uses' =>'LocatorsController@guest']);
+Route::get('/about', function () {return view('clients.about');}); 
 Route::get('/testimonials', function () {return view('clients.testimonials');}); 
 Route::get('/services', function () {return view('clients.services');});
 Route::get('/contact', ['as'=> 'contact.create', 'uses' => 'ContactController@create']);
@@ -20,18 +21,22 @@ Route::post('/contactstore', ['as'=> 'contact.store', 'uses' =>'ContactControlle
 Route::get('/report/{id}', 'AppointmentController@showAppointment');
 Route::get('/firstreport', ['as'=>'clientreport.show', 'uses' =>'AppointmentController@showLastAppointment']);
 
-//App Views. 
+//Appointment Views. 
 Route::get('dropdown/Goals/{id}', 'UserController@getGoals');
 Route::get('textbox/Goals/{id}', 'GoalController@getRelatedGoals');
-Route::get('listappointment/Goals/{id}', 'AppointmentController@getSavedAppointments');
-Route::get('listpublishedappointment/Goals/{id}', 'AppointmentController@getPublishedAppointments');
+Route::get('listappointment/Goals/{id}', 'GoalController@getSavedAppointments');
+Route::get('listpublishedappointment/Goals/{id}', 'GoalController@getPublishedAppointments');
+Route::get('listpublishedgoals/Goals/{id}', 'UserController@getPublishedGoals');
+Route::get('listuserappointments', 'UserController@getPublishedAppointments');
+Route::get('lastpublishedappointment/Goals/{id}', 'GoalController@lastPublishedAppointments');
+Route::get('lastpublishedappointment/User/{id}', 'UserController@lastPublishedAppointment');
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-//Navigation pages
+Route::get('/', function () {return view('welcome');});
+
+//Navigation pages. 
 Route::get('/sessionstart', ['as'=> 'session.create', 'uses' => 'SessionController@create']);
+Route::get('/homesession', ['as'=> 'practitioner.home', 'uses' => 'AppointmentController@appointmentStart']);
 Route::get('/navigation/{appointment}', ['as'=>'navigation.show', 'uses' => 'LocatorsController@index']);
 
 // Diagnosis pages
@@ -55,6 +60,7 @@ Route::get('diagnosis/entities/{id}/create/{appointment}', 'DiagnosesController@
 Route::get('diagnosis/excess/{id}/create/{appointment}', 'DiagnosesController@createExcess');
 Route::get('diagnosis/food/{id}/create/{appointment}', 'DiagnosesController@createFood');
 Route::get('diagnosis/heartwall/6/create/{appointment}', 'DiagnosesController@createHeartWall');
+Route::get('diagnosis/heavymetal/{id}/create/{appointment}', 'DiagnosesController@createHeavyMetal');
 Route::get('diagnosis/herb/{id}/create/{appointment}', 'DiagnosesController@createHerb');
 Route::get('diagnosis/hypnotic/{id}/create/{appointment}', 'DiagnosesController@createHypnotic');
 Route::get('diagnosis/idea/{id}/create/{appointment}', 'DiagnosesController@createIdea');
@@ -113,11 +119,17 @@ Route::post('/problemsspirit/{appointment}', 'ProblemsController@storeSpirittoSp
 Route::post('/heartwallUpdate/{heartwall}/update/{appointment}', 'HeartwallController@updateHeartwall');
 Route::post('/heartwallClear/{heartwall}/update/{appointment}', 'HeartwallController@clearHeartwall');
 
-Route::post('/disconnectionUpdate/{disconnection}/update/{appointment}', 'DisconnectionController@updateDisconnection');
+Route::post('/disconnectionUpdate/{disconnection}/update/{appointment}', ['as' => 'updateDisconnection', 'uses' => 'DisconnectionController@updateDisconnection']);
+Route::post('/disconnectionClear/{heartwall}/update/{appointment}', ['as' =>'repairDisconnection','uses' => 
+    'DisconnectionController@clearDisconnection']);
 
 
-Route::get('/problems/show/{appointment}', ['as' =>'problems.show', 'uses' => 'ProblemsController@showProblems']);
+Route::get('/problems/show/{appointment}', ['as' =>'problems.show', 'uses' 
+    => 'ProblemsController@showProblems']);
 Route::get('/problems/{id}/clear/{appointment}',  'ProblemsController@updateClear');
+
+Route::delete('/problem/{id}/delete/{appointment}', ['as' => 'problem.delete', 'uses' 
+    =>'ProblemsController@destroyProblem']);
 
 
 //Updates
@@ -126,8 +138,10 @@ Route::get('/problems/{id}/clear/{appointment}',  'ProblemsController@updateClea
 Route::post('/appointment/storeall', 'AppointmentController@storeUserGoalAppointment');
 Route::post('/appointment/storegoalsession', 'AppointmentController@storeGoalAppointment');
 Route::post('/appointment/storesession', 'AppointmentController@storeAppointment');
-Route::post('/appointment/{appointment}/update', ['as' =>'appointment.publish', 'uses' 
+Route::post('/appointment/{id}/publish', ['as' =>'appointment.publish', 'uses' 
     =>'AppointmentController@publishAppointment']);
+Route::delete('/appointment/{id}/delete', ['as' => 'appointment.delete', 'uses' 
+    =>'AppointmentController@destroyAppointment']);
 
 //Autocompletes
 Route::get('/searchheartwall',array('as'=>'searchheartwall','uses'=>'HeartwallController@autoComplete'));

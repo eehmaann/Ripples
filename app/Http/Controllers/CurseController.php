@@ -15,7 +15,7 @@ class CurseController extends Controller
         $curses= Curse::select('curse', DB::raw('COUNT(curse) as count'))
         	->where('curse','LIKE','%'.$query.'%')
         	->groupBy('curse')
-        	->orderBy('count')
+        	->orderBy('count', 'DESC')
         	->get(array('curse'));
         
         $data=array();

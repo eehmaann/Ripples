@@ -7,7 +7,7 @@
 <label>What is the Memory</label>
 <input
     type='text'
-    id='messagetext'
+    id='messagetext'. 
     name='messagetext'
     value=''>
 <p id="errormessage" class="error">There needs to be a memory</p>
@@ -19,7 +19,7 @@
     name='memory'
     value=''>
 <p>Suggestions</p>
-<ul style="width:30%">
+<ul style="width:30%" class="list-unstyled">
     <li class ="clicker clickableSolutions">Move the field from front to back</li>
     <li class ="clicker clickableSolutions">Release from field entirely</li>
 </ul>

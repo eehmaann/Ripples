@@ -4,7 +4,7 @@
         id='repititions'
         name='repititions'
         value=''>
-        <p id="errormessage" class="error">Please enter how many times this emotion occured</p>
+        <p id="errormessage" class="error repitionerror">Please enter how many times this emotion occured</p>
     
     <div class="self"> 
        <label>At what age did this occur?</label>

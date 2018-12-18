@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	//Get list of goals previously made by particular client
 	$("#userSelector").change(function() {
   		var $goals = $("#caseSelector");
   		$goals.empty();
