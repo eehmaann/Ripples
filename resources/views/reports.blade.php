@@ -1,19 +1,6 @@
-<!doctype html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>
-		{{$appointment->goals->user->name}}
-	</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link href="/css/app.css" type='text/css' rel='stylesheet'>
-	<link href="/css/main.css" type='text/css' rel='stylesheet'>
- 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+@extends('layouts.app')
+@section('content')
 	<script src="/js/report.js"></script>
-
-</head>
-<body>
 <div class="container">
  <div class="row justify-content-center">
         <div class="col-12">
@@ -53,7 +40,7 @@ $count = [
 ?>
 
 <hr>
-<p id="defitionsshower" class="clicker". style="max-width: 20%">Click to show definitions</p>
+<p id="defitionsshower" class="clicker". style="max-width: 20%">Click to show cause definitions</p>
 	
 	@foreach($appointment->problems as $problem)
 		<div class="row">
@@ -108,7 +95,7 @@ $count = [
 			</span>
 				
 				@if($problem->cleared ==true)
-					$problem->notes
+					<br><sup>{!!$problem->notes!!}</sup>
 				@endif
 				@if(strlen($problem->diagnosis->definition)>3)			
 						<div class="barrierdefinition" style="color:blue;">&bull;
@@ -141,7 +128,7 @@ $count = [
 						<li><span class="emotionentry"> 
 							<span class="childstep" id="{{$count[$problem->steps+1]}}"> 
 							<span class="barrier"></span></span>{{$emotion->name}} 
-							<br><span class="emotiondefinition" style="color: lightblue;">{{$emotion->definition}}</span>
+							<br><span class="emotiondefinition" style="color: SeaGreen;">{{$emotion->definition}}</span>
 						</span></li>
 					@endforeach
 				</ul>
@@ -151,20 +138,25 @@ $count = [
 	
 	@endforeach
 	<hr>
+
 <p>I placed a temporary shield around you which will block all negative energies from reaching you.  It will allow love and positive energies in.  It covers you completely </p> 
 
 	<p>Thank you for the honor of working with you.  Please feel free to call or email me.
 	Wishing you total unconditional acceptance,</p>
-<p>Vera </p>
+
+<p>Vera Ehmann</p>
+
 </span>
-</div>
-</div>
-</div>
 @if($user->role=='practitioner')
 	@include('components.practitionerViewSearch')
 @else
 	@include('components.clientreportsearcher')
 @endif
 
+</div>
+
+</div>
+</div>
+
 </div>	
-</body>
+@endsection

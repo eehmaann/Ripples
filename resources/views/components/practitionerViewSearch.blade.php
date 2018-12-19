@@ -1,3 +1,5 @@
+<script src="/js/sessioncreation.js"></script>
+<script src="/js/viewGetter.js"></script>
 @if(!empty($appointments))
     @if(!empty($appointment))
         <div class="col-4"><a href='report/{{$appointment->id}}'> <p class="toReportClicker" id={{$appointment->id}}>

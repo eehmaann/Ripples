@@ -22,7 +22,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
     <link href="/css/main.css" type="text/css" rel='stylesheet'>
 
     <!-- Styles -->
@@ -52,8 +52,6 @@
                         @if(Auth::user())
                             @if(Auth::user()->role='practitioner')
                                 <li> <a class="nav-link" href="{{ url('/homesession') }}">See Reports</a></li>
-                            @else
-                                <li> <a class="nav-link" href="{{ url('/firstreport') }}">See Reports</a></li>
                             @endif
                         @else  
 

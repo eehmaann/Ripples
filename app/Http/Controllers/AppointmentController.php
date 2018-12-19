@@ -152,11 +152,15 @@ class AppointmentController extends Controller
     public function showAppointment (Request $request, $id){
         $user=$request->user();
         $appointment=Appointment::find($id);
-        $appoinments=$user->publishedAppointments()->get();
-        $clients=[];
         if($user->role=="practitioner"){
-            $clients[]=User::has('publishedAppointments')->get();
+            $appointments = Appointment::where('showable', true);
+            $clients=User::has('publishedAppointments')->get();
         }
+        else{
+             $appoinments=$user->publishedAppointments()->get();
+              $clients=[];
+        }
+       
         $problems = [];
         $problems[]=$appointment->problems;
         $solutions=[];
@@ -166,7 +170,10 @@ class AppointmentController extends Controller
          return view('reports')
             ->with(['problems'=>$problems,
                     'appointment'=>$appointment,
-                    'solutions'=>$solutions]);
+                    'appointments'=>$appointments,
+                    'solutions'=>$solutions,
+                    'user'=>$user,
+                    'clients'=>$clients]);
     }
 
     
@@ -184,7 +191,8 @@ class AppointmentController extends Controller
             ->with(['problems'=>$problems,
                     'appointment'=>$appointment,
                     'appointments'=>$appointments,
-                    'solutions'=>$solutions]);
+                    'solutions'=>$solutions,
+                    'user'=>$user]);
     }
 
     // This is the opening page for the pracitioner, it will give the option to start session or view reports

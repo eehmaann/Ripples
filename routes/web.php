@@ -32,7 +32,7 @@ Route::get('lastpublishedappointment/Goals/{id}', 'GoalController@lastPublishedA
 Route::get('lastpublishedappointment/User/{id}', 'UserController@lastPublishedAppointment');
 
 
-Route::get('/', function () {return view('welcome');});
+Route::get('/', ['as'=>'welcome.guests', 'uses' =>'LocatorsController@guest']);
 
 //Navigation pages. 
 Route::get('/sessionstart', ['as'=> 'session.create', 'uses' => 'SessionController@create']);
