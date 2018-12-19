@@ -5,6 +5,9 @@ $(".error").hide();
 	$('#diagnoses > div > div >ul > a').each(function(){
 		$(this).removeAttr("href");
 	});
+	//Alters navigation tool to only show body parts and remove the links so they can be 
+	//clicked to populate boxed
+	
 	$(".clickDiagnose > a").removeAttr("href");
 	$( ".clickLocate:nth-child(6)")[0].remove()
 	$('#Energy')[0].remove();
@@ -14,6 +17,7 @@ $(".error").hide();
 	$("#lastCauseClicker").remove();
 	var id =$('#appointmentnumber').text(); 
 
+	// Determines which body part box will be changed
 	var bodyChoice="first part";
 
 	$('#firstPart').click(function(){

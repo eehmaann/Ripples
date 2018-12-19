@@ -6,6 +6,8 @@ $(document).ready(function()
 
 	$(".cordtexts").hide();
 	$(".definition").css("color", "blue")
+	
+	// For each pair of cording applies the definition so that practitioner can see it
 	$(".definition").each(function(){
 		for (var client = 0; client < arbody.length; ++client) {
 			for (var cord =0; cord <arbody.length; ++cord){
@@ -18,9 +20,11 @@ $(document).ready(function()
 
 	//Adjust base form
 	$('#progressionQuestion').hide();
+	// cords do not have underlying cause
 	$('#newCauseClicker').hide();
 	$('#lastCauseClicker').text('Clear Cording');
 
+	//When a multiple has been changed it will adjust the exponent
 	$('.cordmultiple').change(function(){
 		var text=$(this).attr('id');
 		text=text.substring(0, text.length-10);
@@ -34,6 +38,7 @@ $(document).ready(function()
 		}
 	});
 
+	//When a cord number has been changed, it will make sure the length is correct
 	$('.cord').change(function(){
 		var text=$(this).attr('id');
 		text=text.substring(0, text.length-6);
@@ -45,7 +50,7 @@ $(document).ready(function()
 		}
 	});
 
-
+	//As soon as a cord has been written it will create the statement so the form can be processed
 	$('.cordmultiple, .cord').change(function(){
 		var client;
 		for (client = 0; client < arbody.length; ++client) {
@@ -60,7 +65,7 @@ $(document).ready(function()
 		}
 	});
 
-
+	//How each cord will look in scientific notation
 		function writeTextAreas(part1, part2){
 			return ($("#"+part1+"to"+part2+"number").val()+ " " +part1 + " to " 
 			+ part2 + " X 10 <sup> "+ $("#"+part1+"to"+part2+"multiplier").val() + 
@@ -92,6 +97,7 @@ $(document).ready(function()
 		}
 	}
 
+	// Write statment including capturing definiition and example statement
 	function constructDescription(){
 		var cordtypecount =0;
 		var statement ='<ul class="cordDetail">';
@@ -111,13 +117,14 @@ $(document).ready(function()
 			$("#description").val("Unhealthy cording to " + $('#corded').val()+
 				statement + "</ul>");
 		}
+		//Will make form unsendable if the there are no complete cords
 		else
 		$("#description").val("");
 	}
 
 });
 
-
+// Adjust a number written to make sure it is correct scientific notation
 function addExponent(input){
 	var text=input.val();
 	var space =text.indexOf(".");
@@ -136,6 +143,7 @@ function addExponent(input){
 
 }
 
+//Replaces number to make sure it is 3 digits with a decimal after first number
 
 function replaceNumber(text){
 	var num = parseFloat(text,10);

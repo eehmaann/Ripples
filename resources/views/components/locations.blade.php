@@ -24,7 +24,7 @@
         <ul class="list-unstyled">
           @foreach($diagnoses as $diagnosis)
                <a href='../diagnosis/{{$diagnosis->url}}/{{$diagnosis->id}}/create/{{$appointment->id}}'>  
-              <li class='clickDiagnose goClicker' id="{{$diagnosis->name}}"                      
+              <li class='clickDiagnose clicker' id="{{$diagnosis->name}}"                      
                 data-category="{{$diagnosis->category_type}}"> 
                   @if(strlen($diagnosis->picture)>4)
                     <img src="{{$diagnosis->picture}}" style="width:10rem;height:10rem;" alt="Picture of {{$diagnosis->name}}">

@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(VitaminsTableSeeder::class);
         $this->call(CuresTableSeeder::class);
         $this->call(CureDiagnosisTableSeeder::class);
-        $this->call(AppointmentProblemTableSeeder::class);
+        //$this->call(AppointmentProblemTableSeeder::class);
         $this->call(HeartwallTableSeeder::class);
         $this->call(ColorTableSeeder::class);
     }

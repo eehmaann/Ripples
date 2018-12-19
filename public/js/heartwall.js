@@ -11,6 +11,7 @@ $(document).ready(function()
 
   $('.error').hide();
 
+  //Creates statement for construction of a heartwall
   $(".pathClicker").click(function(){
     if(checkDistance() && checkMaterial()){
         $('#description').val($("#diagnosisname").text()+ 
@@ -58,7 +59,7 @@ $(document).ready(function()
      }
 
 
-   
+   // autocomplete for all materials ever entered
      $( "#material" ).autocomplete({
         source: function(request, response) {
           $.ajax({

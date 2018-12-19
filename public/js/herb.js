@@ -6,7 +6,7 @@ $(document).ready(function()
     $("#newCauseClicker").text('Suggest change');
 
 	 var id =$('#appointmentnumber').text();  
-
+	 //Checks whether there is a herb to include or avoid
 	 $(".pathClicker").click(function(){
 	 	var emptycounter=0;
 	 	$('#description').val("Change diet ");

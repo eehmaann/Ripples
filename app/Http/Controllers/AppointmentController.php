@@ -125,7 +125,6 @@ class AppointmentController extends Controller
         return redirect('/homesession');
     }
 
-
     public function destroyAppointment($id){
         $appointment=Appointment::find($id);
         $problems=$appointment->problems()->get(); 
@@ -133,7 +132,6 @@ class AppointmentController extends Controller
             foreach($problems as $problem){
                 if($problem->appointments()->count()>0){
                     $problem->cleared=false;
-
                 }
                 else{
                     if($problem->emotions()) {
@@ -147,7 +145,6 @@ class AppointmentController extends Controller
         $appointment->solution()->delete();
         $appointment->problems()->detach();
         $appointment->delete(); 
-
         return redirect('/homesession');
     }
 
@@ -155,6 +152,11 @@ class AppointmentController extends Controller
     public function showAppointment (Request $request, $id){
         $user=$request->user();
         $appointment=Appointment::find($id);
+        $appoinments=$user->publishedAppointments()->get();
+        $clients=[];
+        if($user->role=="practitioner"){
+            $clients[]=User::has('publishedAppointments')->get();
+        }
         $problems = [];
         $problems[]=$appointment->problems;
         $solutions=[];

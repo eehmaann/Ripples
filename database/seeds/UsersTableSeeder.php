@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User;
+use App\User as User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -10,29 +10,30 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+public function run()
     {
-    	 $users=[
-    	 	['Gail','gail@tester.com', 'Harvard', 'client'],
-    	 	['Bob', 'bob@tester.com', 'Harvard', 'client'],
-    	 	['Vera', 'vera@tester.com', 'Harvard', 'practitioner'],
-        ];
+ 
+       User::truncate();
+  
+        User::create( [
+            'email' => 'Bob@test.com' ,
+            'password' => Hash::make( 'password' ) ,
+            'name' => 'Bob' ,
+        ] );
 
-    	 $count = count($users);
+         User::create( [
+            'email' => 'Gail@test.com' ,
+            'password' => Hash::make( 'password' ) ,
+            'name' => 'Gail' ,
+        ] );
 
-	    foreach ($users as $key => $userData) {
-	        $user = new User();
+        User::create( [
+            'email' => 'Vera@test.com' ,
+            'password' => Hash::make( 'password' ) ,
+            'name' => 'Vera' ,
+            'role' =>'practitioner'
+        ] );
 
-	        $user->created_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
-	        $user->updated_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
-	        $user->name = $userData[0];
-	        $user->email = $userData[1];
-	        $user->password = $userData[2];
-            $user->role=$userData[3];
 
-	        $user->save();
-	        $count--;
-        //
-        }
     }
 }

@@ -47,16 +47,18 @@
 
 					        <input
 					            type='number'  
-					            class='updateconnection'	
+					            class='updateconnection'
+					            id='updateconnection'	
 					            name='updateconnection'
 					            min=0
 					            value='{{$disconnection->describable->current_connection}}'>
 					        
 					       <p class="goClicker disconnectionUpdater">Update Connection</p>
+					   	</form>
 					        @if($loop->last)
 
 								<form action='{{ route("repairDisconnection", [$disconnection->describable->id, $appointment->id])}}' method="POST">
-
+											@csrf
 	         						<p class="goClicker disconnectionClearer" style="background:pink;">Completely Repair</p>
 	         					</form>
 					  	

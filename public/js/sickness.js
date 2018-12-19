@@ -1,5 +1,6 @@
 $(document).ready(function()
 {
+	//Used for morning sickness
 	var id =$('#appointmentnumber').text(); 
 	$('#progressionQuestion').hide();
 	$("#lastCauseClicker").remove();

@@ -22,7 +22,7 @@ $(document).ready(function()
             $('.error').show();
         }
     });
-
+   //Tests where is an entry in effect of intolerance
      function testEffect(){
         if($('#effect').val().length>2){
             if($('#description').val().length>3){

@@ -719,8 +719,7 @@ class ProblemsController extends Controller
         $clearer->save();
         return \Redirect::route('problems.show', $appointment_id);
     }
-        
-    public function destroyProblem($id, $appointment_id){
+       public function destroyProblem($id, $appointment_id){
         $problem = Problem::find($id);
         
         $problem->appointments()->detach();

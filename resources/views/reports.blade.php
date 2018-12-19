@@ -160,6 +160,11 @@ $count = [
 </div>
 </div>
 </div>
+@if($user->role=='practitioner')
+	@include('components.practitionerViewSearch')
+@else
+	@include('components.clientreportsearcher')
+@endif
 
 </div>	
 </body>

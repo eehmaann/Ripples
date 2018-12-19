@@ -52,7 +52,7 @@
                     </form>
                     <div id="nextstep" >
                         <h3 id="progressionQuestion">Are there any underlying causes </h3>
-                        <div style="width: 15%;">
+                        <div style="width: 17%;">
                             <p id="lastCauseClicker" class="pathClicker alert alert-danger clicker">
                                 {{$diagnosis->name}} {{$diagnosis->clear_statement}}</p>
                             <p id="newCauseClicker" class="pathClicker alert alert-success clicker">
@@ -67,7 +67,5 @@
         </div>
     </div>
 </div>
-
-@include('components.footer')
 @endsection
 

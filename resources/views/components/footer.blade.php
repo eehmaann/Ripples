@@ -1,23 +1,22 @@
-
-  <script src="/js/appointmentexit.js"></script>
+ <script src="/js/appointmentexit.js"></script>
   <div class="container-fluid">
 
     <ul class="nav navbar-nav">
-    	 <a href="{{ url('/homesession') }}"><li class='goClicker'>Save and Exit</li></a>
-    	<li>
-    		<form class="goClicker" id="publishForm" action='{{ route("appointment.publish", [$appointment->id]) }}' method="POST">
-    			<span id="publish">Publish Appointment</span>
+       <a href="{{ url('/homesession') }}"><li class='goClicker'>Save and Exit</li></a>
+      <li>
+        <form class="goClicker" id="publishForm" action='{{ route("appointment.publish", [$appointment->id]) }}' method="POST">
+          <span id="publish">Publish Appointment</span>
                                         @csrf
             </form>
-    	</li>
+      </li>
     
         <li>   
-        	<form class="destroyClicker" id="destroyForm" action='{{ route("appointment.delete", [$appointment->id])}}' method="POST">
-    			<span  id="destroy">Destroy Appointment</span>
-    			{!! method_field('delete') !!}
+          <form class="destroyClicker" id="destroyForm" action='{{ route("appointment.delete", [$appointment->id])}}' method="POST">
+          <span  id="destroy">Destroy Appointment</span>
+          {!! method_field('delete') !!}
                  @csrf
             </form>
-    	</li>
+      </li>
 
        @if(!empty($deletableProblem))
         <li>Should {!!$deletableProblem->description!!} be the last cause?</li>

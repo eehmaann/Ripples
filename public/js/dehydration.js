@@ -5,6 +5,7 @@ $(document).ready(function()
 	$("#lastCauseClicker").show();
     $("#newCauseClicker").hide();
 
+    // Makes each question asked in series
 	$("#rightqualitydiv, #righttypediv").hide();
 	$('input[name=enoughwater]').change(function(){
 			var answer = $('input[name=enoughwater]:checked').val();

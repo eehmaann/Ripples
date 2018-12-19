@@ -130,6 +130,8 @@ Route::get('/problems/{id}/clear/{appointment}',  'ProblemsController@updateClea
 
 Route::delete('/problem/{id}/delete/{appointment}', ['as' => 'problem.delete', 'uses' 
     =>'ProblemsController@destroyProblem']);
+Route::delete('/problem/{id}/delete/{appointment}', ['as' => 'problem.delete', 'uses' 
+    =>'ProblemsController@destroyProblem']);
 
 
 //Updates
@@ -142,7 +144,6 @@ Route::post('/appointment/{id}/publish', ['as' =>'appointment.publish', 'uses'
     =>'AppointmentController@publishAppointment']);
 Route::delete('/appointment/{id}/delete', ['as' => 'appointment.delete', 'uses' 
     =>'AppointmentController@destroyAppointment']);
-
 //Autocompletes
 Route::get('/searchheartwall',array('as'=>'searchheartwall','uses'=>'HeartwallController@autoComplete'));
 Route::get('/searchsubstance',array('as'=>'searchsubstance','uses'=>'IntoleranceController@substanceAutoComplete'));

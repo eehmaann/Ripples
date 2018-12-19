@@ -6,12 +6,14 @@ $(document).ready(function()
 
 	 $('.error').hide();
 	   var id =$('#appointmentnumber').text();   
+
+	   // Checks each list to see if there is one change to diet suggested
            
 	 $(".pathClicker").click(function(){
 	 	var emptycounter=0;
 	 	$('#description').val("Change diet ");
 		if ($("input[name='foods[]']:checked").length>0){
-			appendList($("input[name='foods[]']:checked"), "include" );
+			appendList($("input[name='foods[]']:checked"), "eat" );
 		}
         
         else{
@@ -29,12 +31,14 @@ $(document).ready(function()
        		$('.error').show();
        	}
        	else{
+       		//Destination is just solution
        	$('#solution').val($('#description').val());
        	 destination ="../../../../problemsjs/"+id;
             $('#barrierform').attr('action', destination);
         }
 	});
 
+	 // Adds change to diet to suggestion
  	function appendList(list, verb){
 		var listarray = [];
 		list.each(function() {

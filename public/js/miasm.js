@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	$('.error').hide();
+	//expands upon geneology.js
 	  $('.pathClicker').click(function(){
 	  	if($('#generationpath').val().length>5){
 	  		$('#description').val($("#diagnosisname").text()+": from "

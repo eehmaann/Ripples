@@ -5,15 +5,18 @@ $(document).ready(function()
 	$('.error').hide();
 	var id =$('#appointmentnumber').text();  
   
+  	//Makes sure only one list will show at a time
 	 $(".dietClicker").click(function () {
         hideDietTypes();
         $('.'+$(this).attr('id')).show();
     });
+	 //Hides list type to minimize screen
 	$("#foodlisthider, #herblisthider, #vitaminlisthider").click(function(){
 		var thisclass=$(this).attr('class');
 		$('.'+thisclass).hide();
 	});
 
+	//Checks whether there are any ideas for change in diet
 	 $(".pathClicker").click(function(){
 	 	var emptycounter=0;
 	 	$('#description').val("Change diet ");

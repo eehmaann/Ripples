@@ -4,6 +4,8 @@ $(document).ready(function()
 		$('#diagnoses > div > div >ul > a').each(function(){
 		$(this).removeAttr("href");
 	});
+
+		//Makes navigation tool usable for adding body part.
 	$(".clickDiagnose > a").removeAttr("href");
 	$( ".clickLocate:nth-child(6)")[0].remove()
 	$('#Energy')[0].remove();
@@ -16,13 +18,17 @@ $(document).ready(function()
 
 	var id =$('#appointmentnumber').text(); 
 
+	//Click to add body part
 	$(".clickDiagnose").click(function(){
 		$('#bodyinput').val($(this).attr('id'));
 	});
 
+	//Turns on and off the tool for locate body parts
 	$('#bodyPartsToggler').click(function(){
 		$('#LocationDisplay').toggle();
 	});
+
+	//Checks each field for valid entry
 
 	$('fieldset').change(function(){
 		var data=$(this).children('input').val();
