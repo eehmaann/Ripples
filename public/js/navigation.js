@@ -41,7 +41,7 @@ $(document).ready(function()
 	$(".pathClicker").click(function(){
 		//forms can only be submitted if description has been built
 		if($('#description').val().length>2){
-		$('form').submit();
+		$('#barrierform').submit();
 		}
 	});
 

@@ -6,16 +6,31 @@ $(".corddefiner").hide();
 
 
 $('#defitionsshower').click(function(){
-	if ($(this).text()=="Click to show definitions"){
-		$(this).text("Click to hide defintions");
+	if ($(this).text()=="Click to show cause definitions"){
+		$(this).text("Click to hide cause defintions");
 		$(".barrierdefinition").show();
 	}
 	else{
-		$(this).text("Click to show definitions");
+		$(this).text("Click to show cause definitions");
 		$(".barrierdefinition").hide();
 	}
 
 });
+
+
+$('#emotoinshower').click(function(){
+	if ($(this).text()=="Click to show emotion definitions"){
+		$(this).text("Click to hide emotion defintions");
+		$(".emotiondefinition").hide();
+	}
+	else{
+		$(this).text("Click to show emotion definitions");
+		$(".emotiondefinition").show();
+	}
+
+});
+
+
 //Display a different number style for each level of nesting
 $( ".1step" ).each( function(){
 		$(this).children(".barrier").prepend(toRoman(parseInt($(this).attr('id')))+".");

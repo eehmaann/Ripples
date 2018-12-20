@@ -14,9 +14,9 @@ class ProblemsTableSeeder extends Seeder
     {
         //
         $problems=[
-    	 	[1,'Corded to Kim',false, 15],
-    	 	[2, 'Trapped Emotion',true, 5],
-    	 	[2, 'Heartwall',false, 6],
+    	 	[1,'Addictive Heart Enery',false, 1],
+    	 	[2, 'Despair Anchor',true, 9],
+    	 	[2, 'Addictive Heart Energy',false, 1],
     	 	[3, 'Knee unhappy',false,27]
         ];
 

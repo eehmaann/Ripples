@@ -87,7 +87,7 @@ class AppointmentController extends Controller
     // Starts a new appointment for a new user
     public function storeUserGoalAppointment(Request $request){
     	$this->validate($request, [
-    		'client_name'=> 'required|min:5',
+    		'client_name'=> 'required|min:1',
     		'client_email'=>'required|email',
     		'case_description'=>'required|min:5',
     		'goal_description'=>'required|min:10',

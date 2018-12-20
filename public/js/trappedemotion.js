@@ -50,7 +50,7 @@ $(document).ready(function()
 		if(checkDistance()){
 		destination ="../../../../heartwallUpdate/"+heartwall+"/update/"+id;
 	$('#barrierform').attr('action', destination);
-	$('form').submit();
+	$('#barrierform').submit();
 		}
 	});
 
@@ -58,7 +58,7 @@ $(document).ready(function()
 	$('#heartwallClearer').click(function(){
 		destination ="../../../../heartwallClear/"+heartwall+"/update/"+id;
 		$('#barrierform').attr('action', destination);
-		$('form').submit();
+		$('#barrierform').submit();
 	});
 
 	

@@ -18,19 +18,19 @@ public function run()
         User::create( [
             'email' => 'Bob@test.com' ,
             'password' => Hash::make( 'password' ) ,
-            'name' => 'Bob' ,
+            'name' => 'Bob Tester' ,
         ] );
 
          User::create( [
             'email' => 'Gail@test.com' ,
             'password' => Hash::make( 'password' ) ,
-            'name' => 'Gail' ,
+            'name' => 'Gail Tester' ,
         ] );
 
         User::create( [
             'email' => 'Vera@test.com' ,
             'password' => Hash::make( 'password' ) ,
-            'name' => 'Vera' ,
+            'name' => 'Vera Owner' ,
             'role' =>'practitioner'
         ] );
 

@@ -282,7 +282,7 @@
             name='demographicinput'
             value=''>
         </div>  
-
+        <div style="display:none">
          <label>Details of Life?</label>
         <textarea
         type='text'
@@ -292,6 +292,7 @@
         rows="5">
         </textarea>
         <p id="lifeerror" class="error">The details of life must be at least 21 characters long</p>
+        </div>
     </div>    
 
     <div class="inherited">
@@ -300,7 +301,7 @@
 
 
 @include('layouts.emotions')
-<p class="error" id="emotionListError">Please select at least one emotion</p>
+<p class="warning" id="emotionListError">Please select at least one emotion</p>
 <p class=error id="emptyStatementError">Please complete all required questions</p>
 <p class="error repitionerror">Please enter how many times this emotion occured</p>
 @endsection

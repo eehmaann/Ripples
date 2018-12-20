@@ -40,7 +40,8 @@ $count = [
 ?>
 
 <hr>
-<p id="defitionsshower" class="clicker". style="max-width: 20%">Click to show cause definitions</p>
+<p id="defitionsshower" class="clicker" style="max-width: 20%">Click to show cause definitions</p>
+<p id="emotoinshower" class="clicker" style="max-width: 20%">Click to hide emotion definitions</p>
 	
 	@foreach($appointment->problems as $problem)
 		<div class="row">
