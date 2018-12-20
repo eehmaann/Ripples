@@ -18,19 +18,6 @@ $('#defitionsshower').click(function(){
 });
 
 
-$('#emotoinshower').click(function(){
-	if ($(this).text()=="Click to show emotion definitions"){
-		$(this).text("Click to hide emotion defintions");
-		$(".emotiondefinition").hide();
-	}
-	else{
-		$(this).text("Click to show emotion definitions");
-		$(".emotiondefinition").show();
-	}
-
-});
-
-
 //Display a different number style for each level of nesting
 $( ".1step" ).each( function(){
 		$(this).children(".barrier").prepend(toRoman(parseInt($(this).attr('id')))+".");

@@ -41,7 +41,6 @@ $count = [
 
 <hr>
 <p id="defitionsshower" class="clicker" style="max-width: 20%">Click to show cause definitions</p>
-<p id="emotoinshower" class="clicker" style="max-width: 20%">Click to hide emotion definitions</p>
 	
 	@foreach($appointment->problems as $problem)
 		<div class="row">
@@ -120,7 +119,7 @@ $count = [
 					<div style="display:inline;">
 						<span class="childstep" id="{{$count[$problem->steps+1]+1}}"> 
 							<span class="barrier"></span></span>
-						- <span class="childstep" id="{{count($problem->emotions)}}"">
+						- <span class="childstep" id="{{count($problem->emotions)+$count[$problem->steps+1]}}"">
 							<span class="barrier"></span></span>
 					</div>
 				<ul class="list-unstyled">
