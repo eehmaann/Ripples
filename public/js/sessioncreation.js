@@ -98,8 +98,7 @@ $(document).ready(function(){
 	      			$('#appointmentList').empty();
 		      		$.each(data, function(index, value){
 		      			$("#appointmentList").prepend(
-	    					"<li> <a href='../navigation/"+index+"'> Session started on "
-	    					+value+"</a></li>");
+		      				"<a href='../navigation/"+index+"'><p class='clicker'>"+value+"</p></a>");
 		      		});
 	      		}
 	      		else

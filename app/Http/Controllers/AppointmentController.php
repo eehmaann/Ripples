@@ -93,12 +93,12 @@ class AppointmentController extends Controller
     		'goal_description'=>'required|min:10',
     	]);
       
-    	$user= new User();
-    	$user->name=$request->input('client_name');
-    	$user->email=$request->input('client_email');
-    	$user->password=Hash::make('password');
-        auth()->login($user);
-    	$user->save();
+    	$client= new User();
+    	$client->name=$request->input('client_name');
+    	$client->email=$request->input('client_email');
+    	$client->password=Hash::make('password');
+        
+    	$client->save();
     
     // Create case
     	$user_id =User::latest()->first();

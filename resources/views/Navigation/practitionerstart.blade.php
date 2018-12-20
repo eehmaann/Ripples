@@ -8,7 +8,6 @@
 	<link href="/css/app.css" type='text/css' rel='stylesheet'>
     <link href="/css/main.css" type="text/css" rel='stylesheet'>
     <script   src="https://code.jquery.com/jquery-3.3.1.js"   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="   crossorigin="anonymous"></script>
-     <script src="/js/sessioncreation.js"></script>
 </head>
 <div class="container">
     <div class="row">
@@ -116,8 +115,8 @@
 
 <div id="unfinsihedAppoints"> 
         <h2> Continue unfinished session</h2> 
-    <ul id="appointmentList"> 
-    </ul>
+    <div id="appointmentList"> 
+    </div>
 </div>
 <!-- These questions will determine whether where the form is posted to.>
 	<form post = location determined by questions to create User, case and session: case and session, or just session
