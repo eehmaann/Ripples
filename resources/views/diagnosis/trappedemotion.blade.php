@@ -79,10 +79,9 @@
     <div class="pastlife">
             <label>Year of Birth?</label>
             <input
-                type='number'
+                type='text'
                 id='birth'
                 name='birth'
-                pattern='[0-9]*'
                 readonly
                 value=''>
          <label> Age of Death?</label>

@@ -167,19 +167,21 @@ $(document).ready(function()
 
 	// Past life funcions
 	
+	var birthdate;
 	$('#relationshipstatus').hide();
 	$('#soldierquestion').hide();
 	$('#kidnappedquestion').hide();
 	$('#kidnappingage').hide();
 	
 	$('#pastage, #died').change(function(){
-		var birthdate= parseInt($('#died').val())-parseInt($('#pastage').val());
+
+		birthdate= parseInt($('#died').val())-parseInt($('#pastage').val());
 		if (birthdate<0){
 			birthdate*=-1
-			$('#birth').val(birthdate + "B.C.E");
+			$('#birth').val(birthdate + " B.C.E");
 		}
 		else{
-			$('#birth').val(birthdate + "CE");
+			$('#birth').val(birthdate + " CE");
 		}	
 	});
 
@@ -309,7 +311,7 @@ $(document).ready(function()
 	 	}
 	 } 
 	function testPastLifeBase(){
-		return($('input[name=gender]:checked') && $('#birth').val()>0);
+		return($('input[name=gender]:checked') && birthdate>-1);
 	}
 	function makePastLife(){
 		if(testPastLifeBase()){
@@ -351,7 +353,7 @@ $(document).ready(function()
 			}
 			else{
 				currentPhrase="";
-				timePrepared=false();
+				timePrepared=false;
 				$("#lifeerror").show();
 			}
 		}

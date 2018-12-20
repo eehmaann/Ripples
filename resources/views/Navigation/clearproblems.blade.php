@@ -21,11 +21,9 @@
 		  				Clear {!! $problems->last()->description !!}</a></br>
 		  			
 			  		 	
-
+		  		@endif
 		  			 <a href='../../../navigation/{{$appointment->id}}' class="goClicker">Find underlying cause</a>
-				@else
-				<p>All causes have been cleared.  Publish the report</p>
-				@endif
+
 			</div>
 		</div>
 		@if(count($disconnections)>0)
